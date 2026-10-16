@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft, BookOpen, Check, CheckCircle2, ChevronRight, Cir
 import { concepts, getConcept, type ConceptId, type QuestionRole } from '@/lib/content';
 import { advance, diagnosisLabels, masteryLabels, newSession, reinforce, submit, type Session, type Stage } from '@/lib/engine';
 import { curatedFeedback } from '@/lib/feedback';
+import { apiUrl } from '@/lib/api';
 import { readSaved, STORAGE_KEY, type Saved } from '@/lib/storage';
 import { ConceptVisual, WorkedVisual, PracticeVisual } from '@/components/lesson-visuals';
 
@@ -42,7 +43,10 @@ export default function Workspace() {
       if (raw) { const parsed = readSaved(raw); if (parsed) setSaved(parsed); else setStorageMessage('Data tersimpan tidak terbaca. Sesi baru siap digunakan.'); }
     } catch { setStorageMessage('Penyimpanan browser tidak tersedia. Kemajuan hanya tersimpan selama halaman ini terbuka.'); }
     setReady(true);
-    fetch('/api/health').then(r => r.json()).then(v => setAi(v.aiConfigured === true)).catch(() => setAi(false));
+    fetch(apiUrl('/api/health')).then(r => {
+      if (!r.ok) throw Error('Health check unavailable');
+      return r.json();
+    }).then(v => setAi(v.aiConfigured === true)).catch(() => setAi(false));
     return () => pending.current?.abort();
   }, []);
 
@@ -68,7 +72,7 @@ export default function Workspace() {
     setBusy(true);
     const controller = new AbortController(); pending.current = controller;
     try {
-      const response = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ questionId: question.id, answer, reasoning }), signal: controller.signal });
+      const response = await fetch(apiUrl('/api/feedback'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ questionId: question.id, answer, reasoning }), signal: controller.signal });
       if (!response.ok) throw Error('Feedback unavailable');
       const v = await response.json();
       if (typeof v.feedback === 'string') setFeedback({ text: v.feedback, source: v.source === 'gemini' ? (typeof v.model === 'string' ? v.model : 'Gemini') : v.reason === 'not-configured' ? 'Materi terkurasi · AI belum diaktifkan' : 'Materi terkurasi · AI tidak tersedia' });

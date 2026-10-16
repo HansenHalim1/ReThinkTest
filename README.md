@@ -1,31 +1,35 @@
 # ReThink MVP
 
-Adaptive mathematics learning based on the ICC2026 proposal. Built with Next.js App Router, TypeScript, and Google AI Studio's **Gemini 3.8 Flash**. Deploys as one project to Vercel; no Python backend is needed.
+Adaptive mathematics learning based on the ICC2026 proposal. Frontend built with Next.js App Router and TypeScript. This repository exports a static website and connects to the separate [ReThink backend](https://github.com/HansenHalim1/ReThinkBackend) at https://rethinkbackend.vercel.app for AI feedback.
 
 ## Run locally
 
 Requires Node.js 20.9+ (Node.js 24+ to run the TypeScript test script).
 
 ```powershell
-cd "C:\Users\Arta Moro Sundjaja\Downloads\icc2026-mvp"
+cd "C:\Users\Hanse\.vscode\nextjs2\ReThinkTest"
 npm.cmd install
 Copy-Item .env.example .env.local
-# Set GEMINI_API_KEY in .env.local using your Google AI Studio key.
+# NEXT_PUBLIC_API_BASE_URL defaults to https://rethinkbackend.vercel.app.
 npm.cmd run dev
 ```
 
 Open http://localhost:3000. If another app uses port 3000, run `npm.cmd run dev -- --port 3001`.
 
-Get a key at https://aistudio.google.com/apikey. Set `GEMINI_API_KEY` and leave `GEMINI_MODEL=gemini-3.8-flash`. Keys stay on the server. Without a key, the entire learning loop works with clearly labeled curated feedback. Provider failures or invalid AI output fall back to curated feedback without losing the student's attempt.
+The default backend URL works without a frontend environment file. To use a different backend, set `NEXT_PUBLIC_API_BASE_URL` in `.env.local` (for example, `http://localhost:3001` to run against the separate backend locally). This is a public URL, never an API key. Restart the dev server after changing it.
+
+The website calls the backend directly from the browser. The backend's `ALLOWED_ORIGINS` must include `http://localhost:3000` for local development and the exact production website origin. If you use another frontend port, add its origin too. When the backend or AI is unavailable, the learning loop still works with curated feedback and browser-local progress.
 
 ## Deploy to Vercel
 
-1. Push this folder as its own GitHub repository, then import that repository into Vercel.
-2. Select the Next.js framework preset; keep the default build/output settings.
-3. Add `GEMINI_API_KEY` and `GEMINI_MODEL=gemini-3.8-flash` under project environment variables.
-4. Deploy. Redeploy after changing environment variables.
+1. Keep this repository connected to the existing frontend Vercel project, using the Next.js preset.
+2. Set `NEXT_PUBLIC_API_BASE_URL=https://rethinkbackend.vercel.app` in the frontend environment variables, or leave it unset to use the same default.
+3. In the **backend** Vercel project, set `ALLOWED_ORIGINS=https://re-think-test.vercel.app,http://localhost:3000`. Omit paths and trailing slashes. Redeploy the backend after changing it. Add other frontend origins explicitly if you use them.
+4. Redeploy the frontend. Public environment variables are embedded at build time.
 
-Alternatively, run `npx.cmd vercel` in this folder and follow the Vercel CLI prompts. No `vercel.json`, separate API host, or database is required for this MVP.
+Keep `GEMINI_API_KEY` and `GEMINI_MODEL` in the backend project only; remove any old Gemini variables from the frontend Vercel project. Model selection is controlled by the backend.
+
+`npm run build` produces a static `out/` directory with no frontend API functions. Vercel serves this export with its default Next.js settings. For a local preview, use a static file server for `out/`; `next start` does not support static exports. Use `npm run dev` for development.
 
 ## Implemented learning loop
 
@@ -46,7 +50,7 @@ Learning state is client-side and is not suitable for high-stakes grading. Probe
 
 If AI is configured, student answers and reasoning from diagnostic/guided interactions are sent to Google. Original proposals, files, and API keys are never sent. Browser storage is specific to a device/profile/domain and can be cleared. Changing from localhost to a Vercel domain starts a separate history.
 
-AI wording remains generative and may still be inaccurate despite schema/math-output guards; curated feedback is the fallback. Before opening this demo broadly, configure Vercel Firewall rate limiting or add authenticated access to protect your API quota. No distributed rate limiter or user authentication is included.
+AI wording remains generative and may still be inaccurate despite schema/math-output guards; curated feedback is the fallback. Before opening this demo broadly, configure rate limiting or authenticated access on the backend to protect your API quota. No distributed rate limiter or user authentication is included.
 
 ## Validate
 
@@ -56,7 +60,7 @@ npm.cmd run typecheck
 npm.cmd run build
 ```
 
-The tests cover linear equivalence, invalid/executable input rejection, confirmed/rejected/uncertain diagnostic paths, scaffold transitions, retry/transfer outcomes, damaged browser records, and AI output guards. Live Gemini requires your key and is not claimed as tested without one.
+The tests cover linear equivalence, invalid/executable input rejection, confirmed/rejected/uncertain diagnostic paths, scaffold transitions, retry/transfer outcomes, damaged browser records, and AI output guards. Live Gemini configuration and provider tests belong to the backend repository.
 
 ## Source
 
@@ -64,10 +68,10 @@ The tests cover linear equivalence, invalid/executable input rejection, confirme
 - `lib/math.ts`: bounded linear-expression parser.
 - `lib/engine.ts`: deterministic diagnosis and learning transitions.
 - `lib/storage.ts`: validated browser persistence.
-- `app/api/feedback/route.ts`: server-side Gemini call and fallback.
+- `lib/api.ts`: shared backend URL configuration for browser requests.
 - `components/workspace.tsx`: complete student experience.
 
-Model documentation: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
+Backend implementation and deployment: https://github.com/HansenHalim1/ReThinkBackend
 
 ## Interactive lesson visuals
 

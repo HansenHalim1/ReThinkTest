@@ -1,5 +1,15 @@
 # Verification
 
+## Separate frontend (2026-10-17)
+
+- Seven existing tests, TypeScript checking, and the static Next.js production build passed.
+- The exported browser bundle contains `https://rethinkbackend.vercel.app`; no `/api` routes remain in the build manifest.
+- The deployed backend health endpoint returned HTTP 200 without an Origin header and reported `gemini-3.5-flash-lite` configured.
+- After the backend was redeployed, health requests returned HTTP 200 and feedback preflight returned HTTP 204 for both `http://localhost:3000` and `https://re-think-test.vercel.app`, with matching `Access-Control-Allow-Origin` headers.
+- One synthetic diagnostic answer sent with the production website Origin returned HTTP 200, nonempty feedback, `source: gemini`, and `model: gemini-3.5-flash-lite`. These HTTP checks verify the deployed API and CORS configuration; the updated frontend still needs to be published to verify the deployed browser experience.
+
+## Earlier combined-app verification
+
 - Seven deterministic unit tests passed.
 - TypeScript checking and the Next.js production build passed.
 - Chrome checks passed for the full guided learning loop, confirmed diagnosis, independent/transfer validation, reinforcement, refresh persistence, history, concept map, JSON export, reset cancellation, mobile overflow, and API fallback/guards.
