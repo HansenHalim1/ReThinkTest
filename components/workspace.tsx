@@ -7,8 +7,9 @@ import { curatedFeedback } from '@/lib/feedback';
 import { apiUrl } from '@/lib/api';
 import { readSaved, STORAGE_KEY, type Saved } from '@/lib/storage';
 import { ConceptVisual, WorkedVisual, PracticeVisual } from '@/components/lesson-visuals';
+import ConceptExplorer from '@/components/concept-explorer';
 
-type View = 'dashboard' | 'learn' | 'map' | 'history';
+type View = 'dashboard' | 'learn' | 'explore' | 'map' | 'history';
 const stageOrder: Stage[] = ['diagnosis', 'probe', 'visual', 'worked', 'practice', 'retry', 'transfer', 'complete'];
 const stageLabels: Record<Stage, string> = { diagnosis: 'Mulai dari pemikiranmu', probe: 'Kenali pola berpikir', visual: 'Lihat konsepnya', worked: 'Ikuti satu contoh', practice: 'Coba dengan bimbingan', retry: 'Sekarang, mandiri', transfer: 'Gunakan di situasi baru', complete: 'Refleksi belajar' };
 const masteryClass = (s?: Session) => s?.mastery === 'understood' ? 'green' : s?.mastery === 'procedural-only' ? 'blue' : s?.mastery === 'needs-reinforcement' ? 'amber' : 'neutral';
@@ -89,14 +90,14 @@ export default function Workspace() {
       <a className="brand" href="#" onClick={e => { e.preventDefault(); navigate('dashboard'); }}><span className="brand-icon"><GitBranch size={23} /></span>ReThink<span className="brand-dot">.</span></a>
       <div className="workspace-label">RUANG BELAJARMU</div>
       <nav aria-label="Navigasi utama">{([
-        ['dashboard', LayoutDashboard, 'Beranda'], ['learn', BookOpen, 'Belajar'], ['map', GitBranch, 'Peta konsep'], ['history', History, 'Riwayat belajar'],
+        ['dashboard', LayoutDashboard, 'Beranda'], ['learn', BookOpen, 'Belajar'], ['explore', Lightbulb, 'Jelajahi Konsep'], ['map', GitBranch, 'Peta konsep'], ['history', History, 'Riwayat belajar'],
       ] as const).map(([id, Icon, label]) => <button key={id} className={view === id ? 'nav-item active' : 'nav-item'} onClick={() => navigate(id)}><Icon size={19} />{label}{view === id && <span className="nav-dot" />}</button>)}</nav>
       <div className="sidebar-note"><span className="note-icon"><Lightbulb size={20} /></span><strong>Pelan-pelan, sampai paham.</strong><p>Setiap kesalahan adalah petunjuk untuk langkah berikutnya.</p></div>
       <div className="profile"><div className="avatar">S</div><div><strong>Siswa ReThink</strong><small>Ruang pribadi · MVP</small></div><GraduationCap size={19} /></div>
     </aside>
     {menu && <button className="menu-backdrop" aria-label="Tutup navigasi" onClick={() => setMenu(false)} />}
     <div className="main-shell">
-      <header className="topbar"><div className="breadcrumb"><button className="mobile-menu icon-button" aria-label="Buka navigasi" onClick={() => setMenu(!menu)}><Menu size={22} /></button><span>Ruang belajar</span><ChevronRight size={14} /><strong>{view === 'dashboard' ? 'Beranda' : view === 'learn' ? 'Belajar' : view === 'map' ? 'Peta konsep' : 'Riwayat belajar'}</strong></div><div className="topbar-right"><span className={`status ${ai ? 'connected' : ''}`}><i />{ai === null ? 'Memeriksa AI' : ai ? 'AI dikonfigurasi' : 'Mode terkurasi'}</span><div className="avatar small">S</div></div></header>
+      <header className="topbar"><div className="breadcrumb"><button className="mobile-menu icon-button" aria-label="Buka navigasi" onClick={() => setMenu(!menu)}><Menu size={22} /></button><span>Ruang belajar</span><ChevronRight size={14} /><strong>{view === 'dashboard' ? 'Beranda' : view === 'learn' ? 'Belajar' : view === 'explore' ? 'Jelajahi Konsep' : view === 'map' ? 'Peta konsep' : 'Riwayat belajar'}</strong></div><div className="topbar-right"><span className={`status ${ai ? 'connected' : ''}`}><i />{ai === null ? 'Memeriksa AI' : ai ? 'AI dikonfigurasi' : 'Mode terkurasi'}</span><div className="avatar small">S</div></div></header>
       <main>
         {storageMessage && <div className="notice" role="status">{storageMessage}</div>}
         {!ready ? <div className="loading"><LoaderCircle className="spin" />Menyiapkan ruang belajarmu…</div> : <>
@@ -108,6 +109,8 @@ export default function Workspace() {
           <div className="concept-grid">{concepts.map((concept, i) => { const s = saved.sessions[concept.id]; return <button className="concept-card" key={concept.id} onClick={() => start(concept.id)}><div className="concept-top"><span className={`concept-symbol ${i ? 'mint' : 'lavender'}`}>{i ? 'x = ?' : '(a+b)'}</span><span className={`tag ${masteryClass(s)}`}>{s?.mastery && s.mastery !== 'unassessed' ? masteryLabels[s.mastery] : s ? 'Sedang dipelajari' : 'Siap dipelajari'}</span></div><h3>{concept.title}</h3><p>{concept.subtitle}</p><div className="concept-prerequisite">Prasyarat: {concept.prerequisite}</div><div className="concept-bottom"><span>{concept.duration} <span>·</span> 3 tahap belajar</span><span className="circle-arrow"><ArrowRight size={18} /></span></div></button>; })}</div>
           <section className="journey"><div><span className="eyebrow">CARA BELAJAR DI RETHINK</span><h3>Satu alur. Pemahaman yang lebih kuat.</h3></div><div className="journey-step"><span>01</span><div><strong>Kenali hambatan</strong><small>Temukan pola dari jawabanmu</small></div></div><ChevronRight size={17} className="journey-chevron" /><div className="journey-step"><span>02</span><div><strong>Bangun konsep</strong><small>Visual, contoh, latihan terbimbing</small></div></div><ChevronRight size={17} className="journey-chevron" /><div className="journey-step"><span>03</span><div><strong>Uji pemahaman</strong><small>Mandiri, lalu situasi baru</small></div></div></section>
         </>}
+
+        {view === 'explore' && <ConceptExplorer />}
 
         {view === 'learn' && <>
           <div className="section-heading learning-heading"><div><button className="text-button" onClick={() => navigate('dashboard')}><ArrowLeft size={15} /> Kembali ke beranda</button><h1>{c.title}</h1><p>{c.subtitle}</p></div><label className="concept-select">Konsep <select value={selected} disabled={busy} onChange={e => start(e.target.value as ConceptId)}>{concepts.map(v => <option key={v.id} value={v.id}>{v.title}</option>)}</select></label></div>

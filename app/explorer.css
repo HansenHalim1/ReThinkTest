@@ -1,0 +1,16 @@
+.explorer-card-title{font-size:18px;margin:18px 0 10px;color:var(--ink)}
+.explorer-modes{display:flex;gap:8px;margin:0 0 24px;padding:5px;background:#eee9f7;border-radius:12px;width:fit-content;max-width:100%}
+.explorer-modes button{display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:transparent;color:#827295;padding:12px 22px;border-radius:8px;font:inherit;font-size:13px;cursor:pointer}
+.explorer-modes button[aria-pressed=true]{background:white;color:var(--purple);box-shadow:0 2px 8px #4434550d}
+.explorer-summary{font-size:14px;line-height:1.8;margin-bottom:24px;max-width:740px}
+.explorer-formulas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.explorer-formula,.explorer-example{background:white;border:1px solid var(--line);border-radius:12px;padding:26px;min-width:0}
+.explorer-formula h2,.explorer-example h2{font-size:14px;margin-bottom:16px}
+.explorer-formula>p:last-child{font-size:12px;line-height:1.8}
+.explorer-equation{font-family:'Manrope',sans-serif;font-size:clamp(16px,2vw,23px);color:#70598f;background:#f8f5fc;border-radius:8px;padding:22px 16px;margin-bottom:16px;overflow-wrap:anywhere;line-height:1.8}
+.explorer-example{margin-top:22px}
+.explorer-example h2{margin-top:10px}
+.explorer-example ol{padding-left:25px;margin:20px 0;color:#70598f;font-family:'Manrope',sans-serif;line-height:2.2;font-size:17px}
+.explorer-example li{padding-left:8px;overflow-wrap:anywhere}
+.explorer-modes button:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
+@media(max-width:640px){.explorer-formulas{grid-template-columns:1fr}.explorer-formula,.explorer-example{padding:20px}.explorer-modes{width:100%}.explorer-modes button{flex:1;padding:12px}.explorer-summary{font-size:13px}}

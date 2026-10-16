@@ -1,5 +1,52 @@
 # Verification
 
+## Adjustable x on addition line (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome verified two independent sliders, x moving both endpoints while preserving jump count, correct sums, zero and maximum values (12 + 12 = 24), a fixed axis, and unchanged progress.
+- The layout fit a 390px mobile viewport without page overflow.
+
+## Single-slider addition line (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome verified exactly one addition slider and no extra operation/playback buttons, zero/one/four/twelve unit jumps, increasing/decreasing endpoints, a fixed x and scale, preserved balance controls, and unchanged progress.
+- At 390px, the diagram scrolled within its container without page overflow.
+
+## Optional x block (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome verified enabling/disabling the x block, the target equation, balanced/low/high/zero/maximum candidates, empty/negative/fractional/out-of-range validation, the impossible-nonnegative-solution hint, independent sliders, preserved progress, and the 390px mobile layout.
+
+## Two-slider block balance (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome verified exactly two sliders starting at zero, independent left/right block counts, removal of the earlier controls from the balance view, both tilt directions, equal/empty balance, and the 12-block limit.
+- Browser progress and the two-row number-line view remained intact. The layout fit a 390px mobile viewport without page overflow.
+
+## Two-row number lines (2026-10-17)
+
+- The static production build and TypeScript checks passed.
+- Chrome verified both rows, shared scale, unit jumps and endpoints, left-only movement, playback and pause, manual stepping, cancellation when controls change, independent starting values, and unchanged browser progress.
+- Reduced-motion behavior and manual stepping passed. At 390px, the diagrams scrolled within their own container without page overflow.
+
+## Independent balance comparison (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome verified independent x/right-side values, all three balance states and correct tilt direction, subtraction on either/both sides, matching number-line behavior, reset to balance, and unchanged progress.
+- The layout fit a 390px mobile viewport without horizontal scrolling.
+
+## Inverse-operation sliders (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome checks passed for all three sliders, synchronized equation/balance/number line, one-side versus both-side subtraction, zero and maximum removal, reset, updated bounds, and unchanged progress.
+- The updated visualization had no horizontal overflow at 390px.
+
+## Jelajahi Konsep (2026-10-17)
+
+- The static production build and its TypeScript checks passed.
+- Chrome checks passed for navigation, the two-topic list, formulas as the initial view, switching between formulas and visuals, interactive models for both topics, and opening a new topic on formulas.
+- Browser storage remained unchanged throughout exploration. The visual detail view had no horizontal overflow at a 390px viewport.
+
 ## Separate frontend (2026-10-17)
 
 - Seven existing tests, TypeScript checking, and the static Next.js production build passed.

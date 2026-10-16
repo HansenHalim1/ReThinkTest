@@ -75,13 +75,19 @@ Backend implementation and deployment: https://github.com/HansenHalim1/ReThinkBa
 
 ## Interactive lesson visuals
 
+The **Jelajahi Konsep** navigation button opens a reference library for the two supported topics. Select a topic to see its formulas and worked example first, then switch to **Visualisasi** for interactive diagrams. Returning to the list and selecting a topic opens formulas again. Browsing this library does not record attempts or change learning progress.
+
 The guided lessons now include three representations for distribution: grouped tiles, a rectangular area model, and multiplication arrows. Students can change the number of groups, units per group, and the example value of x; the visual model and algebra update together.
 
-Inverse operations include an interactive balance scale and number line. Students can compare subtracting from both sides with changing one side, restore balance, and check the example by substitution. The lighter side rises when only that side is reduced; the right-side number line moves only when the right side is actually reduced.
+The exploratory balance scale has exactly two independent sliders: left blocks and right blocks, both starting at zero and ranging to 12. Every block has the same weight; the heavier pan drops and equal counts balance, including zero on both sides. The block counts and balance status are shown directly. The earlier algebra/subtraction controls are absent from this balance view. Guided worked examples and practice retain their algebra scaffolds.
+
+A **Nilai x** number field is always visible directly below the left slider, with no checkbox. It starts at zero and accepts integers from 0 to 12. A variable block on the left pan follows the typed candidate to balance `x + left blocks = right blocks`, with confirmation when the sides match. Invalid or empty input is explained while retaining the last valid preview. If the ordinary left blocks exceed the right, a hint explains how to make a nonnegative solution possible.
+
+The exploratory number-line view has two independent sliders: **Nilai x** and the amount added to x, both ranging from 0 to 12. Moving x shifts the starting point and result while preserving the number of +1 jumps. Changing the added amount changes the jump count and result. The fixed axis covers 0–24 so every combination remains visible; x starts at 3 and the added amount at zero. Starting x and the result have separate labels and colors. No playback or subtraction buttons appear in this view. The diagram scrolls within its own container on narrow screens. Guided examples and practice keep their existing subtraction representations.
 
 Worked examples have four selectable steps with synchronized visual emphasis. Partial guided practice has optional visual help that starts collapsed and leaves the student's answer blank. Independent retry and transfer validation have no visual scaffold.
 
-The diagrams use React, CSS, and accessible SVG, with keyboard controls, text descriptions, and reduced-motion support. No new runtime dependencies or AI calls are required for these visuals. Example sliders are restricted to positive integers in this MVP.
+The diagrams use React, CSS, and accessible SVG, with keyboard controls, text descriptions, and reduced-motion support. No new runtime dependencies or AI calls are required for these visuals. Example values stay positive; the subtraction slider ranges from zero to the added amount.
 
 Implementation: components/lesson-visuals.tsx and app/visuals.css. Preview images are in docs/.
 "# ReThinkTest" 
