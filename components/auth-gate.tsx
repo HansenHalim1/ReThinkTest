@@ -7,7 +7,7 @@ import { getSupabase } from '@/lib/supabase';
 import { authRedirectUrl } from '@/lib/auth-redirect';
 import VerificationNotice from '@/components/verification-notice';
 
-type Auth = { session: Session; signOut: () => Promise<void> };
+type Auth = { session: Session | null; demo: boolean; signOut: () => Promise<void> };
 const AuthContext = createContext<Auth | null>(null);
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -17,6 +17,7 @@ export function useAuth() {
 
 export default function AuthGate({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
+  const [demo, setDemo] = useState(false);
   const [loading, setLoading] = useState(true);
   const [mode, setMode] = useState<'signin' | 'signup' | 'verify' | 'reset' | 'recovery'>('signin');
   const [email, setEmail] = useState('');
@@ -58,6 +59,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   }, []);
 
   async function signOut() {
+    if (demo) { setDemo(false); setMode('signin'); setPassword(''); setMessage(''); return; }
     const supabase = getSupabase();
     if (!supabase) return;
     // Sign out this device without ending sessions on the user's other devices.
@@ -116,7 +118,8 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   }
 
   if (loading) return <div className="auth-shell"><p className="loading"><LoaderCircle className="spin" />Memeriksa sesi…</p></div>;
-  if (session && mode !== 'recovery') return <AuthContext.Provider value={{ session, signOut }}><div key={session.user.id}>{children}</div></AuthContext.Provider>;
+  if (demo) return <AuthContext.Provider value={{ session: null, demo: true, signOut }}><div key="demo">{children}</div></AuthContext.Provider>;
+  if (session && mode !== 'recovery') return <AuthContext.Provider value={{ session, demo: false, signOut }}><div key={session.user.id}>{children}</div></AuthContext.Provider>;
 
   const title = mode === 'signup' ? 'Mulai perjalanan belajarmu.' : mode === 'reset' ? 'Atur ulang kata sandi.' : mode === 'recovery' ? 'Buat kata sandi baru.' : 'Selamat datang kembali.';
   return <div className="auth-shell"><section className="auth-card" aria-labelledby="auth-title">
@@ -131,7 +134,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
       {error && <p className="error" role="alert">{error}</p>}{message && <p className="auth-message" role="status">{message}</p>}
       <button className="primary auth-submit" type="submit" disabled={busy || !configured}>{busy ? <LoaderCircle className="spin" size={17} /> : mode === 'signin' ? 'Masuk' : mode === 'signup' ? 'Buat akun' : mode === 'reset' ? 'Kirim tautan' : 'Simpan kata sandi'}</button>
     </form>
-    <div className="auth-actions">{mode === 'signin' ? <><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signup')}>Belum punya akun? Daftar</button><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('reset')}>Lupa kata sandi?</button></> : mode === 'recovery' ? <button type="button" className="text-button" disabled={busy} onClick={() => { void signOut().catch(cause => setError(cause.message)); }}>Keluar</button> : <button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signin')}>Kembali ke masuk</button>}</div>
+    <div className="auth-actions">{mode === 'signin' ? <><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signup')}>Belum punya akun? Daftar</button><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('reset')}>Lupa kata sandi?</button><button type="button" className="text-button" disabled={busy} onClick={() => setDemo(true)}>Coba tanpa akun (demo)</button><small className="field-help">Progres demo hanya tersimpan selama halaman terbuka.</small></> : mode === 'recovery' ? <button type="button" className="text-button" disabled={busy} onClick={() => { void signOut().catch(cause => setError(cause.message)); }}>Keluar</button> : <button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signin')}>Kembali ke masuk</button>}</div>
     </>}
   </section></div>;
 }

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { ArrowRight, ArrowLeft, BookOpen, Check, CheckCircle2, ChevronRight, CircleHelp, Download, GitBranch, GraduationCap, LayoutDashboard, Lightbulb, LoaderCircle, RotateCcw, Sparkles, Target, TrendingUp, X, Menu, History } from 'lucide-react';
 import { concepts, getConcept, type ConceptId, type QuestionRole } from '@/lib/content';
-import { diagnosisLabels, masteryLabels, newSession, submit, type Session, type Stage } from '@/lib/engine';
+import { advance, diagnosisLabels, masteryLabels, newSession, reinforce, submit, type Session, type Stage } from '@/lib/engine';
 import { curatedFeedback } from '@/lib/feedback';
 import { accountRequest, apiUrl } from '@/lib/api';
 import { useAuth } from '@/components/auth-gate';
@@ -16,7 +16,7 @@ const stageLabels: Record<Stage, string> = { diagnosis: 'Mulai dari pemikiranmu'
 const masteryClass = (s?: Session) => s?.mastery === 'understood' ? 'green' : s?.mastery === 'procedural-only' ? 'blue' : s?.mastery === 'needs-reinforcement' ? 'amber' : 'neutral';
 
 export default function Workspace() {
-  const { session: account, signOut } = useAuth();
+  const { session: account, demo, signOut } = useAuth();
   const [displayName, setDisplayName] = useState('Siswa ReThink');
   const revisions = useRef<Partial<Record<ConceptId, number>>>({});
   const mutation = useRef(false);
@@ -58,6 +58,13 @@ export default function Workspace() {
   }
   useEffect(() => {
     const controller = new AbortController(); lifetime.current = controller;
+    if (demo) {
+      setDisplayName('Mode demo');
+      setSaved({ version: 1, sessions: {} });
+      setReady(true);
+      setAi(false);
+      return () => { controller.abort(); pending.current?.abort(); };
+    }
     loadProgress(controller.signal).catch(() => { if (!controller.signal.aborted) setStorageMessage('Kemajuan belum dapat dimuat. Periksa koneksi lalu coba lagi.'); });
     accountRequest('/api/me', { signal: controller.signal }).then(async response => {
       if (response.ok) { const profile = await response.json(); if (!controller.signal.aborted && typeof profile.displayName === 'string') setDisplayName(profile.displayName); }
@@ -73,6 +80,19 @@ export default function Workspace() {
     if (mutation.current) return null;
     mutation.current = true; setBusy(true); setError(''); setLastSaved(false);
     try {
+      if (demo) {
+        const current = saved.sessions[selected] ?? newSession(selected);
+        let next: Session | null = null;
+        if (action === 'submit') next = submit(current, fields.answer ?? '', fields.reasoning ?? '');
+        else if (action === 'advance' && ['visual', 'worked'].includes(current.stage)) next = advance(current);
+        else if (action === 'reinforce' && current.stage === 'complete' && current.mastery !== 'understood') next = reinforce(current);
+        else if (action === 'reset') next = newSession(selected);
+        if (!next) throw Error('Tindakan belajar tidak valid.');
+        const updated: Saved = { version: 1, sessions: { ...saved.sessions, [selected]: next } };
+        setSaved(updated);
+        setLastSaved(true);
+        return next;
+      }
       const response = await accountRequest('/api/progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: lifetime.current?.signal, body: JSON.stringify({ concept: selected, action, expectedRevision: revisions.current[selected] || 0, ...fields }) });
       if (response.status === 409) {
         await loadProgress(lifetime.current?.signal);
@@ -108,6 +128,7 @@ export default function Workspace() {
     setAnswer(''); setReasoning('');
     if (validation) { setFeedback(null); return; }
     const baseline = curatedFeedback(question, answer);
+    if (demo) { setFeedback({ text: baseline, source: 'Mode demo · materi terkurasi' }); return; }
     setFeedback({ text: baseline, source: 'Materi terkurasi' });
     setBusy(true);
     const controller = new AbortController(); pending.current = controller;
@@ -132,12 +153,13 @@ export default function Workspace() {
         ['dashboard', LayoutDashboard, 'Beranda'], ['learn', BookOpen, 'Belajar'], ['explore', Lightbulb, 'Jelajahi Konsep'], ['map', GitBranch, 'Peta konsep'], ['history', History, 'Riwayat belajar'],
       ] as const).map(([id, Icon, label]) => <button key={id} className={view === id ? 'nav-item active' : 'nav-item'} onClick={() => navigate(id)}><Icon size={19} />{label}{view === id && <span className="nav-dot" />}</button>)}</nav>
       <div className="sidebar-note"><span className="note-icon"><Lightbulb size={20} /></span><strong>Pelan-pelan, sampai paham.</strong><p>Setiap kesalahan adalah petunjuk untuk langkah berikutnya.</p></div>
-      <div className="profile"><div className="avatar">{displayName.charAt(0).toUpperCase()}</div><div><strong>{displayName}</strong><small>{account.user.email}</small></div><GraduationCap size={19} /></div>
+        <div className="profile"><div className="avatar">{displayName.charAt(0).toUpperCase()}</div><div><strong>{displayName}</strong><small>{demo ? 'Progres sementara di tab ini' : account?.user.email}</small></div><GraduationCap size={19} /></div>
     </aside>
     {menu && <button className="menu-backdrop" aria-label="Tutup navigasi" onClick={() => setMenu(false)} />}
     <div className="main-shell">
       <header className="topbar"><div className="breadcrumb"><button className="mobile-menu icon-button" aria-label="Buka navigasi" onClick={() => setMenu(!menu)}><Menu size={22} /></button><span>Ruang belajar</span><ChevronRight size={14} /><strong>{view === 'dashboard' ? 'Beranda' : view === 'learn' ? 'Belajar' : view === 'explore' ? 'Jelajahi Konsep' : view === 'map' ? 'Peta konsep' : 'Riwayat belajar'}</strong></div><div className="topbar-right"><span className={`status ${ai ? 'connected' : ''}`}><i />{ai === null ? 'Memeriksa AI' : ai ? 'AI dikonfigurasi' : 'Mode terkurasi'}</span><button type="button" className="text-button account-logout" disabled={busy} onClick={() => { void signOut().catch(cause => setStorageMessage(cause.message)); }}>Keluar</button></div></header>
       <main>
+        {demo && <div className="notice" role="status">Mode demo aktif. Tidak ada akun atau database yang digunakan; progres hilang saat halaman dimuat ulang.</div>}
         {storageMessage && <div className="notice" role="status">{storageMessage}</div>}{error && !question && <p className="error" role="alert">{error}</p>}
         {!ready ? <div className="loading">{storageMessage ? <button type="button" className="secondary" onClick={() => { setStorageMessage(''); void loadProgress(lifetime.current?.signal).catch(() => setStorageMessage('Kemajuan belum dapat dimuat. Coba lagi.')); }}>Coba lagi</button> : <><LoaderCircle className="spin" />Memuat kemajuan akunmu…</>}</div> : <>
         {view === 'dashboard' && <>
