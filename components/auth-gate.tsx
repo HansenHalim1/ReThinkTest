@@ -6,6 +6,7 @@ import { GitBranch, LoaderCircle } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 import { authRedirectUrl } from '@/lib/auth-redirect';
 import VerificationNotice from '@/components/verification-notice';
+import { signupErrorMessage } from '@/lib/auth-errors';
 
 type Auth = { session: Session; signOut: () => Promise<void> };
 const AuthContext = createContext<Auth | null>(null);
@@ -99,7 +100,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
         if (error) throw Error('Belum berhasil masuk. Periksa email dan kata sandi.');
       } else if (mode === 'signup') {
         const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { display_name: name.trim() }, emailRedirectTo: authRedirectUrl() } });
-        if (error) throw Error('Akun belum dapat dibuat. Periksa isian atau coba lagi nanti.');
+        if (error) throw Error(signupErrorMessage(error));
         if (!data.session) { setEmail(email.trim()); changeMode('verify'); startCooldown(); }
         setPassword('');
       } else if (mode === 'reset') {
