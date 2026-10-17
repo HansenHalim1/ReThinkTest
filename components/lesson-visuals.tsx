@@ -28,7 +28,7 @@ function Distribution({ mode, step = 3 }: { mode: Mode; step?: number }) {
   const showConstant = mode !== 'worked' || step >= 2;
   const purpleWidth = 340 * x / (x + u);
   return <div className="learning-viz" data-visual="distribution">
-    <div className="viz-heading"><div><span className="eyebrow">LABORATORIUM KONSEP</span><h3>Satu ide, tiga cara melihat</h3></div><span className="tag neutral">{faded ? 'Bantuan sebagian' : 'Eksplorasi visual'}</span></div>
+    <div className="viz-heading"><div><h3>Satu ide, tiga cara melihat</h3></div><span className="tag neutral">{faded ? 'Bantuan sebagian' : 'Eksplorasi visual'}</span></div>
     <div className="viz-tabs" role="group" aria-label="Representasi sifat distributif">{[['groups', 'Kelompok'], ['area', 'Luas'], ['arrows', 'Alur perkalian']].map(([key, label]) => <button type="button" key={key} aria-pressed={tab === key} onClick={() => setTab(key)}>{label}</button>)}</div>
     <div className="viz-equation" aria-live="polite"><strong>{g}(x + {u})</strong><span>=</span><strong className={showVariable ? 'term-purple' : 'term-hidden'}>{showVariable ? `${g}x` : '?'}</strong><span>+</span><strong className={showConstant ? 'term-green' : 'term-hidden'}>{showConstant && !faded ? g * u : '?'}</strong></div>
     {tab === 'groups' && <div className="viz-group-grid">{Array.from({ length: g }, (_, i) => <div className="viz-group" key={i}><span className={`viz-x-block ${!showVariable ? 'muted-block' : ''}`}><b>x</b><small>{x} satuan</small></span><div className={`viz-unit-grid ${!showConstant ? 'muted-block' : ''}`} aria-label={`${u} satuan tambahan`}>{Array.from({ length: u }, (_, j) => <i key={j} />)}</div><span className="viz-group-label">Kelompok {i + 1}</span></div>)}</div>}
@@ -59,7 +59,7 @@ function Inverse({ mode, step = 3 }: { mode: Mode; step?: number }) {
   const right = total - r;
   const hidden = mode === 'practice';
   return <div className="learning-viz" data-visual="inverse">
-    <div className="viz-heading"><div><span className="eyebrow">LABORATORIUM KONSEP</span><h3>{hidden ? 'Bantu bayangkan persamaannya' : 'Jaga kedua sisi seimbang'}</h3></div><span className="tag neutral">{hidden ? 'Bantuan sebagian' : 'Eksplorasi visual'}</span></div>
+    <div className="viz-heading"><div><h3>{hidden ? 'Bantu bayangkan persamaannya' : 'Jaga kedua sisi seimbang'}</h3></div><span className="tag neutral">{hidden ? 'Bantuan sebagian' : 'Eksplorasi visual'}</span></div>
     <div className="viz-tabs" role="group" aria-label="Representasi operasi invers">{[['balance', 'Timbangan'], ['numberline', 'Garis bilangan']].map(([key, label]) => <button type="button" key={key} aria-pressed={tab === key} onClick={() => setTab(key)}>{label}</button>)}</div>
     {mode !== 'visual' && <div className="viz-equation" aria-live="polite"><strong className="term-purple">x</strong>{a - r > 0 && <><span>+</span><strong className="term-green">{a - r}</strong></>}<span>=</span><strong>{right}</strong></div>}
     {mode === 'visual' && tab === 'balance' && <BlockBalance />}

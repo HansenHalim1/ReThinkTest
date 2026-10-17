@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { Session } from '@supabase/supabase-js';
-import { GitBranch, LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 import { authRedirectUrl } from '@/lib/auth-redirect';
 import VerificationNotice from '@/components/verification-notice';
@@ -123,10 +123,9 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   if (session && mode !== 'recovery') return <AuthContext.Provider value={{ session, demo: false, signOut }}><div key={session.user.id}>{children}</div></AuthContext.Provider>;
 
   const title = mode === 'signup' ? 'Mulai perjalanan belajarmu.' : mode === 'reset' ? 'Atur ulang kata sandi.' : mode === 'recovery' ? 'Buat kata sandi baru.' : 'Selamat datang kembali.';
-  return <div className="auth-shell"><section className="auth-card" aria-labelledby="auth-title">
-    <div className="brand"><span className="brand-icon"><GitBranch size={24} /></span>ReThink<span className="brand-dot">.</span></div>
+  return <div className="auth-shell"><div className="auth-layout"><aside className="auth-story"><div className="brand" aria-label="ReThink"><span className="brand-icon" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M10 27V9h9a5 5 0 0 1 0 10h-8m9 0 8 8" /><circle cx="25.5" cy="9.5" r="2.5" /></svg></span><span>ReThink</span><span className="brand-dot">.</span></div><div className="auth-story-copy"><span className="eyebrow">MATH STUDIO · 01</span><h2>Buka idenya.<br /><em>Lihat polanya.</em></h2><p>Belajar matematika dari cara kamu berpikir, bukan dari hafalan.</p></div><div className="auth-art"><span className="auth-art-label">SEBUAH IDE, DIURAI</span><svg viewBox="0 0 440 250" role="img" aria-label="Persamaan x ditambah tiga sama dengan delapan dibuka menjadi x sama dengan lima"><path d="M20 18H420V232H20z" fill="none" stroke="#f5e5ad" strokeOpacity=".25" /><path d="M20 68H420M20 118H420M20 168H420M70 18V232M120 18V232M170 18V232M220 18V232M270 18V232M320 18V232M370 18V232" fill="none" stroke="#f5e5ad" strokeOpacity=".1" /><text x="45" y="132" className="auth-equation">x + 3 = 8</text><path d="M76 160C143 202 256 202 323 160" fill="none" stroke="#ef684a" strokeWidth="3" strokeDasharray="7 8" /><path d="M314 147l14 11-15 10" fill="none" stroke="#ef684a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /><rect x="104" y="182" width="232" height="48" rx="2" fill="#f0c956" transform="rotate(-2 220 206)" /><text x="220" y="214" textAnchor="middle" className="auth-answer">x = 5</text><circle cx="358" cy="58" r="7" fill="#ef684a" /></svg></div><div className="auth-story-foot"><span>PAHAMI, BUKAN SEKADAR JAWAB</span><span>RE · 01</span></div></aside><section className="auth-card" aria-labelledby="auth-title">
     {mode === 'verify' ? <VerificationNotice email={email} busy={busy} cooldown={cooldown} error={error} message={message} onResend={() => { void resendVerification(); }} onSignIn={() => changeMode('signin')} onChangeEmail={() => changeMode('signup')} /> : <>
-    <h1 id="auth-title">{title}</h1><p>Masuk untuk menyimpan perjalanan belajar dan melanjutkannya di perangkat lain.</p>
+    <h1 id="auth-title">{title}</h1><p>Simpan cara berpikirmu dan lanjutkan belajar di perangkat lain.</p>
     {!configured && <p className="notice" role="status">Layanan masuk belum tersedia. Silakan coba lagi nanti.</p>}
     <form onSubmit={submit}>
       {mode === 'signup' && <><label className="field-label" htmlFor="auth-name">Nama</label><input id="auth-name" autoComplete="name" maxLength={80} required value={name} onChange={e => setName(e.target.value)} disabled={busy || !configured} /></>}
@@ -137,5 +136,5 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     </form>
     <div className="auth-actions">{mode === 'signin' ? <><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signup')}>Belum punya akun? Daftar</button><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('reset')}>Lupa kata sandi?</button><button type="button" className="text-button" disabled={busy} onClick={() => setDemo(true)}>Coba tanpa akun (demo)</button><small className="field-help">Progres demo hanya tersimpan selama halaman terbuka.</small></> : mode === 'recovery' ? <button type="button" className="text-button" disabled={busy} onClick={() => { void signOut().catch(cause => setError(cause.message)); }}>Keluar</button> : <button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signin')}>Kembali ke masuk</button>}</div>
     </>}
-  </section></div>;
+  </section></div></div>;
 }

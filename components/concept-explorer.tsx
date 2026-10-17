@@ -35,7 +35,7 @@ export default function ConceptExplorer() {
   useEffect(() => { if (selected) heading.current?.focus(); }, [selected]);
 
   if (!selected) return <>
-    <div className="page-heading"><div><div className="eyebrow">TEMUKAN HUBUNGAN, PAHAMI IDENYA</div><h1>Jelajahi Konsep</h1><p>Temukan rumus dan pahami lewat visual. Pilih topik yang ingin kamu jelajahi.</p></div><span className="edition">{concepts.length} TOPIK TERSEDIA</span></div>
+    <div className="page-heading"><div><h1>Jelajahi konsep</h1><p>Temukan rumus dan pahami lewat visual. Pilih topik yang ingin kamu jelajahi.</p></div><span className="edition">{concepts.length} topik</span></div>
     <div className="concept-grid">{concepts.map((concept, index) => <button type="button" className="concept-card" key={concept.id} ref={element => { topicButtons.current[concept.id] = element; }} onClick={() => { setMode('formulas'); setSelected(concept.id); }}>
       <div className="concept-top"><span className={`concept-symbol ${index ? 'mint' : 'lavender'}`}>{index ? 'x = ?' : '(a+b)'}</span><span className="tag neutral">Aljabar dasar</span></div>
       <h2 className="explorer-card-title">{concept.title}</h2><p>{concept.subtitle}</p>
@@ -51,13 +51,13 @@ export default function ConceptExplorer() {
     requestAnimationFrame(() => topicButtons.current[previous]?.focus());
   }
   return <>
-    <div className="page-heading"><div><button type="button" className="text-button" onClick={back}><ArrowLeft size={15} />Semua topik</button><h1 ref={heading} tabIndex={-1}>{concept.title}</h1><p>{concept.subtitle}</p></div><span className="edition">JELAJAHI KONSEP</span></div>
+    <div className="page-heading"><div><button type="button" className="text-button" onClick={back}><ArrowLeft size={15} />Semua topik</button><h1 ref={heading} tabIndex={-1}>{concept.title}</h1><p>{concept.subtitle}</p></div></div>
     <div className="explorer-modes" role="group" aria-label="Tampilan konsep">
       <button type="button" aria-pressed={mode === 'formulas'} aria-controls="concept-reference" onClick={() => setMode('formulas')}><BookOpen size={17} />Rumus</button>
       <button type="button" aria-pressed={mode === 'visuals'} aria-controls="concept-reference" onClick={() => setMode('visuals')}><Eye size={17} />Visualisasi</button>
     </div>
     <section id="concept-reference" aria-label={`${mode === 'formulas' ? 'Rumus' : 'Visualisasi'} ${concept.title}`}>
-      {mode === 'formulas' ? <div className="explorer-reference"><p className="explorer-summary">{content.summary}</p><div className="explorer-formulas">{content.formulas.map(item => <article className="explorer-formula" key={item.title}><h2>{item.title}</h2><p className="explorer-equation">{item.formula}</p><p>{item.note}</p></article>)}</div><article className="explorer-example"><span className="eyebrow">CONTOH PENERAPAN</span><h2>Lihat rumusnya bekerja</h2><ol>{content.example.map(line => <li key={line}>{line}</li>)}</ol><button type="button" className="text-button" onClick={() => setMode('visuals')}>Pahami lewat visual<ArrowRight size={16} /></button></article></div> : <><p className="explorer-summary">Ubah nilai dan amati hubungan antara gambar dan bentuk aljabarnya.</p><ConceptVisual key={selected} id={selected} /></>}
+      {mode === 'formulas' ? <div className="explorer-reference"><p className="explorer-summary">{content.summary}</p><div className="explorer-formulas">{content.formulas.map(item => <article className="explorer-formula" key={item.title}><h2>{item.title}</h2><p className="explorer-equation">{item.formula}</p><p>{item.note}</p></article>)}</div><article className="explorer-example"><h2>Lihat rumusnya bekerja</h2><ol>{content.example.map(line => <li key={line}>{line}</li>)}</ol><button type="button" className="text-button" onClick={() => setMode('visuals')}>Pahami lewat visual<ArrowRight size={16} /></button></article></div> : <><p className="explorer-summary">Ubah nilai dan amati hubungan antara gambar dan bentuk aljabarnya.</p><ConceptVisual key={selected} id={selected} /></>}
     </section>
   </>;
 }
