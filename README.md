@@ -47,13 +47,13 @@ Progress is loaded from the signed-in account. Learning commands go to the backe
 ## Implemented learning loop
 
 - Indonesian responsive student dashboard, concept selection, interactive visual lessons, worked examples, concept map, and attempt history.
-- Two curated concept chains: distributive property and inverse operations. Each begins with one fixed diagnostic item, then uses Gemini's provisional hypothesis to select an unused probe from a validated question bank. A session uses one or two probes, depending on the evidence, then continues to a visual explanation, worked example, guided practice, independent retry, and contextual transfer problem.
-- Two matching known error types confirm a concept blocker. Two correct diagnostic answers reject it. Conflicting evidence gets a second probe; unresolved evidence stays uncertain. Gemini selects probes but cannot assign the final diagnosis or mastery.
+- Two curated concept chains: distributive property and inverse operations. Each begins with one fixed diagnostic item, then uses Gemini's private provisional hypothesis to select one probe from a validated question bank. The session continues to a visual explanation, worked example, guided practice, independent retry, and contextual transfer problem.
+- Two matching known error types confirm a concept blocker. Two correct diagnostic answers reject it. Mixed or unrecognized evidence after the single probe stays uncertain. Gemini selects probes but cannot assign the final diagnosis or mastery.
 - Confirmed blockers enter the guided sequence. Uncertain outcomes can use an explicitly selected general concept review without claiming a confirmed blocker.
 - Independent retry failure becomes Needs Reinforcement and stops transfer. Passing retry and failing transfer becomes Procedural Only. Passing both becomes Understood. Students can revisit instruction and revalidate.
 - Numeric/linear algebra checking is deterministic, without `eval`. It accepts equivalent forms, decimal commas, fractions, and optional `x =` for numeric answers. The parser intentionally supports only linear expressions in x; it is not a general symbolic algebra engine.
 - Gemini receives diagnostic answers and optional reasoning to form a provisional, concept-specific hypothesis and choose among validated probe candidates. It does not write questions, grade answers, assign the final diagnosis, pick lessons, change stages, or decide mastery. AI feedback is disabled during diagnostic selection and independent/transfer validation. No ground-truth answer is sent to the selector.
-- Progress persists in Supabase through the shared backend. Export downloads a JSON snapshot. Concept reset requires confirmation and affects the account across devices. Auth sessions are managed by the Supabase browser SDK.
+- Diagnosis, hypothesis, and mastery remain in backend storage and are omitted from learner-facing progress responses and exports. The UI reports session progress without assigning an ability class. Progress persists in Supabase through the shared backend. Export downloads a learner-facing JSON snapshot. Concept reset requires confirmation and affects the account across devices. Auth sessions are managed by the Supabase browser SDK.
 
 ## Scope and limits
 
