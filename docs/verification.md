@@ -1,5 +1,12 @@
 # Verification
 
+## Supabase accounts and account-owned progress (2026-10-17)
+
+- Frontend and backend production builds passed. Seven existing frontend tests and nine backend tests passed.
+- The SQL migration ran in embedded PostgreSQL (PGlite), verifying profile backfill/signup triggers, row ownership, denial of direct progress writes and anonymous access, service-only saves, revision conflicts and account-deletion cascades.
+- Chrome checks against mocked Supabase/API responses passed for signup confirmation, reset-email request, rejected password, sign-in, profile/progress loading, authenticated learning commands, restored sessions/progress, conflict recovery, token refresh, sign-out/account switching, password recovery/update and a 390px sign-in layout.
+- The live Supabase project was identified as `hhovzaaeolcfynyetabf`, but no connected Supabase access or project keys were available during implementation. The live migration, email delivery, actual sign-in and deployed synchronization have not been verified or activated. Follow `../rethinkbackend/SETUP.md` before deploying this release.
+
 ## Adjustable x on addition line (2026-10-17)
 
 - Production build and TypeScript checks passed.
