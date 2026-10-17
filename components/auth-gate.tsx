@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, type FormEvent, type Re
 import type { Session } from '@supabase/supabase-js';
 import { GitBranch, LoaderCircle } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
+import { authRedirectUrl } from '@/lib/auth-redirect';
 
 type Auth = { session: Session; signOut: () => Promise<void> };
 const AuthContext = createContext<Auth | null>(null);
@@ -67,12 +68,12 @@ export default function AuthGate({ children }: { children: ReactNode }) {
         const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
         if (error) throw Error(error.code === 'email_not_confirmed' ? 'Konfirmasi emailmu sebelum masuk.' : 'Belum berhasil masuk. Periksa email dan kata sandi.');
       } else if (mode === 'signup') {
-        const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { display_name: name.trim() }, emailRedirectTo: `${window.location.origin}/` } });
+        const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { display_name: name.trim() }, emailRedirectTo: authRedirectUrl() } });
         if (error) throw Error('Akun belum dapat dibuat. Periksa isian atau coba lagi nanti.');
         if (!data.session) setMessage('Periksa email untuk konfirmasi akun, lalu masuk.');
         setPassword('');
       } else if (mode === 'reset') {
-        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/?auth=recovery` });
+        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: authRedirectUrl(true) });
         if (error) throw Error('Tautan belum dapat dikirim. Coba lagi nanti.');
         setMessage('Jika email terdaftar, tautan pengaturan ulang akan dikirim.');
       } else {
