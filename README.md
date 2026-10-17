@@ -18,7 +18,7 @@ Open http://localhost:3000. If another app uses port 3000, run `npm.cmd run dev 
 
 The default backend URL works without a frontend environment file. To use a different backend, set `NEXT_PUBLIC_API_BASE_URL` in `.env.local` (for example, `http://localhost:3001` to run against the separate backend locally). This is a public URL, never an API key. Restart the dev server after changing it.
 
-The website calls the backend directly from the browser. The backend's `ALLOWED_ORIGINS` must include `http://localhost:3000` for local development and the exact production website origin. If you use another frontend port, add its origin too. The authenticated learning flow requires the backend and database. If Gemini alone is unavailable, feedback falls back to curated text without losing a saved attempt.
+The website calls the backend directly from the browser. The backend's `ALLOWED_ORIGINS` must include `http://localhost:3000` for local development and the exact production website origin. If you use another frontend port, add its origin too. Signed-in progress requires the backend and database. Demo mode keeps progress in memory and can use the backend's localhost-only diagnostic selector while running both apps locally.
 
 ## Deploy to Vercel
 
@@ -47,21 +47,21 @@ Progress is loaded from the signed-in account. Learning commands go to the backe
 ## Implemented learning loop
 
 - Indonesian responsive student dashboard, concept selection, interactive visual lessons, worked examples, concept map, and attempt history.
-- Two curated concept chains: distributive property and inverse operations. Each contains a diagnostic item, one diagnostic probe, visual explanation, worked example, partial guided practice, independent retry, and contextual transfer problem.
-- A single wrong response forms a suspicion. Two known error patterns confirm a blocker. A correct probe rejects it. Unrecognized or contradictory evidence remains uncertain rather than inventing a diagnosis.
+- Two curated concept chains: distributive property and inverse operations. Each begins with one fixed diagnostic item, then uses Gemini's provisional hypothesis to select an unused probe from a validated question bank. A session uses one or two probes, depending on the evidence, then continues to a visual explanation, worked example, guided practice, independent retry, and contextual transfer problem.
+- Two matching known error types confirm a concept blocker. Two correct diagnostic answers reject it. Conflicting evidence gets a second probe; unresolved evidence stays uncertain. Gemini selects probes but cannot assign the final diagnosis or mastery.
 - Confirmed blockers enter the guided sequence. Uncertain outcomes can use an explicitly selected general concept review without claiming a confirmed blocker.
 - Independent retry failure becomes Needs Reinforcement and stops transfer. Passing retry and failing transfer becomes Procedural Only. Passing both becomes Understood. Students can revisit instruction and revalidate.
 - Numeric/linear algebra checking is deterministic, without `eval`. It accepts equivalent forms, decimal commas, fractions, and optional `x =` for numeric answers. The parser intentionally supports only linear expressions in x; it is not a general symbolic algebra engine.
-- Gemini receives the question, student response, optional reasoning, and deterministic checker result. It produces a validated language-only feedback object. It cannot update diagnosis, pick lessons, change stages, or decide mastery. AI feedback is disabled during independent and transfer validation. No ground truth answer is sent to the AI.
+- Gemini receives diagnostic answers and optional reasoning to form a provisional, concept-specific hypothesis and choose among validated probe candidates. It does not write questions, grade answers, assign the final diagnosis, pick lessons, change stages, or decide mastery. AI feedback is disabled during diagnostic selection and independent/transfer validation. No ground-truth answer is sent to the selector.
 - Progress persists in Supabase through the shared backend. Export downloads a JSON snapshot. Concept reset requires confirmation and affects the account across devices. Auth sessions are managed by the Supabase browser SDK.
 
 ## Scope and limits
 
 This MVP includes Supabase accounts and synchronized progress. It has no teacher dashboard, probabilistic mastery, first-sign-in assessment, or retention assessment. Concept relationships and question metadata live in TypeScript instead of Neo4j/PostgreSQL. The original proposal's Flutter/FastAPI/SymPy/DeepSeek stack has been replaced by the requested Next.js/Gemini implementation. There is no imported Eedi dataset and no claim of measured diagnostic accuracy.
 
-Learning state is computed and persisted by the backend. This curated MVP is not suitable for high-stakes grading. Probe confirmation is based on two matching curated error signatures, not the free-text reasoning. A correct response does not establish broader mathematics ability. After a reinforcement loop, latest validation updates the status; prior attempts remain in history.
+Learning state is computed and persisted by the backend. This curated MVP is not suitable for high-stakes grading. Probe confirmation uses repeated curated error signatures, not free-text reasoning. Results describe evidence about the selected concept; they do not classify general intelligence or overall math ability. After a reinforcement loop, latest validation updates the status; prior attempts remain in history.
 
-If AI is configured, student answers and reasoning from diagnostic/guided interactions are sent to Google. Original proposals, files, and API keys are never sent. Learning history follows the Supabase account across devices using the same project. Auth sessions remain specific to the device/browser.
+If AI is configured, student answers and reasoning from diagnostic interactions are sent to Google. Original proposals, files, and API keys are never sent. Learning history follows the Supabase account across devices using the same project. Auth sessions remain specific to the device/browser. Demo-mode probe selection works with Gemini only when both apps run locally; otherwise it uses the curated fallback.
 
 AI wording remains generative and may still be inaccurate despite schema/math-output guards; curated feedback is the fallback. Before opening this demo broadly, configure per-user rate limits on the backend to protect your API quota. Authentication is included; distributed rate limiting is not.
 
@@ -79,7 +79,7 @@ The tests cover linear equivalence, invalid/executable input rejection, confirme
 
 - `lib/content.ts`: curated question bank and interventions.
 - `lib/math.ts`: bounded linear-expression parser.
-- `lib/engine.ts`: deterministic diagnosis and learning transitions.
+- `lib/engine.ts`: deterministic grading, evidence rules, fallback probe selection, and learning transitions.
 - `lib/storage.ts`: validation of stored/returned learning snapshots.
 - `lib/supabase.ts`: browser Supabase session client.
 - `components/auth-gate.tsx`: sign-in, signup, password recovery and account context.

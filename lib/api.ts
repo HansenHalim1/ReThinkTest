@@ -2,7 +2,7 @@
 import { getSupabase } from './supabase';
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || 'https://rethinkbackend.vercel.app').replace(/\/+$/, '');
 
-export function apiUrl(path: '/api/health' | '/api/feedback' | '/api/me' | '/api/progress'): string {
+export function apiUrl(path: '/api/health' | '/api/diagnostic' | '/api/feedback' | '/api/me' | '/api/progress'): string {
   return `${apiBaseUrl}${path}`;
 }
 

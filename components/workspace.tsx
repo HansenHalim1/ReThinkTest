@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { ArrowRight, ArrowLeft, BookOpen, Check, CheckCircle2, ChevronRight, CircleHelp, Download, GitBranch, GraduationCap, LayoutDashboard, Lightbulb, LoaderCircle, RotateCcw, Sparkles, Target, TrendingUp, X, Menu, History } from 'lucide-react';
-import { concepts, getConcept, type ConceptId, type QuestionRole } from '@/lib/content';
-import { advance, diagnosisLabels, masteryLabels, newSession, reinforce, submit, type Session, type Stage } from '@/lib/engine';
+import { concepts, diagnosticHypothesisLabels, getConcept, getQuestion, type ConceptId, type QuestionRole } from '@/lib/content';
+import { advance, diagnosisLabels, masteryLabels, newSession, reinforce, submit, type AdaptiveSelection, type Session, type Stage } from '@/lib/engine';
 import { curatedFeedback } from '@/lib/feedback';
 import { accountRequest, apiUrl } from '@/lib/api';
 import { useAuth } from '@/components/auth-gate';
@@ -14,6 +14,19 @@ type View = 'dashboard' | 'learn' | 'explore' | 'map' | 'history';
 const stageOrder: Stage[] = ['diagnosis', 'probe', 'visual', 'worked', 'practice', 'retry', 'transfer', 'complete'];
 const stageLabels: Record<Stage, string> = { diagnosis: 'Mulai dari pemikiranmu', probe: 'Kenali pola berpikir', visual: 'Lihat konsepnya', worked: 'Ikuti satu contoh', practice: 'Coba dengan bimbingan', retry: 'Sekarang, mandiri', transfer: 'Gunakan di situasi baru', complete: 'Refleksi belajar' };
 const masteryClass = (s?: Session) => s?.mastery === 'understood' ? 'green' : s?.mastery === 'procedural-only' ? 'blue' : s?.mastery === 'needs-reinforcement' ? 'amber' : 'neutral';
+function aiLabel(value: unknown, task: 'hypothesis' | 'feedback') {
+  const result = value && typeof value === 'object' ? value as Record<string, unknown> : {};
+  if (result.source === 'gemini') return `${task === 'hypothesis' ? 'Gemini menganalisis hipotesis' : 'Feedback Gemini'} · ${typeof result.model === 'string' ? result.model : 'Gemini'}`;
+  const reasons: Record<string, string> = {
+    'not-configured': 'key Gemini belum tersedia', 'invalid-configuration': 'konfigurasi model tidak valid',
+    'provider-unavailable': 'Gemini tidak merespons', 'rate-limited': 'permintaan Gemini dibatasi',
+    'invalid-response': 'balasan Gemini tidak lolos validasi', 'no-candidates': 'soal probe tidak tersedia',
+    'endpoint-unavailable': 'endpoint analisis tidak tersedia',
+  };
+  const reason = typeof result.reason === 'string' ? reasons[result.reason] || result.reason : 'status pemanggilan tidak diterima';
+  const status = typeof result.providerStatus === 'number' && Number.isSafeInteger(result.providerStatus) ? ` · HTTP ${result.providerStatus}` : '';
+  return `Fallback kurasi · ${reason}${status}`;
+}
 
 export default function Workspace() {
   const { session: account, demo, signOut } = useAuth();
@@ -30,6 +43,7 @@ export default function Workspace() {
   const [answer, setAnswer] = useState('');
   const [reasoning, setReasoning] = useState('');
   const [feedback, setFeedback] = useState<{ text: string; source: string } | null>(null);
+  const diagnosticAI = useRef<unknown>(null);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -39,7 +53,8 @@ export default function Workspace() {
   const c = getConcept(selected);
   const session = saved.sessions[selected] ?? newSession(selected);
   const stage = session.stage;
-  const question = ['diagnosis', 'probe', 'practice', 'retry', 'transfer'].includes(stage) ? c.questions[stage as QuestionRole] : null;
+  const question = ['diagnosis', 'probe', 'practice', 'retry', 'transfer'].includes(stage) ? getQuestion(session.currentQuestionId || c.questions[stage as QuestionRole].id) || null : null;
+  const attempted = (role: QuestionRole) => session.attempts.some(a => getQuestion(a.questionId)?.role === role);
   const totalAttempts = Object.values(saved.sessions).reduce((n, s) => n + (s?.attempts.length ?? 0), 0);
   const understood = Object.values(saved.sessions).filter(s => s?.mastery === 'understood').length;
   const validation = stage === 'retry' || stage === 'transfer';
@@ -62,7 +77,7 @@ export default function Workspace() {
       setDisplayName('Mode demo');
       setSaved({ version: 1, sessions: {} });
       setReady(true);
-      setAi(false);
+      fetch(apiUrl('/api/health'), { signal: controller.signal }).then(r => r.json()).then(v => { if (!controller.signal.aborted) setAi(v.aiConfigured === true); }).catch(() => { if (!controller.signal.aborted) setAi(false); });
       return () => { controller.abort(); pending.current?.abort(); };
     }
     loadProgress(controller.signal).catch(() => { if (!controller.signal.aborted) setStorageMessage('Kemajuan belum dapat dimuat. Periksa koneksi lalu coba lagi.'); });
@@ -83,7 +98,18 @@ export default function Workspace() {
       if (demo) {
         const current = saved.sessions[selected] ?? newSession(selected);
         let next: Session | null = null;
-        if (action === 'submit') next = submit(current, fields.answer ?? '', fields.reasoning ?? '');
+        if (action === 'submit') {
+          let selection: AdaptiveSelection | undefined;
+          if (current.stage === 'diagnosis' || current.stage === 'probe') {
+            try {
+              const response = await fetch(apiUrl('/api/diagnostic'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ concept: selected, session: current, answer: fields.answer ?? '', reasoning: fields.reasoning ?? '' }), signal: AbortSignal.any([lifetime.current?.signal || new AbortController().signal, AbortSignal.timeout(9000)]), cache: 'no-store' });
+              const value = await response.json();
+              diagnosticAI.current = value.ai ?? { source: 'curated', reason: 'endpoint-unavailable' };
+              if (response.ok && typeof value.questionId === 'string' && ['possible-slip', 'possible-conceptual-gap', 'possible-understanding', 'uncertain'].includes(value.hypothesis)) selection = value as AdaptiveSelection;
+            } catch { diagnosticAI.current = { source: 'curated', reason: 'endpoint-unavailable' }; }
+          }
+          next = submit(current, fields.answer ?? '', fields.reasoning ?? '', new Date().toISOString(), selection);
+        }
         else if (action === 'advance' && ['visual', 'worked'].includes(current.stage)) next = advance(current);
         else if (action === 'reinforce' && current.stage === 'complete' && current.mastery !== 'understood') next = reinforce(current);
         else if (action === 'reset') next = newSession(selected);
@@ -99,7 +125,9 @@ export default function Workspace() {
         throw Error('Kemajuan diperbarui dari perangkat lain. Periksa tahap terbaru sebelum mencoba lagi.');
       }
       const data = await response.json();
+      if (response.status === 401) throw Error('Sesi Supabase ditolak. Masuk kembali; analisis Gemini tidak dijalankan.');
       if (!response.ok) throw Error(typeof data.error === 'string' ? data.error : 'Kemajuan gagal disimpan. Coba lagi.');
+      diagnosticAI.current = data.ai ?? null;
       const parsed = readSaved(JSON.stringify({ version: 1, sessions: { [selected]: data.session } }));
       const next = parsed?.sessions[selected];
       if (!next || !Number.isSafeInteger(data.revision) || data.revision < 1) throw Error('Balasan penyimpanan tidak valid.');
@@ -108,7 +136,7 @@ export default function Workspace() {
       setLastSaved(true);
       return next;
     } catch (cause) {
-      if (!lifetime.current?.signal.aborted) setError(cause instanceof Error ? cause.message : 'Kemajuan gagal disimpan. Coba lagi.');
+      if (!lifetime.current?.signal.aborted) setError(cause instanceof TypeError ? 'CORS/koneksi backend gagal. Gemini tidak dipanggil.' : cause instanceof Error ? cause.message : 'Kemajuan gagal disimpan. Coba lagi.');
       return null;
     } finally { mutation.current = false; if (!lifetime.current?.signal.aborted) setBusy(false); }
   }
@@ -121,23 +149,40 @@ export default function Workspace() {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!question || busy) return;
+    if (stage === 'diagnosis' || stage === 'probe') diagnosticAI.current = null;
     const next = submit(session, answer, reasoning);
     if (!next) { setError('Gunakan angka, pecahan, atau ekspresi linear dengan x. Contoh format: 2x + 8 atau x = 6.'); return; }
     setError('');
-    if (!await commitProgress('submit', { answer, reasoning })) return;
+    const committed = await commitProgress('submit', { answer, reasoning });
+    if (!committed) return;
     setAnswer(''); setReasoning('');
     if (validation) { setFeedback(null); return; }
     const baseline = curatedFeedback(question, answer);
+    if (stage === 'diagnosis' || stage === 'probe') {
+      setFeedback({ text: baseline, source: aiLabel(diagnosticAI.current, 'hypothesis') });
+      return;
+    }
     if (demo) { setFeedback({ text: baseline, source: 'Mode demo · materi terkurasi' }); return; }
     setFeedback({ text: baseline, source: 'Materi terkurasi' });
     setBusy(true);
     const controller = new AbortController(); pending.current = controller;
     try {
       const response = await accountRequest('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ questionId: question.id, answer, reasoning }), signal: controller.signal });
-      if (!response.ok) throw Error('Feedback unavailable');
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          setFeedback({ text: baseline, source: 'Sesi Supabase ditolak · Gemini tidak dipanggil' });
+          return;
+        }
+        throw Error('Backend feedback tidak merespons.');
+      }
       const v = await response.json();
-      if (typeof v.feedback === 'string') setFeedback({ text: v.feedback, source: v.source === 'gemini' ? (typeof v.model === 'string' ? v.model : 'Gemini') : v.reason === 'not-configured' ? 'Materi terkurasi · AI belum diaktifkan' : 'Materi terkurasi · AI tidak tersedia' });
-    } catch { if (!controller.signal.aborted) setFeedback({ text: baseline, source: 'Materi terkurasi · AI tidak tersedia' }); }
+      if (typeof v.feedback === 'string') setFeedback({ text: v.feedback, source: aiLabel(v, 'feedback') });
+    } catch (cause) {
+      if (!controller.signal.aborted) {
+        const authFailure = cause instanceof Error && /akun belum tersedia|masuk kembali|sesi berakhir/i.test(cause.message);
+        setFeedback({ text: baseline, source: authFailure ? 'Sesi Supabase tidak tersedia · Gemini tidak dipanggil' : 'CORS/koneksi backend gagal · Gemini belum dipanggil' });
+      }
+    }
     finally { if (pending.current === controller) { pending.current = null; setBusy(false); } }
   }
   function exportProgress() {
@@ -157,7 +202,7 @@ export default function Workspace() {
     </aside>
     {menu && <button className="menu-backdrop" aria-label="Tutup navigasi" onClick={() => setMenu(false)} />}
     <div className="main-shell">
-      <header className="topbar"><div className="breadcrumb"><button className="mobile-menu icon-button" aria-label="Buka navigasi" onClick={() => setMenu(!menu)}><Menu size={22} /></button><span>Ruang belajar</span><ChevronRight size={14} /><strong>{view === 'dashboard' ? 'Beranda' : view === 'learn' ? 'Belajar' : view === 'explore' ? 'Jelajahi Konsep' : view === 'map' ? 'Peta konsep' : 'Riwayat belajar'}</strong></div><div className="topbar-right"><span className={`status ${ai ? 'connected' : ''}`}><i />{ai === null ? 'Memeriksa AI' : ai ? 'AI dikonfigurasi' : 'Mode terkurasi'}</span><button type="button" className="text-button account-logout" disabled={busy} onClick={() => { void signOut().catch(cause => setStorageMessage(cause.message)); }}>Keluar</button></div></header>
+      <header className="topbar"><div className="breadcrumb"><button className="mobile-menu icon-button" aria-label="Buka navigasi" onClick={() => setMenu(!menu)}><Menu size={22} /></button><span>Ruang belajar</span><ChevronRight size={14} /><strong>{view === 'dashboard' ? 'Beranda' : view === 'learn' ? 'Belajar' : view === 'explore' ? 'Jelajahi Konsep' : view === 'map' ? 'Peta konsep' : 'Riwayat belajar'}</strong></div><div className="topbar-right"><span className={`status ${ai ? 'connected' : ''}`}><i />{ai === null ? 'Memeriksa Gemini' : ai ? 'Key Gemini tersedia · koneksi belum diuji' : 'Mode terkurasi'}</span><button type="button" className="text-button account-logout" disabled={busy} onClick={() => { void signOut().catch(cause => setStorageMessage(cause.message)); }}>Keluar</button></div></header>
       <main>
         {demo && <div className="notice" role="status">Mode demo aktif. Tidak ada akun atau database yang digunakan; progres hilang saat halaman dimuat ulang.</div>}
         {storageMessage && <div className="notice" role="status">{storageMessage}</div>}{error && !question && <p className="error" role="alert">{error}</p>}
@@ -192,12 +237,12 @@ export default function Workspace() {
             {stage === 'visual' && <><p className="question-prompt">{c.visual}</p><ConceptVisual id={selected} /><button className="primary lesson-next" disabled={busy} onClick={() => { void performAction('advance'); }}>Lihat contoh berikutnya <ArrowRight size={17} /></button></>}
             {stage === 'worked' && <><p className="question-prompt">Perhatikan bagaimana konsep digunakan di setiap langkah.</p><WorkedVisual key={selected} id={selected} steps={c.worked} /><button className="primary lesson-next" disabled={busy} onClick={() => { void performAction('advance'); }}>Coba latihan terbimbing <ArrowRight size={17} /></button></>}
             {stage === 'complete' && <div className="result-content"><span className={`result-icon ${masteryClass(session)}`}>{session.mastery === 'understood' ? <CheckCircle2 size={36} /> : <BookOpen size={36} />}</span><h3>{masteryLabels[session.mastery]}</h3><p>{session.mastery === 'understood' ? 'Kamu berhasil mengerjakan soal mandiri dan menerapkan konsep pada situasi baru. Ini bukti pemahaman untuk konsep yang diuji hari ini.' : session.mastery === 'procedural-only' ? 'Soal mandiri berhasil, tetapi penerapan pada situasi baru masih perlu latihan. Mari hubungkan kembali konsep dengan konteksnya.' : session.diagnosis === 'uncertain' ? 'Jawaban belum cukup untuk memastikan satu hambatan. Tinjau kembali konsep ini atau diskusikan langkahmu dengan guru; diagnosis tetap belum pasti.' : 'Soal mandiri belum berhasil. Kembali ke penjelasan dan contoh, lalu coba lagi tanpa bantuan.'}</p><div className="result-actions"><button className="primary" onClick={() => navigate('map')}>Lihat peta konsep <GitBranch size={16} /></button>{session.mastery !== 'understood' && <button className="secondary" disabled={busy} onClick={() => { void performAction('reinforce'); }}>Pelajari kembali <RotateCcw size={16} /></button>}</div></div>}
-          </section><aside className="lesson-aside"><div className="path-card"><h3>Perjalanan konsep</h3><ol>{stageOrder.filter(s => s !== 'complete').map((s, i) => <li className={s === stage ? 'current' : session.attempts.some(a => a.questionId === selected + "-" + s) ? 'done' : ''} key={s}><span>{session.attempts.some(a => a.questionId === selected + "-" + s) ? <Check size={13} /> : i + 1}</span><div><strong>{stageLabels[s]}</strong>{s === stage && <small>Sedang dikerjakan</small>}</div></li>)}</ol></div><div className="evidence-card"><h3><CircleHelp size={17} /> Apa yang sudah diketahui?</h3><small>DIAGNOSIS KONSEP</small><span className={`tag ${session.diagnosis === 'confirmed' ? 'amber' : 'neutral'}`}>{diagnosisLabels[session.diagnosis]}</span><small>STATUS PEMAHAMAN</small><span className={`tag ${masteryClass(session)}`}>{masteryLabels[session.mastery]}</span><p>Diagnosis dan pemahaman adalah dua hal berbeda. Pemahaman diuji lewat kerja mandiri dan transfer.</p></div><button className="text-button reset-button" onClick={() => setConfirmReset(true)}><RotateCcw size={14} /> Mulai ulang konsep ini</button></aside></div>
+          </section><aside className="lesson-aside"><div className="path-card"><h3>Perjalanan konsep</h3><ol>{stageOrder.filter(s => s !== 'complete').map((s, i) => <li className={s === stage ? 'current' : s !== 'visual' && s !== 'worked' && attempted(s as QuestionRole) ? 'done' : ''} key={s}><span>{s !== 'visual' && s !== 'worked' && attempted(s as QuestionRole) ? <Check size={13} /> : i + 1}</span><div><strong>{stageLabels[s]}</strong>{s === stage && <small>{s === 'probe' ? `Pertanyaan lanjutan ${session.attempts.filter(a => getQuestion(a.questionId)?.role === 'probe').length + 1}` : 'Sedang dikerjakan'}</small>}</div></li>)}</ol></div><div className="evidence-card"><h3><CircleHelp size={17} /> Apa yang sudah diketahui?</h3><small>DIAGNOSIS KONSEP</small><span className={`tag ${session.diagnosis === 'confirmed' ? 'amber' : 'neutral'}`}>{diagnosisLabels[session.diagnosis]}</span>{session.hypothesis && <><small>HIPOTESIS AWAL</small><span className="tag neutral">{diagnosticHypothesisLabels[session.hypothesis]}</span></>}<small>STATUS PEMAHAMAN</small><span className={`tag ${masteryClass(session)}`}>{masteryLabels[session.mastery]}</span><p>Hipotesis AI bersifat sementara. Hasil akhir memakai pola jawaban dari soal kurasi.</p></div><button className="text-button reset-button" onClick={() => setConfirmReset(true)}><RotateCcw size={14} /> Mulai ulang konsep ini</button></aside></div>
         </>}
 
         {view === 'map' && <><div className="page-heading"><div><div className="eyebrow">HUBUNGKAN PEMAHAMANMU</div><h1>Peta konsep</h1><p>Lihat prasyarat dan hasil belajar untuk konsep yang sudah diuji.</p></div><span className="edition">2 KONSEP MVP</span></div><div className="map-legend"><span><i className="dot green" />Tervalidasi</span><span><i className="dot blue" />Prosedural</span><span><i className="dot amber" />Perlu penguatan</span><span><i className="dot neutral" />Belum diuji</span></div><section className="map-card"><div className="map-foundation"><GraduationCap size={26} /><h3>Fondasi aritmetika</h3><p>Prasyarat · belum dinilai dalam MVP</p></div><div className="map-connector" /><div className="map-nodes">{concepts.map(v => <div className={`map-node ${masteryClass(saved.sessions[v.id])}`} key={v.id}><span className="eyebrow">{v.prerequisite}</span><h3>{v.title}</h3><span className={`tag ${masteryClass(saved.sessions[v.id])}`}>{masteryLabels[saved.sessions[v.id]?.mastery ?? 'unassessed']}</span><p>{diagnosisLabels[saved.sessions[v.id]?.diagnosis ?? 'unassessed']}</p><button className="text-button" onClick={() => start(v.id)}>Buka konsep <ArrowRight size={16} /></button></div>)}</div><div className="map-target"><Target size={20} /><div><strong>Persamaan linear</strong><p>Tujuan lanjutan · belum tersedia di MVP</p></div></div></section><div className="info-strip"><CircleHelp size={18} /><p>Peta ini menunjukkan hasil pada soal yang didukung, bukan nilai kemampuan matematika secara keseluruhan atau penguasaan jangka panjang.</p></div></>}
 
-        {view === 'history' && <><div className="page-heading"><div><div className="eyebrow">SETIAP LANGKAH BERARTI</div><h1>Riwayat belajar</h1><p>Jawaban dan proses berpikirmu, tersimpan di akunmu.</p></div><button className="secondary" onClick={exportProgress}><Download size={16} />Unduh kemajuan</button></div>{totalAttempts === 0 ? <div className="empty-state"><History size={40} /><h2>Perjalananmu mulai di sini.</h2><p>Belum ada jawaban. Pilih konsep dan coba soal pertamamu.</p><button className="primary" onClick={() => start('distribution')}>Mulai belajar <ArrowRight size={16} /></button></div> : <div className="history-list">{Object.values(saved.sessions).flatMap(s => (s?.attempts ?? []).map(a => ({ ...a, concept: s!.concept }))).sort((a, b) => b.at.localeCompare(a.at)).map((a, i) => <article className="history-item" key={`${a.at}-${i}`}><span className={`attempt-icon ${a.correct ? 'green' : 'amber'}`}>{a.correct ? <Check size={19} /> : <RotateCcw size={18} />}</span><div><h3>{getConcept(a.concept).title} <span>{stageLabels[a.questionId.split('-').at(-1) as Stage]}</span></h3><p>Jawaban: <strong>{a.answer}</strong></p>{a.reasoning && <p className="reasoning-note">“{a.reasoning}”</p>}<small>{new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(a.at))}</small></div><span className={`tag ${a.correct ? 'green' : 'amber'}`}>{a.correct ? 'Setara' : 'Belum setara'}</span></article>)}</div>}</>}
+        {view === 'history' && <><div className="page-heading"><div><div className="eyebrow">SETIAP LANGKAH BERARTI</div><h1>Riwayat belajar</h1><p>Jawaban dan proses berpikirmu, tersimpan di akunmu.</p></div><button className="secondary" onClick={exportProgress}><Download size={16} />Unduh kemajuan</button></div>{totalAttempts === 0 ? <div className="empty-state"><History size={40} /><h2>Perjalananmu mulai di sini.</h2><p>Belum ada jawaban. Pilih konsep dan coba soal pertamamu.</p><button className="primary" onClick={() => start('distribution')}>Mulai belajar <ArrowRight size={16} /></button></div> : <div className="history-list">{Object.values(saved.sessions).flatMap(s => (s?.attempts ?? []).map(a => ({ ...a, concept: s!.concept }))).sort((a, b) => b.at.localeCompare(a.at)).map((a, i) => <article className="history-item" key={`${a.at}-${i}`}><span className={`attempt-icon ${a.correct ? 'green' : 'amber'}`}>{a.correct ? <Check size={19} /> : <RotateCcw size={18} />}</span><div><h3>{getConcept(a.concept).title} <span>{stageLabels[getQuestion(a.questionId)?.role as Stage] || 'Pertanyaan adaptif'}</span></h3><p>Jawaban: <strong>{a.answer}</strong></p>{a.reasoning && <p className="reasoning-note">“{a.reasoning}”</p>}<small>{new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(a.at))}</small></div><span className={`tag ${a.correct ? 'green' : 'amber'}`}>{a.correct ? 'Setara' : 'Belum setara'}</span></article>)}</div>}</>}
         <footer className="page-footer"><span>ReThink<span className="brand-dot">.</span> <span>Ruang untuk berpikir lagi.</span></span><span>{lastSaved ? 'Tersimpan di akunmu' : 'Kemajuan tersimpan di akunmu'} · Dapat dilanjutkan di perangkat lain</span></footer>
         </>}
       </main>
