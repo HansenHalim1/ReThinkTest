@@ -100,11 +100,11 @@ export default function Workspace() {
         let next: Session | null = null;
         if (action === 'submit') {
           let selection: AdaptiveSelection | undefined;
-          if (current.stage === 'diagnosis') {
+          if (current.stage === 'diagnosis' || current.stage === 'probe') {
             try {
               const response = await fetch(apiUrl('/api/diagnostic'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ concept: selected, session: current, answer: fields.answer ?? '', reasoning: fields.reasoning ?? '' }), signal: AbortSignal.any([lifetime.current?.signal || new AbortController().signal, AbortSignal.timeout(9000)]), cache: 'no-store' });
               const value = await response.json();
-              if (response.ok && typeof value.questionId === 'string') selection = { questionId: value.questionId };
+              if (response.ok && typeof value.questionId === 'string') selection = { questionId: value.questionId, ...(typeof value.hypothesis === 'string' ? { hypothesis: value.hypothesis } : {}) };
             } catch { selection = undefined; }
           }
           next = submit(current, fields.answer ?? '', fields.reasoning ?? '', new Date().toISOString(), selection);
