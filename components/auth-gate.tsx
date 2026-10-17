@@ -5,6 +5,7 @@ import type { Session } from '@supabase/supabase-js';
 import { GitBranch, LoaderCircle } from 'lucide-react';
 import { getSupabase } from '@/lib/supabase';
 import { authRedirectUrl } from '@/lib/auth-redirect';
+import VerificationNotice from '@/components/verification-notice';
 
 type Auth = { session: Session; signOut: () => Promise<void> };
 const AuthContext = createContext<Auth | null>(null);
@@ -17,7 +18,7 @@ export function useAuth() {
 export default function AuthGate({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState<'signin' | 'signup' | 'reset' | 'recovery'>('signin');
+  const [mode, setMode] = useState<'signin' | 'signup' | 'verify' | 'reset' | 'recovery'>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -25,6 +26,16 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [configured, setConfigured] = useState(false);
+  const [resendAt, setResendAt] = useState(0);
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (!resendAt) return;
+    const tick = () => setCooldown(Math.max(0, Math.ceil((resendAt - Date.now()) / 1000)));
+    tick();
+    const timer = setInterval(() => { tick(); if (Date.now() >= resendAt) clearInterval(timer); }, 1000);
+    return () => clearInterval(timer);
+  }, [resendAt]);
 
   useEffect(() => {
     const supabase = getSupabase();
@@ -58,6 +69,24 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     setMessage('');
   }
   function changeMode(next: typeof mode) { setMode(next); setPassword(''); setMessage(''); setError(''); }
+  function startCooldown() { setCooldown(60); setResendAt(Date.now() + 60000); }
+  async function resendVerification() {
+    const supabase = getSupabase();
+    if (!supabase || busy || Date.now() < resendAt) return;
+    setBusy(true); setError(''); setMessage('');
+    try {
+      const { error } = await supabase.auth.resend({ type: 'signup', email: email.trim(), options: { emailRedirectTo: authRedirectUrl() } });
+      if (error) {
+        if (error.status === 429 || error.code === 'over_email_send_rate_limit') {
+          startCooldown();
+          throw Error('Tunggu sebentar sebelum meminta email baru. Cek juga folder Spam.');
+        }
+        throw Error('Email belum dapat dikirim ulang. Coba lagi sebentar.');
+      }
+      startCooldown(); setMessage('Permintaan terkirim. Jika akunmu belum dikonfirmasi, periksa email terbaru.');
+    } catch (cause) { setError(cause instanceof Error ? cause.message : 'Email belum dapat dikirim. Coba lagi.'); }
+    finally { setBusy(false); }
+  }
   async function submit(event: FormEvent) {
     event.preventDefault();
     const supabase = getSupabase();
@@ -66,11 +95,12 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     try {
       if (mode === 'signin') {
         const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
-        if (error) throw Error(error.code === 'email_not_confirmed' ? 'Konfirmasi emailmu sebelum masuk.' : 'Belum berhasil masuk. Periksa email dan kata sandi.');
+        if (error?.code === 'email_not_confirmed') { changeMode('verify'); return; }
+        if (error) throw Error('Belum berhasil masuk. Periksa email dan kata sandi.');
       } else if (mode === 'signup') {
         const { data, error } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { display_name: name.trim() }, emailRedirectTo: authRedirectUrl() } });
         if (error) throw Error('Akun belum dapat dibuat. Periksa isian atau coba lagi nanti.');
-        if (!data.session) setMessage('Periksa email untuk konfirmasi akun, lalu masuk.');
+        if (!data.session) { setEmail(email.trim()); changeMode('verify'); startCooldown(); }
         setPassword('');
       } else if (mode === 'reset') {
         const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: authRedirectUrl(true) });
@@ -91,6 +121,7 @@ export default function AuthGate({ children }: { children: ReactNode }) {
   const title = mode === 'signup' ? 'Mulai perjalanan belajarmu.' : mode === 'reset' ? 'Atur ulang kata sandi.' : mode === 'recovery' ? 'Buat kata sandi baru.' : 'Selamat datang kembali.';
   return <div className="auth-shell"><section className="auth-card" aria-labelledby="auth-title">
     <div className="brand"><span className="brand-icon"><GitBranch size={24} /></span>ReThink<span className="brand-dot">.</span></div>
+    {mode === 'verify' ? <VerificationNotice email={email} busy={busy} cooldown={cooldown} error={error} message={message} onResend={() => { void resendVerification(); }} onSignIn={() => changeMode('signin')} onChangeEmail={() => changeMode('signup')} /> : <>
     <h1 id="auth-title">{title}</h1><p>Masuk untuk menyimpan perjalanan belajar dan melanjutkannya di perangkat lain.</p>
     {!configured && <p className="notice" role="status">Layanan masuk belum tersedia. Silakan coba lagi nanti.</p>}
     <form onSubmit={submit}>
@@ -101,5 +132,6 @@ export default function AuthGate({ children }: { children: ReactNode }) {
       <button className="primary auth-submit" type="submit" disabled={busy || !configured}>{busy ? <LoaderCircle className="spin" size={17} /> : mode === 'signin' ? 'Masuk' : mode === 'signup' ? 'Buat akun' : mode === 'reset' ? 'Kirim tautan' : 'Simpan kata sandi'}</button>
     </form>
     <div className="auth-actions">{mode === 'signin' ? <><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signup')}>Belum punya akun? Daftar</button><button type="button" className="text-button" disabled={busy} onClick={() => changeMode('reset')}>Lupa kata sandi?</button></> : mode === 'recovery' ? <button type="button" className="text-button" disabled={busy} onClick={() => { void signOut().catch(cause => setError(cause.message)); }}>Keluar</button> : <button type="button" className="text-button" disabled={busy} onClick={() => changeMode('signin')}>Kembali ke masuk</button>}</div>
+    </>}
   </section></div>;
 }

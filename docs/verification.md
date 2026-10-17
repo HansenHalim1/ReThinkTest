@@ -1,5 +1,12 @@
 # Verification
 
+## Email verification experience and templates (2026-10-17)
+
+- Production build and TypeScript checks passed.
+- Chrome checks with mocked Auth responses passed for the inbox screen, recipient display, focus placement, email editing, unconfirmed sign-in, resend payload/production redirect, rate-limit handling, success feedback and cooldowns.
+- The verification screen and both email HTML previews fit a 390px viewport. Confirmation/recovery action links and the Indonesian document language were checked.
+- No real emails were sent by the checks. Templates were prepared as HTML files, not applied to the live Supabase configuration; actual inbox delivery/rendering requires testing after applying them.
+
 ## Supabase accounts and account-owned progress (2026-10-17)
 
 - Frontend and backend production builds passed. Seven existing frontend tests and nine backend tests passed.

@@ -34,6 +34,8 @@ Keep `GEMINI_API_KEY` and `GEMINI_MODEL` in the backend project only; remove any
 
 ## Accounts and database
 
+After signup, a dedicated **Cek kotak masukmu** screen shows the recipient, confirmation steps, an email-edit option, and a resend action with a 60-second cooldown. Unconfirmed sign-in attempts open the same screen. Resend failures/rate limits are explained without claiming delivery. The email HTML and subjects for confirmation and password reset are in [`docs/email-templates`](docs/email-templates/README.md); apply them in Supabase to update outgoing emails.
+
 Confirmation and password-reset emails return to `https://re-think-test.vercel.app` by default, even when requested from localhost or a preview. Set `NEXT_PUBLIC_SITE_URL` before rebuilding only to use a different destination. In Supabase Authentication → URL Configuration, set the Site URL to `https://re-think-test.vercel.app` and allow `https://re-think-test.vercel.app/` plus `https://re-think-test.vercel.app/?auth=recovery`. Supabase can fall back to its Site URL if a requested redirect is not allowed. Request a new email after changing these settings; existing links keep their original destination.
 
 The application now requires email/password sign-in. It includes account creation, email confirmation messaging, password reset/recovery, session restoration, and sign-out. Without Supabase configuration, the sign-in form is disabled instead of allowing unprotected access.
