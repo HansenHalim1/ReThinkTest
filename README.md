@@ -90,7 +90,7 @@ Backend implementation and deployment: https://github.com/HansenHalim1/ReThinkBa
 
 ## Interactive lesson visuals
 
-The **Jelajahi Konsep** navigation button opens a reference library for the two supported topics. Select a topic to see its formulas and worked example first, then switch to **Visualisasi** for interactive diagrams. Returning to the list and selecting a topic opens formulas again. Browsing this library does not record attempts or change learning progress.
+The **Jelajahi Konsep** navigation button opens a reference library for both foundational topics and all 18 SMA materials. Select a topic to see its formulas and worked example first, then switch to **Visualisasi** for interactive diagrams. Returning to the list and selecting a topic opens formulas again. Browsing this library does not record attempts or change learning progress.
 
 The guided lessons now include three representations for distribution: grouped tiles, a rectangular area model, and multiplication arrows. Students can change the number of groups, units per group, and the example value of x; the visual model and algebra update together.
 
@@ -106,3 +106,37 @@ The diagrams use React, CSS, and accessible SVG, with keyboard controls, text de
 
 Implementation: components/lesson-visuals.tsx and app/visuals.css. Preview images are in docs/.
 "# ReThinkTest" 
+
+## SMA roadmap after the two pretests
+
+The distributive-property and inverse-operation sessions serve as two foundation pretests. Completing both sessions opens the Matematika SMA page automatically, regardless of the private diagnosis/mastery result. Existing accounts with both sessions complete open the roadmap when progress loads. The roadmap can be previewed before completion; lesson access stays locked. Resetting or reviewing a pretest relocks access until both sessions finish again, without deleting SMA progress.
+
+The roadmap contains 18 introductory materials, six per grade:
+
+| Kelas | Materials |
+| --- | --- |
+| 10 | Eksponen dan logaritma; sistem persamaan linear; persamaan dan fungsi kuadrat; trigonometri; statistika; peluang dasar |
+| 11 | Fungsi dan domain; komposisi dan invers; transformasi grafik; lingkaran; statistika bivariat; regresi linear |
+| 12 | Barisan dan deret; bunga tunggal/majemuk; anuitas; pencacahan; permutasi/kombinasi; peluang majemuk/bersyarat |
+
+Each material has objectives, an original explanation, formulas, a worked example, and a multiple-choice checkpoint. A correct answer marks that material complete; a later incorrect retry never removes completion. This is a brief learning checkpoint, not a mastery assessment. The order is ReThink's suggested sequence; schools can distribute topics differently. This first release covers introductions rather than every subtopic or advanced mathematics elective.
+
+Signed-in accounts load and save through authenticated `GET/POST /api/curriculum`. The backend checks both pretests, grades answers, and saves with revision checks. Demo progress stays in the current workspace tab. Frontend and backend `lib/curriculum.ts` must be kept in sync when editing questions or material IDs.
+
+**Deployment:** apply the backend migration `supabase/migrations/202610180001_sma_curriculum.sql` in the Supabase SQL Editor, deploy the backend, then deploy this frontend. No new environment variables are needed. Previous pretest data is preserved.
+
+Topic references: [SIBI mathematics catalog](https://buku.kemendikdasmen.go.id/katalog/matematika-untuk-smasmk-kelas-xi) and [the Ministry's revised kelas XII book (2025)](https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_XII_Rev.pdf). All explanations, examples, and checkpoints here are original ReThink content.
+
+## Concepts across the SMA roadmap
+
+Jelajahi Konsep includes all 20 topics (two foundations plus 18 SMA materials). Filter by foundation/grade or search by title/summary. Every topic opens its formulas and worked example first; Visualisasi provides an interactive model. New models cover graphs, triangles, sectors, data, function composition, sequences, financial-growth calculations, counting, and conditional probability. Reference browsing changes no learning progress and remains available before completing the pretests.
+
+Peta Konsep groups all SMA topics by grade and links each topic's suggested prerequisites to its reference page. Links also open the corresponding lesson directly, or the next unfinished pretest while lesson access is locked. Prerequisites are suggestions, not new access gates. Completion is loaded from the same curriculum API; pending or failed requests show an unknown status.
+
+The topic graph lives in `lib/concept-map.ts`; diagrams live in `components/sma-concept-visual.tsx`. All visual controls update local examples only. This frontend addition requires no further backend migration.
+
+## Interactive concept graph
+
+Peta Konsep is a connected graph of all 20 topics, arranged vertically with foundations at the top, followed by kelas 10, 11, and 12. Directed arrows represent the suggested prerequisites in `lib/concept-map.ts`. Select a node to highlight its incoming (blue) and outgoing (orange) connections; the detail panel links to formulas, visuals, lessons, and neighboring nodes.
+
+Pan with mouse dragging, trackpad scrolling, or touch scrolling. Use the zoom buttons or Lihat semua to fit the whole graph. Nodes are keyboard-accessible buttons; the scroll region also supports keyboard scrolling. Completion and the existing pretest access gate remain unchanged.
