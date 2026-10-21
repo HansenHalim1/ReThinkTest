@@ -2,11 +2,11 @@
 import { getSupabase } from './supabase';
 const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || 'https://rethinkbackend.vercel.app').replace(/\/+$/, '');
 
-export function apiUrl(path: '/api/health' | '/api/diagnostic' | '/api/feedback' | '/api/me' | '/api/progress' | '/api/curriculum'): string {
+export function apiUrl(path: '/api/chat' | '/api/youtube-transcript' | '/api/assessment' | '/api/assessment-demo' | '/api/video-help' | '/api/videos' | '/api/health' | '/api/diagnostic' | '/api/feedback' | '/api/me' | '/api/progress' | '/api/curriculum'): string {
   return `${apiBaseUrl}${path}`;
 }
 
-export async function accountRequest(path: '/api/feedback' | '/api/me' | '/api/progress' | '/api/curriculum', init: RequestInit = {}): Promise<Response> {
+export async function accountRequest(path: '/api/chat' | '/api/youtube-transcript' | '/api/assessment' | '/api/assessment-demo' | '/api/video-help' | '/api/feedback' | '/api/me' | '/api/progress' | '/api/curriculum', init: RequestInit = {}): Promise<Response> {
   const auth = getSupabase()?.auth;
   if (!auth) throw Error('Layanan akun belum tersedia.');
   const { data, error } = await auth.getSession();

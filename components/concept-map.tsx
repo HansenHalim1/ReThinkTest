@@ -3,7 +3,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowRight, BookOpen, CheckCircle2, Expand, LockKeyhole, Minus, Plus, X } from 'lucide-react';
 import type { ConceptId } from '@/lib/content';
 import type { CurriculumProgress } from '@/lib/curriculum';
-import { connectedTopics, graphEdges, graphNodes, graphSize, prerequisites, topicGroups, topicTitle } from '@/lib/concept-map';
+import { connectedTopics, graphEdges, graphNodes, graphSize, prerequisites, graphLanes, topicTitle } from '@/lib/concept-map';
 
 export default function ConceptMap({ unlocked, completedPretests, progress, loading, error, onRetry, onExplore, onLearn, onPretest }: {
   unlocked: boolean; completedPretests: ConceptId[]; progress: CurriculumProgress; loading: boolean; error: string;
@@ -46,16 +46,16 @@ export default function ConceptMap({ unlocked, completedPretests, progress, load
     if (node && viewport.current) viewport.current.scrollTo({ left: (node.x + graphSize.nodeWidth / 2) * zoom - viewport.current.clientWidth / 2, top: (node.y + graphSize.nodeHeight / 2) * zoom - viewport.current.clientHeight / 2, behavior: 'smooth' });
   }
   function status(id: string) {
-    if (id === 'distribution' || id === 'inverse') return completedPretests.includes(id) ? 'Pretest selesai' : 'Pretest awal';
+    if (id === 'distribution' || id === 'inverse') return unlocked || completedPretests.includes(id) ? 'Pretest selesai' : 'Pretest awal';
     if (!unlocked) return 'Pretest dulu';
     if (loading || error) return 'Status belum dimuat';
     return progress[id]?.completed ? 'Selesai' : progress[id] ? 'Sudah dicoba' : 'Belum dimulai';
   }
-  function complete(id: string) { return id === 'distribution' || id === 'inverse' ? completedPretests.includes(id) : progress[id]?.completed === true; }
+  function complete(id: string) { return id === 'distribution' || id === 'inverse' ? unlocked || completedPretests.includes(id) : progress[id]?.completed === true; }
   function learn(id: string) { if (id === 'distribution' || id === 'inverse') onPretest(id); else onLearn(id); }
   return <div className="topic-map">
-    <div className="page-heading"><div><span className="eyebrow">DARI FONDASI KE PENERAPAN</span><h1>Peta konsep</h1><p>Ikuti garis penghubung untuk melihat bagaimana satu ide membangun ide berikutnya. Pilih simpul untuk menyorot hubungannya.</p></div><span className="edition">20 KONSEP TERHUBUNG</span></div>
-    <div className="graph-summary"><span>{completedPretests.length}/2 pretest selesai · {unlocked ? 'Materi SMA terbuka' : 'Selesaikan dua pretest untuk membuka materi SMA'}</span><span className="graph-direction">Konsep prasyarat <span aria-hidden="true">↓</span> Konsep lanjutan</span></div>
+    <div className="page-heading"><div><span className="eyebrow">DARI FONDASI KE PENERAPAN</span><h1>Peta konsep</h1><p>Ikuti garis penghubung untuk melihat bagaimana satu ide membangun ide berikutnya. Pilih simpul untuk menyorot hubungannya.</p></div><span className="edition">{graphNodes.length} KONSEP TERHUBUNG</span></div>
+    <div className="graph-summary"><span>{unlocked ? 'Pretest selesai' : 'Pretest dasar belum selesai'} · {unlocked ? 'Materi SMA terbuka' : 'Selesaikan pretest dasar untuk membuka materi SMA'}</span><span className="graph-direction">Konsep prasyarat <span aria-hidden="true">↓</span> Konsep lanjutan</span></div>
     {loading && <p role="status" className="topic-map-status">Memuat kemajuan materi…</p>}
     {error && <div className="notice" role="alert">{error}<button className="text-button" onClick={onRetry}>Coba lagi</button></div>}
     <section className="concept-graph" aria-label="Graf hubungan konsep matematika">
@@ -67,7 +67,7 @@ export default function ConceptMap({ unlocked, completedPretests, progress, load
         onLostPointerCapture={event => { drag.current = null; event.currentTarget.classList.remove('dragging'); }}
         onPointerCancel={event => { drag.current = null; event.currentTarget.classList.remove('dragging'); }}>
         <div className="graph-scaled" style={{ width: graphSize.width * zoom, height: graphSize.height * zoom }}><div className="graph-canvas" style={{ width: graphSize.width, height: graphSize.height, transform: `scale(${zoom})` }}>
-          {topicGroups.map((group, index) => <div className="graph-lane" key={group.id} style={{ left: 16, top: 26 + index * 270, width: graphSize.width - 32, height: 226 }}><span>{group.label}</span><small>{group.id === 'foundation' ? 'KENALI TITIK AWALMU' : group.id === 10 ? 'BANGUN BAHASA MATEMATIKA' : group.id === 11 ? 'HUBUNGKAN IDE' : 'TERAPKAN PEMAHAMAN'}</small></div>)}
+          {graphLanes.map(group => <div className="graph-lane" key={group.id} style={{ left: 16, top: group.top, width: graphSize.width - 32, height: group.height }}><span>{group.label}</span><small>{group.id === 'foundation' ? 'KENALI TITIK AWALMU' : group.id === 10 ? 'BANGUN BAHASA MATEMATIKA' : group.id === 11 ? 'HUBUNGKAN IDE' : group.id === 'advanced' ? 'JALUR PILIHAN · FASE F' : 'TERAPKAN PEMAHAMAN'}</small></div>)}
           <svg className="graph-edges" width={graphSize.width} height={graphSize.height} aria-hidden="true"><defs>{['base','incoming','outgoing'].map(kind => <marker id={`${marker}-${kind}`} key={kind} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8 4L0 8Z" fill={kind === 'outgoing' ? '#d75335' : kind === 'incoming' ? '#2849ad' : '#929caf'} /></marker>)}</defs>{graphEdges.map((edge,index) => {
             const from = graphNodes.find(node => node.id === edge.source)!;
             const to = graphNodes.find(node => node.id === edge.target)!;
@@ -87,7 +87,7 @@ export default function ConceptMap({ unlocked, completedPretests, progress, load
       <div className="graph-help"><span>Geser peta untuk menjelajah. Pilih konsep untuk menyorot prasyarat dan lanjutannya.</span>{selected && <button type="button" className="text-button" onClick={() => setSelected(null)}>Tampilkan semua hubungan<X size={14} /></button>}</div>
     </section>
     <section className="graph-detail" aria-label="Detail konsep terpilih" aria-live="polite">{topic ? <>
-      <div className="graph-detail-heading"><div><span className="eyebrow">{topic.group === 'foundation' ? 'FONDASI' : `KELAS ${topic.group}`} · {status(topic.id)}</span><h2>{topic.title}</h2><p>{topic.summary}</p></div><div className="graph-detail-actions"><button className="secondary" onClick={() => onExplore(topic.id)}>Rumus & visual<ArrowRight size={16} /></button><button className="primary" onClick={() => learn(topic.id)}>{topic.group === 'foundation' ? 'Buka pretest' : unlocked ? 'Buka materi' : 'Kerjakan pretest'}<ArrowRight size={16} /></button></div></div>
+      <div className="graph-detail-heading"><div><span className="eyebrow">{topic.group === 'foundation' ? 'FONDASI' : topic.group === 'advanced' ? 'TINGKAT LANJUT' : `KELAS ${topic.group}`} · {status(topic.id)}</span><h2>{topic.title}</h2><p>{topic.summary}</p></div><div className="graph-detail-actions"><button className="secondary" onClick={() => onExplore(topic.id)}>Rumus & visual<ArrowRight size={16} /></button><button className="primary" onClick={() => learn(topic.id)}>{topic.group === 'foundation' ? 'Buka pretest' : unlocked ? 'Buka materi' : 'Kerjakan pretest'}<ArrowRight size={16} /></button></div></div>
       <div className="graph-relations"><div><strong><i className="graph-line incoming" />Bangun dari</strong>{incoming.length ? incoming.map(id => <button className="topic-dependency" key={id} onClick={() => focusTopic(id)}>{topicTitle(id)}<ArrowRight size={12} /></button>) : <p>{topic.group === 'foundation' ? 'Fondasi awal untuk perjalanan belajarmu.' : 'Membaca dan menghitung data sederhana.'}</p>}</div><div><strong><i className="graph-line outgoing" />Lanjutkan ke</strong>{outgoing.length ? outgoing.map(id => <button className="topic-dependency" key={id} onClick={() => focusTopic(id)}>{topicTitle(id)}<ArrowRight size={12} /></button>) : <p>Gunakan konsep ini untuk latihan dan penerapan berikutnya.</p>}</div></div>
     </> : <div className="graph-empty-detail"><BookOpen size={23} /><div><h2>Mulai dari satu konsep.</h2><p>Pilih simpul pada peta untuk melihat hubungan, rumus, dan materi belajarnya.</p></div></div>}</section>
     <p className="graph-footnote">Garis menunjukkan saran prasyarat, bukan syarat tambahan untuk membuka materi. Rumus dan visual dapat dijelajahi kapan saja.</p>

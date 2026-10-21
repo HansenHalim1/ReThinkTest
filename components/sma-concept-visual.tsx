@@ -1,5 +1,6 @@
 'use client';
 import { useId, useState, type ReactNode } from 'react';
+import CurriculumExtraVisual from '@/components/curriculum-extra-visual';
 
 type Point = [number, number];
 const blue = '#2849ad', orange = '#d75335';
@@ -28,7 +29,7 @@ function Plot({ title, series = [], dots = [], xMin = 0, xMax, yMin = 0, yMax, x
   </Figure>{series.length > 0 && <div className="sma-plot-legend">{series.map(s => <span key={s.label}><i style={{ background: s.color }} />{s.label}</span>)}</div>}</>;
 }
 const defaults: Record<string, number> = {
-  'x-exponents': 3, 'x-linear': 8, 'x-quadratic': 0, 'x-trigonometry': 45, 'x-statistics': 12, 'x-probability': 4,
+  'x-exponential-functions': 3, 'x-scatterplots': 1, 'xii-conditional-probability': 3, 'x-exponents': 3, 'x-linear': 8, 'x-quadratic': 0, 'x-trigonometry': 45, 'x-statistics': 12, 'x-probability': 4,
   'xi-functions': 3, 'xi-composition': 2, 'xi-transformations': 2, 'xi-circles': 90, 'xi-bivariate': 1, 'xi-regression': 4,
   'xii-sequences': 3, 'xii-interest': 3, 'xii-annuities': 60, 'xii-counting': 3, 'xii-combinatorics': 5, 'xii-compound-probability': 3,
 };
@@ -38,6 +39,7 @@ export default function SmaConceptVisual({ id }: { id: string }) {
   let title = '', description = '', observation = '', picture: ReactNode, controls: ReactNode;
   const control = (label: string, min: number, max: number, step = 1) => <Range label={label} min={min} max={max} step={step} value={n} onChange={setN} />;
   switch (id) {
+    case 'x-exponential-functions':
     case 'x-exponents': {
       title = 'Pangkat bertambah, hasil berlipat'; description = 'Setiap kenaikan satu pada pangkat menggandakan nilai untuk basis 2.';
       controls = control('Pangkat n', 0, 6); observation = `2${['⁰','¹','²','³','⁴','⁵','⁶'][n]} = ${2**n}. Jadi log₂ ${2**n} = ${n}.`;
@@ -93,6 +95,7 @@ export default function SmaConceptVisual({ id }: { id: string }) {
       controls = control('Sudut pusat (derajat)',30,330,30); observation = `Bagian lingkaran = ${n}/360. Panjang busur ≈ ${round(n/360*8)}π satuan; luas juring ≈ ${round(n/360*16)}π satuan².`;
       picture = <Figure title={observation}><circle cx="230" cy="140" r="85" fill="#eee9dc" stroke={blue} /><path d={`M230 140L230 55A85 85 0 ${n>180?1:0} 1 ${endX} ${endY}Z`} fill="#f2d87b" stroke={blue} strokeWidth="2" /><path d={`M230 55A85 85 0 ${n>180?1:0} 1 ${endX} ${endY}`} fill="none" stroke={orange} strokeWidth="5" /><circle cx="230" cy="140" r="4" fill={blue} /><text x="350" y="120">θ = {n}°</text><text x="350" y="150">r = 4</text><text x="90" y="265">Busur: garis oranye · juring: daerah kuning</text></Figure>;break;
     }
+    case 'x-scatterplots':
     case 'xi-bivariate': {
       const points: Point[] = [1,2,3,4,5].map((x,i)=>[x,10+n*(x-3)+[1,-1,0,-1,1][i]]);
       const numerator=points.reduce((s,[x,y])=>s+(x-3)*(y-10),0), denominator=Math.sqrt(10*points.reduce((s,[,y])=>s+(y-10)**2,0));
@@ -134,12 +137,13 @@ export default function SmaConceptVisual({ id }: { id: string }) {
       controls = control('Jumlah siswa yang tersedia',3,7); observation = `C(${n},2) = ${pairs.length} tim. Untuk ketua dan wakil, P(${n},2) = ${n*(n-1)} susunan, dua kali banyak tim.`;
       picture = <div className="sma-combinations" aria-label={observation}>{pairs.map(([a,b])=><span key={`${a}-${b}`}>Siswa {a}<b>&</b>Siswa {b}</span>)}</div>;break;
     }
+    case 'xii-conditional-probability':
     case 'xii-compound-probability': {
       title = 'Tanpa pengembalian, ruang sampelnya berubah'; description = 'Awalnya ada 10 bola. Diketahui bola pertama yang terambil merah dan tidak dikembalikan.';
       controls = control('Jumlah merah sebelum pengambilan',2,8); observation = `Sebelum: P(merah) = ${n}/10. Setelah satu merah diambil: P(merah berikutnya | pertama merah) = ${n-1}/9 ≈ ${round((n-1)/9)}.`;
       picture = <div><p className="sma-visual-caption">Setelah satu bola merah diambil: {n-1} merah dan {10-n} biru tersisa.</p><BallTray red={n-1} total={9} title={observation} /></div>;break;
     }
-    default: return null;
+    default: return <CurriculumExtraVisual key={id} id={id} />;
   }
   return <section className="sma-interactive" aria-label={title}><h2>{title}</h2><p>{description}</p><div className="sma-visual-controls">{controls}</div>{picture}<p className="sma-visual-observation" role="status">{observation}</p><small className="sma-visual-rounding">Nilai desimal ditampilkan dengan pembulatan hingga dua angka di belakang koma.</small></section>;
 }

@@ -14,9 +14,9 @@ Copy-Item .env.example .env.local
 npm.cmd run dev
 ```
 
-Open http://localhost:3000. If another app uses port 3000, run `npm.cmd run dev -- --port 3001`.
+Open http://localhost:3000. The local backend uses port 3001; keep that port available for it.
 
-The default backend URL works without a frontend environment file. To use a different backend, set `NEXT_PUBLIC_API_BASE_URL` in `.env.local` (for example, `http://localhost:3001` to run against the separate backend locally). This is a public URL, never an API key. Restart the dev server after changing it.
+The default backend URL works without a frontend environment file. To use a different backend, set `NEXT_PUBLIC_API_BASE_URL=http://localhost:3001` in the ignored `.env.development.local` file and run `npm.cmd run dev` in `../rethinkbackend`. This development-only override keeps `npm run build` pointed at the production backend from `.env.local` or the default. This is a public URL, never an API key. Restart the dev server after changing it.
 
 The website calls the backend directly from the browser. The backend's `ALLOWED_ORIGINS` must include `http://localhost:3000` for local development and the exact production website origin. If you use another frontend port, add its origin too. Signed-in progress requires the backend and database. Demo mode keeps progress in memory and can use the backend's localhost-only diagnostic selector while running both apps locally.
 
@@ -28,7 +28,7 @@ The website calls the backend directly from the browser. The backend's `ALLOWED_
 4. Set `NEXT_PUBLIC_SUPABASE_URL=https://hhovzaaeolcfynyetabf.supabase.co` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` in the frontend project.
 5. Complete the database/key/redirect setup described in `../rethinkbackend/SETUP.md`, then deploy both projects. Public environment variables are embedded at build time.
 
-Keep `GEMINI_API_KEY` and `GEMINI_MODEL` in the backend project only; remove any old Gemini variables from the frontend Vercel project. Model selection is controlled by the backend.
+Keep `AI_GATEWAY_API_KEY` and `AI_GATEWAY_MODEL` in the backend project only; remove any old Gemini variables from the frontend Vercel project. Model selection is controlled by the backend.
 
 `npm run build` produces a static `out/` directory with no frontend API functions. Vercel serves this export with its default Next.js settings. For a local preview, use a static file server for `out/`; `next start` does not support static exports. Use `npm run dev` for development.
 
@@ -44,24 +44,28 @@ The database migration and full activation instructions live in the shared backe
 
 Progress is loaded from the signed-in account. Learning commands go to the backend, which grades answers and validates transitions before saving. Saves use revisions to avoid overwriting changes from another device. Changing accounts unmounts the workspace and loads the new account's progress. The UI advances only after a successful save; network failures leave the answer available to retry. Legacy anonymous browser data is left untouched and is not automatically imported into any account.
 
-## Implemented learning loop
+## Current foundation pretest
+
+Students start one mixed pretest covering eight topics and 24 questions in three increasing difficulty rounds. Each question shows its topic name. Signed-in answers save and resume through `/api/assessment`; demo uses a stateless practice endpoint. The final editable checklist records self-assessment separately from graded answers. See [the pretest API and deployment guide](docs/foundation-pretest.md). Apply the new assessment migration before publishing the signed-in flow. AI-targeted follow-ups and the rest of the draft question bank are not included yet.
+
+## Existing concept learning engine
 
 - Indonesian responsive student dashboard, concept selection, interactive visual lessons, worked examples, concept map, and attempt history.
-- Two curated concept chains: distributive property and inverse operations. Each begins with one fixed diagnostic item, then uses Gemini's private provisional hypothesis and the expanded 1,243-item bank to select up to three foundation probes. The session continues to a visual explanation, worked example, guided practice, independent retry, and contextual transfer problem.
-- Two matching known error types confirm a concept blocker. Two consecutive correct diagnostic answers reject it. Mixed or unrecognized evidence stays uncertain after the probe limit. Gemini updates its hypothesis and selects from the bank; deterministic rules assign the final diagnosis and mastery.
+- Two curated concept chains: distributive property and inverse operations. Each begins with one fixed diagnostic item, then uses DeepSeek's private provisional hypothesis and the expanded 1,243-item bank to select up to three foundation probes. The session continues to a visual explanation, worked example, guided practice, independent retry, and contextual transfer problem.
+- Two matching known error types confirm a concept blocker. Two consecutive correct diagnostic answers reject it. Mixed or unrecognized evidence stays uncertain after the probe limit. DeepSeek updates its hypothesis and selects from the bank; deterministic rules assign the final diagnosis and mastery.
 - Confirmed blockers enter the guided sequence. Uncertain outcomes can use an explicitly selected general concept review without claiming a confirmed blocker.
 - Independent retry failure becomes Needs Reinforcement and stops transfer. Passing retry and failing transfer becomes Procedural Only. Passing both becomes Understood. Students can revisit instruction and revalidate.
 - Numeric/linear algebra checking is deterministic, without `eval`. It accepts equivalent forms, decimal commas, fractions, and optional `x =` for numeric answers. The parser intentionally supports only linear expressions in x; it is not a general symbolic algebra engine.
-- Gemini receives diagnostic answers, optional reasoning, and its previous private hypothesis to update that hypothesis and choose the next probe from validated foundation candidates. It does not write questions, grade answers, assign the final diagnosis, pick lessons, change stages, or decide mastery. AI feedback is disabled during diagnostic selection and independent/transfer validation. No ground-truth answer is sent to the selector.
+- DeepSeek receives diagnostic answers, optional reasoning, and its previous private hypothesis to update that hypothesis and choose the next probe from validated foundation candidates. It does not write questions, grade answers, assign the final diagnosis, pick lessons, change stages, or decide mastery. AI feedback is disabled during diagnostic selection and independent/transfer validation. No ground-truth answer is sent to the selector.
 - Diagnosis, hypothesis, and mastery remain in backend storage and are omitted from learner-facing progress responses and exports. The UI reports session progress without assigning an ability class. Progress persists in Supabase through the shared backend. Export downloads a learner-facing JSON snapshot. Concept reset requires confirmation and affects the account across devices. Auth sessions are managed by the Supabase browser SDK.
 
 ## Scope and limits
 
-This MVP includes Supabase accounts and synchronized progress. It has no teacher dashboard, probabilistic mastery, first-sign-in assessment, or retention assessment. Concept relationships and question metadata live in TypeScript instead of Neo4j/PostgreSQL. The original proposal's Flutter/FastAPI/SymPy/DeepSeek stack has been replaced by the requested Next.js/Gemini implementation. There is no imported Eedi dataset and no claim of measured diagnostic accuracy.
+This MVP includes Supabase accounts and synchronized progress. It has no teacher dashboard, probabilistic mastery, first-sign-in assessment, or retention assessment. Concept relationships and question metadata live in TypeScript instead of Neo4j/PostgreSQL. The original proposal's Flutter/FastAPI/SymPy/DeepSeek stack has been replaced by the requested Next.js/DeepSeek implementation. There is no imported Eedi dataset and no claim of measured diagnostic accuracy.
 
 Learning state is computed and persisted by the backend. This curated MVP is not suitable for high-stakes grading. Probe confirmation uses repeated curated error signatures, not free-text reasoning. Results describe evidence about the selected concept; they do not classify general intelligence or overall math ability. After a reinforcement loop, latest validation updates the status; prior attempts remain in history.
 
-If AI is configured, student answers and reasoning from diagnostic interactions are sent to Google. Original proposals, files, and API keys are never sent. Learning history follows the Supabase account across devices using the same project. Auth sessions remain specific to the device/browser. Demo-mode probe selection works with Gemini only when both apps run locally; otherwise it uses the curated fallback.
+If AI is configured, student answers and reasoning from diagnostic interactions are sent through Vercel AI Gateway to its AI providers. Original proposals, files, and API keys are never sent. Learning history follows the Supabase account across devices using the same project. Auth sessions remain specific to the device/browser. Demo-mode probe selection works with DeepSeek only when both apps run locally; otherwise it uses the curated fallback.
 
 AI wording remains generative and may still be inaccurate despite schema/math-output guards; curated feedback is the fallback. Before opening this demo broadly, configure per-user rate limits on the backend to protect your API quota. Authentication is included; distributed rate limiting is not.
 
@@ -73,7 +77,7 @@ npm.cmd run typecheck
 npm.cmd run build
 ```
 
-The tests cover linear equivalence, invalid/executable input rejection, confirmed/rejected/uncertain diagnostic paths, scaffold transitions, retry/transfer outcomes, damaged browser records, and AI output guards. Live Gemini configuration and provider tests belong to the backend repository.
+The tests cover linear equivalence, invalid/executable input rejection, confirmed/rejected/uncertain diagnostic paths, scaffold transitions, retry/transfer outcomes, damaged browser records, and AI output guards. Live DeepSeek configuration and provider tests belong to the backend repository.
 
 ## Source
 
@@ -107,9 +111,13 @@ The diagrams use React, CSS, and accessible SVG, with keyboard controls, text de
 Implementation: components/lesson-visuals.tsx and app/visuals.css. Preview images are in docs/.
 "# ReThinkTest" 
 
-## SMA roadmap after the two pretests
+## SMA curriculum v2
 
-The distributive-property and inverse-operation sessions serve as two foundation pretests. Completing both sessions opens the Matematika SMA page automatically, regardless of the private diagnosis/mastery result. Existing accounts with both sessions complete open the roadmap when progress loads. The roadmap can be previewed before completion; lesson access stays locked. Resetting or reviewing a pretest relocks access until both sessions finish again, without deleting SMA progress.
+The shared curriculum now contains 37 introductory lessons: 25 general-pathway lessons including prerequisite support, and 12 elective advanced lessons covering algebra, geometry, distributions, and calculus. Both pathways have independent completion totals, suggested grade placement, prerequisites, and CP source mapping. Every lesson has additional examples and a common-mistake note. Existing IDs and checkpoint grading remain compatible. Apply the new module-constraint migration before saving new lesson IDs. See [the current curriculum and Swift guide](docs/sma-curriculum-v2.md).
+
+## Existing SMA roadmap behavior
+
+Completing the unified foundation pretest opens Matematika SMA, regardless of score or checklist choices. Accounts that previously completed both legacy concept sessions retain access. The roadmap remains previewable before completion.
 
 The roadmap contains 18 introductory materials, six per grade:
 
@@ -121,7 +129,7 @@ The roadmap contains 18 introductory materials, six per grade:
 
 Each material has objectives, an original explanation, formulas, a worked example, and a multiple-choice checkpoint. A correct answer marks that material complete; a later incorrect retry never removes completion. This is a brief learning checkpoint, not a mastery assessment. The order is ReThink's suggested sequence; schools can distribute topics differently. This first release covers introductions rather than every subtopic or advanced mathematics elective.
 
-Signed-in accounts load and save through authenticated `GET/POST /api/curriculum`. The backend checks both pretests, grades answers, and saves with revision checks. Demo progress stays in the current workspace tab. Frontend and backend `lib/curriculum.ts` must be kept in sync when editing questions or material IDs.
+Signed-in accounts load and save through authenticated `GET/POST /api/curriculum`. The backend checks unified or legacy pretest completion, grades answers, and saves with revision checks. Demo progress stays in the current workspace tab. Frontend and backend `lib/curriculum.ts` must be kept in sync when editing questions or material IDs.
 
 **Deployment:** apply the backend migration `supabase/migrations/202610180001_sma_curriculum.sql` in the Supabase SQL Editor, deploy the backend, then deploy this frontend. No new environment variables are needed. Previous pretest data is preserved.
 
@@ -129,7 +137,7 @@ Topic references: [SIBI mathematics catalog](https://buku.kemendikdasmen.go.id/k
 
 ## Concepts across the SMA roadmap
 
-Jelajahi Konsep includes all 20 topics (two foundations plus 18 SMA materials). Filter by foundation/grade or search by title/summary. Every topic opens its formulas and worked example first; Visualisasi provides an interactive model. New models cover graphs, triangles, sectors, data, function composition, sequences, financial-growth calculations, counting, and conditional probability. Reference browsing changes no learning progress and remains available before completing the pretests.
+Jelajahi Konsep includes all 39 references (two legacy foundations plus 37 general/advanced materials). Filter by foundation/grade or search by title/summary. Every topic opens its formulas and worked example first; Visualisasi provides an interactive model. New models cover graphs, triangles, sectors, data, function composition, sequences, financial-growth calculations, counting, and conditional probability. Reference browsing changes no learning progress and remains available before completing the pretests.
 
 Peta Konsep groups all SMA topics by grade and links each topic's suggested prerequisites to its reference page. Links also open the corresponding lesson directly, or the next unfinished pretest while lesson access is locked. Prerequisites are suggestions, not new access gates. Completion is loaded from the same curriculum API; pending or failed requests show an unknown status.
 
@@ -137,6 +145,26 @@ The topic graph lives in `lib/concept-map.ts`; diagrams live in `components/sma-
 
 ## Interactive concept graph
 
-Peta Konsep is a connected graph of all 20 topics, arranged vertically with foundations at the top, followed by kelas 10, 11, and 12. Directed arrows represent the suggested prerequisites in `lib/concept-map.ts`. Select a node to highlight its incoming (blue) and outgoing (orange) connections; the detail panel links to formulas, visuals, lessons, and neighboring nodes.
+Peta Konsep is a graph of all 39 references, arranged across foundations, suggested general grades 10/11/12, and the advanced elective. Multiple rows keep the expanded nodes inside their sections. Directed arrows represent the suggested prerequisites in `lib/concept-map.ts`. Select a node to highlight its incoming (blue) and outgoing (orange) connections; the detail panel links to formulas, visuals, lessons, and neighboring nodes.
 
-Pan with mouse dragging, trackpad scrolling, or touch scrolling. Use the zoom buttons or Lihat semua to fit the whole graph. Nodes are keyboard-accessible buttons; the scroll region also supports keyboard scrolling. Completion and the existing pretest access gate remain unchanged.
+Pan with mouse dragging, trackpad scrolling, or touch scrolling. Use the zoom buttons or Lihat semua to fit the whole graph. Nodes are keyboard-accessible buttons; the scroll region also supports keyboard scrolling. Completion uses the shared curriculum API; the gate accepts the unified pretest or both legacy sessions.
+
+## Concept video demo and Swift handoff
+
+Jelajahi Konsep now has **Rumus | Visualisasi | Video**. All 37 SMA lessons and both foundation references now have real, silent Manim videos and interactive visualizations. Videos include Indonesian captions and clickable transcripts; the new derivatives reference also includes an interactive secant slider. The catalog covers all 39 current topics.
+
+Both signed-in and demo users load the public `GET /api/videos?topicId=...` catalog from the shared backend. If that request fails, demo mode offers an explicit packaged preview. The backend ships the same versioned MP4/poster/VTT assets, so this pilot requires no database migration or Storage configuration. Deploy the backend before the frontend.
+
+See [the demo runbook and Swift integration guide](docs/swift-team-demo.md), [video API contract](docs/video-api.openapi.json), and [reproducible Manim sources](media/manim/README.md). The full 126-question bank remains a draft authoring package; the unified assessment integrates a 24-question foundation pilot subset.
+
+Transcript sentences are clickable: selecting one pauses the video and opens a focused question panel. Signed-in students use authenticated `POST /api/video-help`; demo mode shows labeled curated examples. The backend validates the video version and passage, grounds DeepSeek in the canonical transcript, and labels curated fallback responses. See the transcript-question section of the [Swift handoff](docs/swift-team-demo.md).
+
+## DeepSeek AI Gateway
+
+All AI requests use the shared backend DeepSeek transport: diagnostic selection, feedback, and transcript explanations. See [Gateway setup](docs/deepseek-gateway-setup.md) for credentials, monthly credit eligibility, and activation checks. No Google/Gemini request path remains.
+
+## Complete concept media
+
+All 39 topics have mathematical visualizations and captioned videos, accessible from the explorer and each SMA lesson. The release includes 36 new 36-second films, 156 native SVG stages, clickable transcripts, and grounded passage explanations. Public `GET /api/visualizations` supports Swift stage selection. See [the complete media guide](docs/complete-concept-media.md). No new database migration is introduced by this media release.
+
+Chatbot and video context: [web demo and Swift/API handoff](docs/chatbot-video-context.md).

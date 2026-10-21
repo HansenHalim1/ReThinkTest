@@ -22,3 +22,16 @@ test('all grades have usable lessons and public curriculum omits quiz answers', 
     assert.equal('explanation' in visible.quiz, false);
   }
 });
+
+
+test('general and advanced pathways stay distinct with source mapping and deeper examples', () => {
+  assert.equal(materials.length, 37);
+  assert.equal(materials.filter(m => m.track === 'general').length, 25);
+  assert.equal(materials.filter(m => m.track === 'advanced').length, 12);
+  for (const m of materials) {
+    assert.equal(m.gradePlacement, 'suggested');
+    assert.ok(m.additionalExamples.length >= 1 && m.commonMistakes.length >= 1);
+    if (m.track === 'advanced') assert.equal(m.phase, 'F');
+  }
+  assert.equal(new Set(materials.flatMap(m => m.bankTopicIds)).size, 34);
+});

@@ -1,0 +1,6521 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.21-v1",
+  "locale": "id-ID",
+  "title": "ReThink SMA diagnostic starter bank",
+  "authorship": "original-rethink",
+  "status": "draft",
+  "difficultyScale": {
+    "1": "entry",
+    "2": "routine",
+    "3": "application-or-reasoning"
+  },
+  "sources": [
+    {
+      "id": "cp-math-2025",
+      "title": "Panduan Mata Pelajaran Matematika 2025",
+      "url": "https://repositori.kemendikdasmen.go.id/33608/",
+      "alignmentStatus": "topic-level-indexed-official-excerpts",
+      "note": "General sections 5–6; Advanced sections 1–4. Full section-level review pending."
+    },
+    {
+      "id": "rethink-prerequisites",
+      "title": "ReThink prerequisite design",
+      "url": null,
+      "alignmentStatus": "proposed-prerequisites",
+      "note": "Foundational content supports SMA readiness; not a claim of separate SMA CP requirements."
+    }
+  ],
+  "topics": [
+    {
+      "id": "f-integers",
+      "title": "Bilangan bertanda dan urutan operasi",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "signed arithmetic"
+      }
+    },
+    {
+      "id": "f-fractions",
+      "title": "Pecahan dan desimal",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-integers"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "fractions"
+      }
+    },
+    {
+      "id": "f-ratios",
+      "title": "Rasio dan proporsi",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "ratios"
+      }
+    },
+    {
+      "id": "f-percentages",
+      "title": "Persentase dan perubahan relatif",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-ratios"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "percentages"
+      }
+    },
+    {
+      "id": "f-distribution",
+      "title": "Sifat distributif dan suku sejenis",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-integers"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "algebraic manipulation"
+      }
+    },
+    {
+      "id": "f-linear-equations",
+      "title": "Persamaan linear dan operasi invers",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-distribution",
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "linear equations"
+      }
+    },
+    {
+      "id": "f-coordinates",
+      "title": "Koordinat dan gradien garis",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-linear-equations"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "coordinates"
+      }
+    },
+    {
+      "id": "f-pythagoras",
+      "title": "Segitiga siku-siku dan akar",
+      "phase": "foundation",
+      "track": "foundation",
+      "prerequisites": [
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "rethink-prerequisites",
+        "section": "geometry prerequisites"
+      }
+    },
+    {
+      "id": "e-exponents",
+      "title": "Eksponen bulat dan pecahan",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.1"
+      }
+    },
+    {
+      "id": "e-inequalities",
+      "title": "Sistem pertidaksamaan linear dua variabel",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-linear-equations",
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.2"
+      }
+    },
+    {
+      "id": "e-quadratic-roots",
+      "title": "Persamaan kuadrat dan akar kompleks",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-distribution",
+        "f-linear-equations"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.2"
+      }
+    },
+    {
+      "id": "e-quadratic-graphs",
+      "title": "Grafik dan nilai ekstrem fungsi kuadrat",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "e-quadratic-roots",
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.2"
+      }
+    },
+    {
+      "id": "e-exponential-functions",
+      "title": "Persamaan dan fungsi eksponensial",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "e-exponents",
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.2"
+      }
+    },
+    {
+      "id": "e-trigonometry",
+      "title": "Perbandingan trigonometri sudut lancip",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-pythagoras",
+        "f-ratios"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.3"
+      }
+    },
+    {
+      "id": "e-quartiles",
+      "title": "Kuartil dan jangkauan interkuartil",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.4"
+      }
+    },
+    {
+      "id": "e-data-displays",
+      "title": "Representasi data dan evaluasi laporan",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "e-quartiles"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.4"
+      }
+    },
+    {
+      "id": "e-scatterplots",
+      "title": "Diagram pencar dan hubungan numerik",
+      "phase": "E",
+      "track": "general",
+      "prerequisites": [
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "5.4"
+      }
+    },
+    {
+      "id": "g-arithmetic-sequences",
+      "title": "Barisan dan deret aritmetika",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "f-linear-equations"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.1"
+      }
+    },
+    {
+      "id": "g-geometric-sequences",
+      "title": "Barisan dan deret geometri",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "e-exponents"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.1"
+      }
+    },
+    {
+      "id": "g-interest",
+      "title": "Bunga tunggal dan majemuk",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "f-percentages",
+        "g-geometric-sequences"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.1"
+      }
+    },
+    {
+      "id": "g-annuities",
+      "title": "Anuitas dan model pinjaman",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-interest"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.1"
+      }
+    },
+    {
+      "id": "g-functions",
+      "title": "Fungsi, domain, dan evaluasi",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "g-composition",
+      "title": "Komposisi fungsi",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-functions",
+        "f-distribution"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "g-inverse-functions",
+      "title": "Fungsi invers dan pembatasan domain",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-functions",
+        "f-linear-equations"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "g-transformations",
+      "title": "Transformasi fungsi",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-functions",
+        "e-quadratic-graphs"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "g-circles",
+      "title": "Unsur dan hubungan dalam lingkaran",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "e-trigonometry"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.3"
+      }
+    },
+    {
+      "id": "g-bivariate-statistics",
+      "title": "Asosiasi, regresi, dan sebab-akibat",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "e-scatterplots",
+        "f-percentages"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.4"
+      }
+    },
+    {
+      "id": "g-counting",
+      "title": "Pencacahan, permutasi, dan kombinasi",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "f-integers"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.4"
+      }
+    },
+    {
+      "id": "g-compound-probability",
+      "title": "Peluang majemuk dan frekuensi harapan",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-counting",
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.4"
+      }
+    },
+    {
+      "id": "g-conditional-probability",
+      "title": "Peluang bersyarat dan independensi",
+      "phase": "F",
+      "track": "general",
+      "prerequisites": [
+        "g-compound-probability"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "6.4"
+      }
+    },
+    {
+      "id": "a-polynomials",
+      "title": "Polinomial, faktor, dan sisa",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "e-quadratic-roots"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 1"
+      }
+    },
+    {
+      "id": "a-matrices",
+      "title": "Matriks dan transformasi linear",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "f-coordinates",
+        "f-distribution"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 1"
+      }
+    },
+    {
+      "id": "a-vectors",
+      "title": "Vektor bidang dan geometri",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "f-coordinates",
+        "f-pythagoras"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 2"
+      }
+    },
+    {
+      "id": "a-advanced-trigonometry",
+      "title": "Lingkaran satuan dan fungsi trigonometri",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "e-trigonometry",
+        "g-functions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 1"
+      }
+    },
+    {
+      "id": "a-rational-log-functions",
+      "title": "Fungsi rasional, logaritma, dan nilai mutlak",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "g-functions",
+        "e-exponents"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 1"
+      }
+    },
+    {
+      "id": "a-conics",
+      "title": "Persamaan lingkaran dan elips",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "e-quadratic-roots",
+        "f-coordinates"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 2"
+      }
+    },
+    {
+      "id": "a-binomial",
+      "title": "Distribusi binomial",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "g-conditional-probability",
+        "g-counting"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 3"
+      }
+    },
+    {
+      "id": "a-normal",
+      "title": "Distribusi normal dan standardisasi",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "e-quartiles",
+        "f-fractions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 3"
+      }
+    },
+    {
+      "id": "a-limits",
+      "title": "Limit dan kontinuitas",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "a-polynomials",
+        "a-rational-log-functions"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 4"
+      }
+    },
+    {
+      "id": "a-derivatives",
+      "title": "Turunan dan laju perubahan",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "a-limits",
+        "a-advanced-trigonometry"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 4"
+      }
+    },
+    {
+      "id": "a-derivative-applications",
+      "title": "Garis singgung, kecepatan, dan optimasi",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "a-derivatives",
+        "e-quadratic-graphs"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 4"
+      }
+    },
+    {
+      "id": "a-integrals",
+      "title": "Integral, luas, dan teorema dasar kalkulus",
+      "phase": "F-advanced",
+      "track": "advanced",
+      "prerequisites": [
+        "a-derivatives"
+      ],
+      "alignment": {
+        "sourceId": "cp-math-2025",
+        "section": "Advanced 4"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "f-integers-01",
+      "version": 1,
+      "topicId": "f-integers",
+      "skillId": "f-integers.signed-addition",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung −7 + 12.",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "19"
+        },
+        {
+          "id": "c",
+          "text": "−19"
+        },
+        {
+          "id": "d",
+          "text": "−5"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Mulai dari −7 lalu bergerak 12 satuan ke kanan: hasilnya 5.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "add-absolute-values"
+        },
+        {
+          "optionId": "c",
+          "misconception": "keep-negative-sign"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-larger-magnitude-sign"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-integers-02",
+      "version": 1,
+      "topicId": "f-integers",
+      "skillId": "f-integers.operation-order",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung 18 − 3 × 4.",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "60"
+        },
+        {
+          "id": "c",
+          "text": "−6"
+        },
+        {
+          "id": "d",
+          "text": "15"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Kerjakan perkalian dahulu: 3 × 4 = 12. Kemudian 18 − 12 = 6.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "left-to-right-without-precedence"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-subtraction"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-multiplication"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-integers-03",
+      "version": 1,
+      "topicId": "f-integers",
+      "skillId": "f-integers.signed-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Suhu awal −4 °C naik 9 °C, lalu turun 3 °C. Berapa suhu akhirnya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "8 °C"
+        },
+        {
+          "id": "b",
+          "text": "2 °C"
+        },
+        {
+          "id": "c",
+          "text": "−16 °C"
+        },
+        {
+          "id": "d",
+          "text": "5 °C"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Suhu akhir = −4 + 9 − 3 = 2 °C.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "subtract-negative-initial-temperature"
+        },
+        {
+          "optionId": "c",
+          "misconception": "treat-all-changes-as-decreases"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-final-decrease"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-fractions-01",
+      "version": 1,
+      "topicId": "f-fractions",
+      "skillId": "f-fractions.fraction-addition",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung 1/2 + 1/4.",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/4"
+        },
+        {
+          "id": "b",
+          "text": "2/6"
+        },
+        {
+          "id": "c",
+          "text": "2/4"
+        },
+        {
+          "id": "d",
+          "text": "1/6"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Samakan penyebut: 1/2 = 2/4, sehingga 2/4 + 1/4 = 3/4.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "add-denominators"
+        },
+        {
+          "optionId": "c",
+          "misconception": "retain-larger-denominator"
+        },
+        {
+          "optionId": "d",
+          "misconception": "add-denominators-only"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-fractions-02",
+      "version": 1,
+      "topicId": "f-fractions",
+      "skillId": "f-fractions.fraction-division",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung (3/4) ÷ (1/2).",
+      "options": [
+        {
+          "id": "a",
+          "text": "2/3"
+        },
+        {
+          "id": "b",
+          "text": "3/4"
+        },
+        {
+          "id": "c",
+          "text": "3/8"
+        },
+        {
+          "id": "d",
+          "text": "3/2"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Pembagian oleh 1/2 sama dengan perkalian oleh 2: (3/4) × 2 = 3/2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "invert-dividend"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-divisor"
+        },
+        {
+          "optionId": "c",
+          "misconception": "multiply-without-reciprocal"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-fractions-03",
+      "version": 1,
+      "topicId": "f-fractions",
+      "skillId": "f-fractions.fraction-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Resep untuk 4 porsi memakai 3/4 kg tepung. Berapa tepung untuk 6 porsi dengan perbandingan yang sama?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1/2 kg"
+        },
+        {
+          "id": "b",
+          "text": "3/4 kg"
+        },
+        {
+          "id": "c",
+          "text": "9/8 kg"
+        },
+        {
+          "id": "d",
+          "text": "3/2 kg"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Faktor pengali porsi = 6/4. Tepung = (3/4) × (6/4) = 18/16 = 9/8 kg.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "inverse-scaling"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-portion-change"
+        },
+        {
+          "optionId": "d",
+          "misconception": "double-instead-of-scale"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-ratios-01",
+      "version": 1,
+      "topicId": "f-ratios",
+      "skillId": "f-ratios.ratio-parts",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Perbandingan banyak bola merah dan biru adalah 2 : 3. Jika ada 10 bola, berapa bola merah?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "2"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Ada 2 + 3 = 5 bagian. Setiap bagian berisi 10/5 = 2 bola; merah = 2 × 2 = 4.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "split-equally"
+        },
+        {
+          "optionId": "c",
+          "misconception": "read-ratio-as-count"
+        },
+        {
+          "optionId": "d",
+          "misconception": "swap-ratio-parts"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-ratios-02",
+      "version": 1,
+      "topicId": "f-ratios",
+      "skillId": "f-ratios.direct-proportion",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tiga buku sejenis berharga Rp18.000. Berapa harga lima buku?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rp10.800"
+        },
+        {
+          "id": "b",
+          "text": "Rp20.000"
+        },
+        {
+          "id": "c",
+          "text": "Rp30.000"
+        },
+        {
+          "id": "d",
+          "text": "Rp90.000"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Satu buku berharga 18.000/3 = 6.000 rupiah. Lima buku berharga 5 × 6.000 = 30.000 rupiah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-inverse-proportion"
+        },
+        {
+          "optionId": "b",
+          "misconception": "add-count-difference-to-price"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-total-without-unit-rate"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-ratios-03",
+      "version": 1,
+      "topicId": "f-ratios",
+      "skillId": "f-ratios.inverse-proportion",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Enam pekerja menyelesaikan pekerjaan dalam 8 hari. Dengan produktivitas sama, berapa hari untuk 12 pekerja?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4 hari"
+        },
+        {
+          "id": "b",
+          "text": "16 hari"
+        },
+        {
+          "id": "c",
+          "text": "8 hari"
+        },
+        {
+          "id": "d",
+          "text": "2 hari"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Beban kerja tetap = 6 × 8 = 48 hari-orang. Waktu untuk 12 pekerja = 48/12 = 4 hari.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "use-direct-proportion"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-worker-count"
+        },
+        {
+          "optionId": "d",
+          "misconception": "overhalve-duration"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-percentages-01",
+      "version": 1,
+      "topicId": "f-percentages",
+      "skillId": "f-percentages.percentage-of",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa 15% dari 200?",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "3000"
+        },
+        {
+          "id": "c",
+          "text": "185"
+        },
+        {
+          "id": "d",
+          "text": "30"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "15% dari 200 = (15/100) × 200 = 30.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "treat-percent-as-amount"
+        },
+        {
+          "optionId": "b",
+          "misconception": "omit-percent-division"
+        },
+        {
+          "optionId": "c",
+          "misconception": "subtract-percent-number"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-percentages-02",
+      "version": 1,
+      "topicId": "f-percentages",
+      "skillId": "f-percentages.discount",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Harga tas Rp240.000 mendapat diskon 25%. Berapa harga setelah diskon?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rp215.000"
+        },
+        {
+          "id": "b",
+          "text": "Rp60.000"
+        },
+        {
+          "id": "c",
+          "text": "Rp180.000"
+        },
+        {
+          "id": "d",
+          "text": "Rp300.000"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Diskon = 0,25 × 240.000 = 60.000 rupiah. Harga akhir = 240.000 − 60.000 = 180.000 rupiah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "subtract-percent-as-thousands"
+        },
+        {
+          "optionId": "b",
+          "misconception": "report-discount-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "increase-instead-of-discount"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-percentages-03",
+      "version": 1,
+      "topicId": "f-percentages",
+      "skillId": "f-percentages.successive-percentages",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Harga barang naik 20%, lalu harga baru turun 20%. Bagaimana harga akhir dibanding harga awal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tetap sama"
+        },
+        {
+          "id": "b",
+          "text": "Turun 20%"
+        },
+        {
+          "id": "c",
+          "text": "Turun 4%"
+        },
+        {
+          "id": "d",
+          "text": "Naik 4%"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Jika harga awal 100, sesudah kenaikan menjadi 120, lalu 0,8 × 120 = 96. Harga akhir turun 4%.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "cancel-successive-percentages"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-first-change"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-net-change"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-distribution-01",
+      "version": 1,
+      "topicId": "f-distribution",
+      "skillId": "f-distribution.distribute-positive",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Bentuk tanpa kurung yang setara dengan 3(x + 2) adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "3x + 2"
+        },
+        {
+          "id": "b",
+          "text": "x + 6"
+        },
+        {
+          "id": "c",
+          "text": "5x"
+        },
+        {
+          "id": "d",
+          "text": "3x + 6"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Kalikan 3 dengan setiap suku: 3 × x + 3 × 2 = 3x + 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "missed-constant"
+        },
+        {
+          "optionId": "b",
+          "misconception": "missed-variable"
+        },
+        {
+          "optionId": "c",
+          "misconception": "combine-unlike-terms"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-distribution-02",
+      "version": 1,
+      "topicId": "f-distribution",
+      "skillId": "f-distribution.distribute-negative",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sederhanakan −2(3x − 4) + x.",
+      "options": [
+        {
+          "id": "a",
+          "text": "−5x + 8"
+        },
+        {
+          "id": "b",
+          "text": "−5x − 8"
+        },
+        {
+          "id": "c",
+          "text": "−6x + 8"
+        },
+        {
+          "id": "d",
+          "text": "−5x − 4"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Hasil distribusi adalah −6x + 8. Tambahkan x: −6x + x + 8 = −5x + 8.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "negative-times-negative"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-outside-term"
+        },
+        {
+          "optionId": "d",
+          "misconception": "missed-constant"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-distribution-03",
+      "version": 1,
+      "topicId": "f-distribution",
+      "skillId": "f-distribution.equivalent-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Persegi panjang memiliki lebar x dan panjang x + 3. Bentuk sederhana kelilingnya adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x² + 3x"
+        },
+        {
+          "id": "b",
+          "text": "4x + 3"
+        },
+        {
+          "id": "c",
+          "text": "4x + 6"
+        },
+        {
+          "id": "d",
+          "text": "2x + 3"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Keliling = 2[x + (x + 3)] = 2(2x + 3) = 4x + 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-area-and-perimeter"
+        },
+        {
+          "optionId": "b",
+          "misconception": "distribute-to-variable-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-perimeter-doubling"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-linear-equations-01",
+      "version": 1,
+      "topicId": "f-linear-equations",
+      "skillId": "f-linear-equations.one-step",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tentukan x jika x + 5 = 8.",
+      "options": [
+        {
+          "id": "a",
+          "text": "−3"
+        },
+        {
+          "id": "b",
+          "text": "8/5"
+        },
+        {
+          "id": "c",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "text": "13"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Kurangi kedua ruas dengan 5: x = 8 − 5 = 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "reverse-subtraction"
+        },
+        {
+          "optionId": "b",
+          "misconception": "divide-instead-of-subtract"
+        },
+        {
+          "optionId": "d",
+          "misconception": "add-instead-of-subtract"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-linear-equations-02",
+      "version": 1,
+      "topicId": "f-linear-equations",
+      "skillId": "f-linear-equations.two-step",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tentukan x jika 3x − 4 = 11.",
+      "options": [
+        {
+          "id": "a",
+          "text": "15"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "11/3"
+        },
+        {
+          "id": "d",
+          "text": "7/3"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Tambah 4 pada kedua ruas: 3x = 15. Bagi kedua ruas dengan 3: x = 5.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-division"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-constant"
+        },
+        {
+          "optionId": "d",
+          "misconception": "wrong-inverse-sign"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-linear-equations-03",
+      "version": 1,
+      "topicId": "f-linear-equations",
+      "skillId": "f-linear-equations.linear-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Ongkos perjalanan adalah Rp8.000 ditambah Rp3.000 per km. Jika total Rp29.000, berapa jaraknya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "21 km"
+        },
+        {
+          "id": "b",
+          "text": "9 km"
+        },
+        {
+          "id": "c",
+          "text": "7 km"
+        },
+        {
+          "id": "d",
+          "text": "29/3 km"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Modelnya 8.000 + 3.000d = 29.000. Maka 3.000d = 21.000 dan d = 7 km.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-rate-division"
+        },
+        {
+          "optionId": "b",
+          "misconception": "subtract-wrong-fixed-charge"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-fixed-charge"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-coordinates-01",
+      "version": 1,
+      "topicId": "f-coordinates",
+      "skillId": "f-coordinates.evaluate-linear",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika y = 2x + 1 dan x = 3, berapa y?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "9"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Substitusi x = 3: y = 2 × 3 + 1 = 7.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "multiply-by-entire-sum"
+        },
+        {
+          "optionId": "c",
+          "misconception": "add-coefficient-instead-of-multiply"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-intercept"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-coordinates-02",
+      "version": 1,
+      "topicId": "f-coordinates",
+      "skillId": "f-coordinates.slope",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa gradien garis melalui (1, 2) dan (3, 8)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "1/3"
+        },
+        {
+          "id": "c",
+          "text": "5/2"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Gradien = (8 − 2)/(3 − 1) = 6/2 = 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-horizontal-change"
+        },
+        {
+          "optionId": "b",
+          "misconception": "invert-rise-over-run"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-coordinate-sums"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-coordinates-03",
+      "version": 1,
+      "topicId": "f-coordinates",
+      "skillId": "f-coordinates.interpret-intercept",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Model biaya C = 5.000 + 2.000n menyatakan biaya untuk n unit. Apa arti 5.000?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Jumlah unit maksimum"
+        },
+        {
+          "id": "b",
+          "text": "Biaya total untuk satu unit"
+        },
+        {
+          "id": "c",
+          "text": "Biaya setiap tambahan satu unit"
+        },
+        {
+          "id": "d",
+          "text": "Biaya tetap saat n = 0"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Saat n = 0, C = 5.000. Jadi 5.000 adalah biaya yang tidak bergantung pada banyak unit.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-input-and-cost"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-variable-cost"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-slope-and-intercept"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-pythagoras-01",
+      "version": 1,
+      "topicId": "f-pythagoras",
+      "skillId": "f-pythagoras.square-root",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa akar kuadrat utama dari 81?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "40,5"
+        },
+        {
+          "id": "c",
+          "text": "−9"
+        },
+        {
+          "id": "d",
+          "text": "18"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Akar kuadrat utama tidak negatif. Karena 9² = 81, nilainya 9.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "halve-instead-of-root"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-principal-root"
+        },
+        {
+          "optionId": "d",
+          "misconception": "double-root"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-pythagoras-02",
+      "version": 1,
+      "topicId": "f-pythagoras",
+      "skillId": "f-pythagoras.hypotenuse",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Segitiga siku-siku memiliki sisi siku-siku 6 cm dan 8 cm. Berapa panjang sisi miring?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2 cm"
+        },
+        {
+          "id": "b",
+          "text": "100 cm"
+        },
+        {
+          "id": "c",
+          "text": "10 cm"
+        },
+        {
+          "id": "d",
+          "text": "14 cm"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "c² = 6² + 8² = 36 + 64 = 100, sehingga c = 10 cm.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "subtract-leg-lengths"
+        },
+        {
+          "optionId": "b",
+          "misconception": "omit-square-root"
+        },
+        {
+          "optionId": "d",
+          "misconception": "add-leg-lengths"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "f-pythagoras-03",
+      "version": 1,
+      "topicId": "f-pythagoras",
+      "skillId": "f-pythagoras.geometry-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tangga panjang 13 m bersandar pada tembok. Kaki tangga berjarak 5 m dari tembok. Berapa tinggi ujung tangga?",
+      "options": [
+        {
+          "id": "a",
+          "text": "√194 m"
+        },
+        {
+          "id": "b",
+          "text": "18 m"
+        },
+        {
+          "id": "c",
+          "text": "8 m"
+        },
+        {
+          "id": "d",
+          "text": "12 m"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Tinggi h memenuhi h² + 5² = 13². Jadi h² = 169 − 25 = 144 dan h = 12 m.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-squares-for-missing-leg"
+        },
+        {
+          "optionId": "b",
+          "misconception": "add-hypotenuse-and-leg"
+        },
+        {
+          "optionId": "c",
+          "misconception": "subtract-lengths-without-squares"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponents-01",
+      "version": 1,
+      "topicId": "e-exponents",
+      "skillId": "e-exponents.exponent-product",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sederhanakan 2³ × 2⁴.",
+      "options": [
+        {
+          "id": "a",
+          "text": "4⁷"
+        },
+        {
+          "id": "b",
+          "text": "2¹"
+        },
+        {
+          "id": "c",
+          "text": "2⁷"
+        },
+        {
+          "id": "d",
+          "text": "2¹²"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Untuk perkalian dengan basis sama, jumlahkan pangkat: 2³ × 2⁴ = 2³⁺⁴ = 2⁷.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "multiply-bases-and-add-powers"
+        },
+        {
+          "optionId": "b",
+          "misconception": "subtract-exponents-in-product"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-exponents-in-product"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponents-02",
+      "version": 1,
+      "topicId": "e-exponents",
+      "skillId": "e-exponents.fractional-exponent",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung 27^(2/3).",
+      "options": [
+        {
+          "id": "a",
+          "text": "18"
+        },
+        {
+          "id": "b",
+          "text": "729"
+        },
+        {
+          "id": "c",
+          "text": "9"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "27^(2/3) = (akar pangkat tiga dari 27)² = 3² = 9.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "multiply-root-by-numerator"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-root-denominator"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-power-numerator"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponents-03",
+      "version": 1,
+      "topicId": "e-exponents",
+      "skillId": "e-exponents.negative-exponent",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sebuah kultur berkurang menjadi setengah setiap jam. Jika awalnya 800 sel, berapa sel setelah 3 jam?",
+      "options": [
+        {
+          "id": "a",
+          "text": "400"
+        },
+        {
+          "id": "b",
+          "text": "200"
+        },
+        {
+          "id": "c",
+          "text": "6400"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Jumlah akhir = 800 × (1/2)³ = 800/8 = 100 sel.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "apply-decay-once"
+        },
+        {
+          "optionId": "b",
+          "misconception": "apply-decay-twice"
+        },
+        {
+          "optionId": "c",
+          "misconception": "growth-instead-of-decay"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-inequalities-01",
+      "version": 1,
+      "topicId": "e-inequalities",
+      "skillId": "e-inequalities.test-point",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Pasangan mana yang memenuhi x + y ≤ 5, x ≥ 0, dan y ≥ 0?",
+      "options": [
+        {
+          "id": "a",
+          "text": "(−1, 3)"
+        },
+        {
+          "id": "b",
+          "text": "(4, 2)"
+        },
+        {
+          "id": "c",
+          "text": "(2, −1)"
+        },
+        {
+          "id": "d",
+          "text": "(2, 3)"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Untuk (2, 3), x + y = 5 ≤ 5 dan kedua koordinat tidak negatif. Pilihan lain melanggar setidaknya satu syarat.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-nonnegative-x"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-sum-bound"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-nonnegative-y"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-inequalities-02",
+      "version": 1,
+      "topicId": "e-inequalities",
+      "skillId": "e-inequalities.boundary",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Daerah 2x + y ≤ 6 pada bidang koordinat memuat ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hanya garis 2x + y = 6"
+        },
+        {
+          "id": "b",
+          "text": "Garis 2x + y = 6 dan titik (0, 0)"
+        },
+        {
+          "id": "c",
+          "text": "Titik (0, 0) tetapi tidak garis batas"
+        },
+        {
+          "id": "d",
+          "text": "Garis 2x + y = 6 tetapi tidak titik (0, 0)"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Tanda ≤ menyertakan garis batas. Titik (0, 0) memenuhi 0 ≤ 6 sehingga termasuk daerah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-inequality-and-equation"
+        },
+        {
+          "optionId": "c",
+          "misconception": "treat-nonstrict-as-strict"
+        },
+        {
+          "optionId": "d",
+          "misconception": "wrong-half-plane"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-inequalities-03",
+      "version": 1,
+      "topicId": "e-inequalities",
+      "skillId": "e-inequalities.constraint-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Produk A membutuhkan 2 kg bahan dan B 3 kg. Tersedia paling banyak 18 kg. Jika x dan y banyak masing-masing produk, kendala bahannya adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x + y ≤ 18"
+        },
+        {
+          "id": "b",
+          "text": "2x + 3y ≥ 18"
+        },
+        {
+          "id": "c",
+          "text": "3x + 2y ≤ 18"
+        },
+        {
+          "id": "d",
+          "text": "2x + 3y ≤ 18"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Total bahan = 2x + 3y kg. Karena persediaan merupakan batas maksimum, totalnya ≤ 18.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-resource-per-product"
+        },
+        {
+          "optionId": "b",
+          "misconception": "reverse-capacity-bound"
+        },
+        {
+          "optionId": "c",
+          "misconception": "swap-resource-coefficients"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-roots-01",
+      "version": 1,
+      "topicId": "e-quadratic-roots",
+      "skillId": "e-quadratic-roots.factor-roots",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Akar-akar x² − 5x + 6 = 0 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 dan 6"
+        },
+        {
+          "id": "b",
+          "text": "−1 dan −6"
+        },
+        {
+          "id": "c",
+          "text": "−2 dan −3"
+        },
+        {
+          "id": "d",
+          "text": "2 dan 3"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Faktorkan x² − 5x + 6 = (x − 2)(x − 3). Jadi x = 2 atau x = 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "match-product-only"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-sum-and-sign"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-factor-root-sign"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-roots-02",
+      "version": 1,
+      "topicId": "e-quadratic-roots",
+      "skillId": "e-quadratic-roots.imaginary-roots",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dalam bilangan kompleks, solusi x² + 4 = 0 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = ±2i"
+        },
+        {
+          "id": "b",
+          "text": "x = ±4i"
+        },
+        {
+          "id": "c",
+          "text": "x = ±2"
+        },
+        {
+          "id": "d",
+          "text": "Tidak ada solusi kompleks"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "x² = −4. Dengan i² = −1, diperoleh x = ±2i.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "omit-square-root"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-negative-square"
+        },
+        {
+          "optionId": "d",
+          "misconception": "restrict-to-real-numbers"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-roots-03",
+      "version": 1,
+      "topicId": "e-quadratic-roots",
+      "skillId": "e-quadratic-roots.root-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Persegi panjang berukuran x m dan (x + 1) m mempunyai luas 12 m². Berapa x yang sesuai?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3 m"
+        },
+        {
+          "id": "b",
+          "text": "−4 m"
+        },
+        {
+          "id": "c",
+          "text": "6 m"
+        },
+        {
+          "id": "d",
+          "text": "4 m"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "x(x + 1) = 12 memberi (x + 4)(x − 3) = 0. Panjang harus positif, sehingga x = 3 m.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "accept-negative-length"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-quadratic-model"
+        },
+        {
+          "optionId": "d",
+          "misconception": "confuse-root-and-adjacent-side"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-graphs-01",
+      "version": 1,
+      "topicId": "e-quadratic-graphs",
+      "skillId": "e-quadratic-graphs.vertex-form",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Titik puncak grafik y = (x − 2)² + 3 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "(2, 3)"
+        },
+        {
+          "id": "b",
+          "text": "(2, −3)"
+        },
+        {
+          "id": "c",
+          "text": "(−2, 3)"
+        },
+        {
+          "id": "d",
+          "text": "(3, 2)"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Bentuk y = (x − h)² + k mempunyai puncak (h, k), sehingga puncaknya (2, 3).",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "reverse-vertical-shift"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-horizontal-shift"
+        },
+        {
+          "optionId": "d",
+          "misconception": "swap-vertex-coordinates"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-graphs-02",
+      "version": 1,
+      "topicId": "e-quadratic-graphs",
+      "skillId": "e-quadratic-graphs.axis-of-symmetry",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sumbu simetri y = x² − 6x + 5 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x = −3"
+        },
+        {
+          "id": "b",
+          "text": "y = 3"
+        },
+        {
+          "id": "c",
+          "text": "x = 5"
+        },
+        {
+          "id": "d",
+          "text": "x = 3"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Sumbu simetri x = −b/(2a) = −(−6)/(2 × 1) = 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-negative-in-axis-formula"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-vertical-and-horizontal-axis"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-intercept-as-axis"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quadratic-graphs-03",
+      "version": 1,
+      "topicId": "e-quadratic-graphs",
+      "skillId": "e-quadratic-graphs.maximum-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tinggi bola h(t) = −t² + 6t + 1 meter. Berapa tinggi maksimumnya untuk t ≥ 0?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10 m"
+        },
+        {
+          "id": "b",
+          "text": "8 m"
+        },
+        {
+          "id": "c",
+          "text": "3 m"
+        },
+        {
+          "id": "d",
+          "text": "1 m"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "h(t) = −(t − 3)² + 10. Kuadrat tidak negatif, maka nilai maksimum h adalah 10 m pada t = 3.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "incorrect-vertex-substitution"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-time-of-maximum"
+        },
+        {
+          "optionId": "d",
+          "misconception": "report-initial-height"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponential-functions-01",
+      "version": 1,
+      "topicId": "e-exponential-functions",
+      "skillId": "e-exponential-functions.same-base",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika 2^(x + 1) = 16, maka x = ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "16 = 2⁴, sehingga x + 1 = 4 dan x = 3.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "reverse-offset"
+        },
+        {
+          "optionId": "c",
+          "misconception": "divide-value-by-base"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-exponent-offset"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponential-functions-02",
+      "version": 1,
+      "topicId": "e-exponential-functions",
+      "skillId": "e-exponential-functions.exponential-graph",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Grafik y = 3 × 2^x memotong sumbu y pada ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "(3, 0)"
+        },
+        {
+          "id": "b",
+          "text": "(0, 3)"
+        },
+        {
+          "id": "c",
+          "text": "(0, 6)"
+        },
+        {
+          "id": "d",
+          "text": "(0, 0)"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Pada sumbu y, x = 0. Maka y = 3 × 2⁰ = 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "swap-intercept-coordinates"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-2-to-power-1-at-zero"
+        },
+        {
+          "optionId": "d",
+          "misconception": "assume-origin-intercept"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-exponential-functions-03",
+      "version": 1,
+      "topicId": "e-exponential-functions",
+      "skillId": "e-exponential-functions.growth-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Populasi awal 200 meningkat 50% setiap tahun. Model setelah t tahun adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "P(t) = 200(1,5)^t"
+        },
+        {
+          "id": "b",
+          "text": "P(t) = 200(50)^t"
+        },
+        {
+          "id": "c",
+          "text": "P(t) = 200(0,5)^t"
+        },
+        {
+          "id": "d",
+          "text": "P(t) = 200 + 50t"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Kenaikan 50% berarti setiap tahun dikali 1 + 0,5 = 1,5. Dengan nilai awal 200, P(t) = 200(1,5)^t.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "use-percent-as-multiplier"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-decay-factor"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-linear-growth"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-trigonometry-01",
+      "version": 1,
+      "topicId": "e-trigonometry",
+      "skillId": "e-trigonometry.sine-ratio",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Pada segitiga siku-siku, sisi di depan sudut θ adalah 3 dan sisi miring 5. Berapa sin θ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4/5"
+        },
+        {
+          "id": "b",
+          "text": "3/4"
+        },
+        {
+          "id": "c",
+          "text": "5/3"
+        },
+        {
+          "id": "d",
+          "text": "3/5"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "sin θ = sisi depan/sisi miring = 3/5.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-sine-and-cosine"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-sine-and-tangent"
+        },
+        {
+          "optionId": "c",
+          "misconception": "invert-sine-ratio"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-trigonometry-02",
+      "version": 1,
+      "topicId": "e-trigonometry",
+      "skillId": "e-trigonometry.tangent-ratio",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Segitiga siku-siku mempunyai sisi depan sudut θ sepanjang 8 dan sisi samping 6. Berapa tan θ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4/5"
+        },
+        {
+          "id": "b",
+          "text": "4/3"
+        },
+        {
+          "id": "c",
+          "text": "3/5"
+        },
+        {
+          "id": "d",
+          "text": "3/4"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "tan θ = sisi depan/sisi samping = 8/6 = 4/3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-hypotenuse-for-tangent"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-cosine-for-tangent"
+        },
+        {
+          "optionId": "d",
+          "misconception": "invert-tangent-ratio"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-trigonometry-03",
+      "version": 1,
+      "topicId": "e-trigonometry",
+      "skillId": "e-trigonometry.height-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dari titik 20 m dari kaki menara, sudut elevasi ke puncak adalah 45°. Abaikan tinggi pengamat. Berapa tinggi menara?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10 m"
+        },
+        {
+          "id": "b",
+          "text": "20√2 m"
+        },
+        {
+          "id": "c",
+          "text": "20 m"
+        },
+        {
+          "id": "d",
+          "text": "40 m"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "tan 45° = tinggi/20 = 1. Jadi tinggi = 20 m.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "halve-distance"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-height-and-line-of-sight"
+        },
+        {
+          "optionId": "d",
+          "misconception": "double-distance"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quartiles-01",
+      "version": 1,
+      "topicId": "e-quartiles",
+      "skillId": "e-quartiles.median",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Data terurut adalah 2, 4, 6, 8, 10. Berapa mediannya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Ada lima nilai, sehingga median adalah nilai ketiga, yaitu 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "choose-maximum"
+        },
+        {
+          "optionId": "c",
+          "misconception": "choose-wrong-middle-position"
+        },
+        {
+          "optionId": "d",
+          "misconception": "confuse-count-and-median"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quartiles-02",
+      "version": 1,
+      "topicId": "e-quartiles",
+      "skillId": "e-quartiles.iqr",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Gunakan median dari separuh bawah dan atas untuk kuartil. Pada data 1, 2, 3, 4, 5, 6, 7, 8, berapa jangkauan interkuartil?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "4,5"
+        },
+        {
+          "id": "c",
+          "text": "2,5"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Separuh bawah 1,2,3,4 memberi Q1 = 2,5; separuh atas 5,6,7,8 memberi Q3 = 6,5. IQR = 6,5 − 2,5 = 4.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-range-and-iqr"
+        },
+        {
+          "optionId": "b",
+          "misconception": "report-overall-median"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-first-quartile"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-quartiles-03",
+      "version": 1,
+      "topicId": "e-quartiles",
+      "skillId": "e-quartiles.compare-spread",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dua kelas memiliki median nilai sama. IQR kelas A = 4 dan kelas B = 10. Kesimpulan yang didukung adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rentang total A pasti lebih kecil"
+        },
+        {
+          "id": "b",
+          "text": "Rata-rata kedua kelas pasti sama"
+        },
+        {
+          "id": "c",
+          "text": "50% data tengah kelas A lebih rapat"
+        },
+        {
+          "id": "d",
+          "text": "Semua nilai A lebih tinggi"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "IQR mengukur rentang 50% data tengah. IQR lebih kecil mendukung sebaran tengah lebih rapat, bukan kesimpulan tentang seluruh rentang atau rata-rata.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "equate-iqr-with-total-range"
+        },
+        {
+          "optionId": "b",
+          "misconception": "equate-median-and-mean"
+        },
+        {
+          "optionId": "d",
+          "misconception": "infer-location-from-spread"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-data-displays-01",
+      "version": 1,
+      "topicId": "e-data-displays",
+      "skillId": "e-data-displays.histogram",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tampilan mana paling tepat untuk melihat distribusi tinggi badan 200 siswa dalam interval tinggi?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Histogram"
+        },
+        {
+          "id": "b",
+          "text": "Diagram lingkaran nama siswa"
+        },
+        {
+          "id": "c",
+          "text": "Peta lokasi sekolah"
+        },
+        {
+          "id": "d",
+          "text": "Diagram garis urutan absen"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Histogram mengelompokkan data numerik ke interval dan menampilkan frekuensinya.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "use-categorical-chart-for-interval-data"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-unrelated-display"
+        },
+        {
+          "optionId": "d",
+          "misconception": "connect-unordered-observations"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-data-displays-02",
+      "version": 1,
+      "topicId": "e-data-displays",
+      "skillId": "e-data-displays.boxplot",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Pada box plot, kotak membentang dari Q1 = 40 ke Q3 = 70, dengan median 55. Berapa persen data berada di dalam kotak, secara konvensi kuartil?",
+      "options": [
+        {
+          "id": "a",
+          "text": "75%"
+        },
+        {
+          "id": "b",
+          "text": "25%"
+        },
+        {
+          "id": "c",
+          "text": "50%"
+        },
+        {
+          "id": "d",
+          "text": "100%"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Kotak membentang dari persentil 25 ke persentil 75, sehingga mencakup 50% data secara konvensi kuartil.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-q3-with-box-coverage"
+        },
+        {
+          "optionId": "b",
+          "misconception": "count-one-quartile-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "confuse-box-with-entire-data"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-data-displays-03",
+      "version": 1,
+      "topicId": "e-data-displays",
+      "skillId": "e-data-displays.misleading-chart",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Grafik batang membandingkan 98 dan 100 tetapi sumbu vertikal dimulai dari 97. Hal apa yang perlu diwaspadai?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Selisih dapat terlihat jauh lebih besar daripada proporsinya"
+        },
+        {
+          "id": "b",
+          "text": "Nilai 98 pasti salah"
+        },
+        {
+          "id": "c",
+          "text": "Pemotongan sumbu selalu mengubah data menjadi 1 dan 3"
+        },
+        {
+          "id": "d",
+          "text": "Perbandingan pasti menunjukkan sebab-akibat"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Memotong sumbu batang dapat memperbesar kesan visual selisih. Nilai aslinya tetap 98 dan 100; periksa skala sebelum menafsirkan.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "confuse-presentation-and-data-error"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-axis-offset-and-data"
+        },
+        {
+          "optionId": "d",
+          "misconception": "infer-causation-from-bars"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-scatterplots-01",
+      "version": 1,
+      "topicId": "e-scatterplots",
+      "skillId": "e-scatterplots.association-direction",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Titik-titik diagram pencar cenderung naik dari kiri bawah ke kanan atas. Hubungannya cenderung ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Positif"
+        },
+        {
+          "id": "b",
+          "text": "Pasti sebab-akibat"
+        },
+        {
+          "id": "c",
+          "text": "Tidak ada hubungan"
+        },
+        {
+          "id": "d",
+          "text": "Negatif"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Saat x meningkat, y cenderung meningkat. Ini disebut asosiasi positif dan belum membuktikan sebab-akibat.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "infer-causation-from-association"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-visible-pattern"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-association-direction"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-scatterplots-02",
+      "version": 1,
+      "topicId": "e-scatterplots",
+      "skillId": "e-scatterplots.outlier",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sebagian besar titik mengikuti garis naik, tetapi satu titik jauh di atas pola itu. Titik itu paling tepat disebut ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pencilan yang perlu diperiksa"
+        },
+        {
+          "id": "b",
+          "text": "Titik yang wajib langsung dihapus"
+        },
+        {
+          "id": "c",
+          "text": "Bukti semua data salah"
+        },
+        {
+          "id": "d",
+          "text": "Bukti hubungan negatif"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Titik yang jauh dari pola umum adalah pencilan. Periksa konteks atau kesalahan pencatatan sebelum memutuskan perlakuannya.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "delete-outlier-without-investigation"
+        },
+        {
+          "optionId": "c",
+          "misconception": "generalize-single-outlier"
+        },
+        {
+          "optionId": "d",
+          "misconception": "infer-direction-from-one-point"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "e-scatterplots-03",
+      "version": 1,
+      "topicId": "e-scatterplots",
+      "skillId": "e-scatterplots.time-pattern",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Diagram pencar penjualan terhadap waktu menunjukkan pola melengkung naik makin cepat. Model mana layak diperiksa lebih lanjut?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Model konstan saja"
+        },
+        {
+          "id": "b",
+          "text": "Tidak perlu memeriksa model karena semua titik harus segaris"
+        },
+        {
+          "id": "c",
+          "text": "Model nonlinier seperti eksponensial"
+        },
+        {
+          "id": "d",
+          "text": "Garis turun karena waktu bertambah"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Pertumbuhan yang makin cepat dapat sesuai dengan model eksponensial. Kecocokan perlu diperiksa pada data; pola ini belum menetapkan satu model pasti.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-time-trend"
+        },
+        {
+          "optionId": "b",
+          "misconception": "require-perfect-linearity"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-trend"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-arithmetic-sequences-01",
+      "version": 1,
+      "topicId": "g-arithmetic-sequences",
+      "skillId": "g-arithmetic-sequences.next-term",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Barisan 4, 7, 10, ... memiliki suku berikutnya ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "13"
+        },
+        {
+          "id": "b",
+          "text": "11"
+        },
+        {
+          "id": "c",
+          "text": "12"
+        },
+        {
+          "id": "d",
+          "text": "30"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Beda antarsuku = 3. Suku berikutnya = 10 + 3 = 13.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "add-one-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "change-common-difference"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-multiplication"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-arithmetic-sequences-02",
+      "version": 1,
+      "topicId": "g-arithmetic-sequences",
+      "skillId": "g-arithmetic-sequences.nth-term",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Suku pertama barisan aritmetika 5 dan bedanya 4. Berapa suku ke-10?",
+      "options": [
+        {
+          "id": "a",
+          "text": "14"
+        },
+        {
+          "id": "b",
+          "text": "41"
+        },
+        {
+          "id": "c",
+          "text": "40"
+        },
+        {
+          "id": "d",
+          "text": "45"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "U10 = a + (10 − 1)d = 5 + 9 × 4 = 41.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-index-instead-of-difference"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-first-term"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-n-instead-of-n-minus-one"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-arithmetic-sequences-03",
+      "version": 1,
+      "topicId": "g-arithmetic-sequences",
+      "skillId": "g-arithmetic-sequences.series-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Baris pertama gedung berisi 12 kursi. Setiap baris berikutnya bertambah 2 kursi. Berapa total kursi dalam 10 baris?",
+      "options": [
+        {
+          "id": "a",
+          "text": "30"
+        },
+        {
+          "id": "b",
+          "text": "210"
+        },
+        {
+          "id": "c",
+          "text": "220"
+        },
+        {
+          "id": "d",
+          "text": "120"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Baris ke-10 berisi 12 + 9 × 2 = 30 kursi. Total = 10(12 + 30)/2 = 210.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-last-row-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-extra-increment"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-increasing-rows"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-geometric-sequences-01",
+      "version": 1,
+      "topicId": "g-geometric-sequences",
+      "skillId": "g-geometric-sequences.common-ratio",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa rasio barisan 3, 6, 12, 24, ...?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "2"
+        },
+        {
+          "id": "d",
+          "text": "1/2"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Rasio = suku berikutnya dibagi suku sebelumnya: 6/3 = 2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-second-term"
+        },
+        {
+          "optionId": "b",
+          "misconception": "use-first-difference"
+        },
+        {
+          "optionId": "d",
+          "misconception": "invert-common-ratio"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-geometric-sequences-02",
+      "version": 1,
+      "topicId": "g-geometric-sequences",
+      "skillId": "g-geometric-sequences.geometric-sum",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa jumlah lima suku pertama barisan 2, 6, 18, ...?",
+      "options": [
+        {
+          "id": "a",
+          "text": "728"
+        },
+        {
+          "id": "b",
+          "text": "162"
+        },
+        {
+          "id": "c",
+          "text": "240"
+        },
+        {
+          "id": "d",
+          "text": "242"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Lima sukunya 2, 6, 18, 54, 162. Jumlahnya 242, juga diperoleh dari 2(3⁵ − 1)/(3 − 1).",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "include-sixth-term"
+        },
+        {
+          "optionId": "b",
+          "misconception": "report-fifth-term-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-first-term"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-geometric-sequences-03",
+      "version": 1,
+      "topicId": "g-geometric-sequences",
+      "skillId": "g-geometric-sequences.geometric-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Bola dijatuhkan dari tinggi 8 m. Setiap pantulan mencapai setengah tinggi sebelumnya. Berapa tinggi maksimum pantulan ketiga?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1 m"
+        },
+        {
+          "id": "b",
+          "text": "2 m"
+        },
+        {
+          "id": "c",
+          "text": "4 m"
+        },
+        {
+          "id": "d",
+          "text": "0,5 m"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Tinggi pantulan berturut-turut 4, 2, dan 1 meter. Pantulan ketiga mencapai 8(1/2)³ = 1 m.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "count-only-two-bounces"
+        },
+        {
+          "optionId": "c",
+          "misconception": "count-only-one-bounce"
+        },
+        {
+          "optionId": "d",
+          "misconception": "count-four-bounces"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-interest-01",
+      "version": 1,
+      "topicId": "g-interest",
+      "skillId": "g-interest.simple-interest",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Modal Rp1.000.000 berbunga tunggal 10% per tahun. Berapa saldo setelah 2 tahun tanpa biaya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rp1.210.000"
+        },
+        {
+          "id": "b",
+          "text": "Rp1.200.000"
+        },
+        {
+          "id": "c",
+          "text": "Rp200.000"
+        },
+        {
+          "id": "d",
+          "text": "Rp1.100.000"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Bunga tunggal = 1.000.000 × 0,10 × 2 = 200.000. Saldo = modal + bunga = 1.200.000 rupiah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "compound-instead-of-simple"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-interest-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "count-one-year-only"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-interest-02",
+      "version": 1,
+      "topicId": "g-interest",
+      "skillId": "g-interest.compound-interest",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Modal Rp1.000.000 berbunga majemuk 10% per tahun. Berapa saldo setelah 2 tahun tanpa biaya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rp1.210.000"
+        },
+        {
+          "id": "b",
+          "text": "Rp1.100.000"
+        },
+        {
+          "id": "c",
+          "text": "Rp210.000"
+        },
+        {
+          "id": "d",
+          "text": "Rp1.200.000"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Saldo = 1.000.000(1,1)² = 1.210.000 rupiah.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "count-one-period-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-interest-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "simple-instead-of-compound"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-interest-03",
+      "version": 1,
+      "topicId": "g-interest",
+      "skillId": "g-interest.interest-comparison",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dua tabungan memiliki modal dan bunga tahunan positif yang sama. A memakai bunga tunggal, B majemuk tahunan. Setelah 3 tahun tanpa transaksi atau biaya, mana lebih besar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Saldo B"
+        },
+        {
+          "id": "b",
+          "text": "Tidak bisa dibandingkan walau syarat sama"
+        },
+        {
+          "id": "c",
+          "text": "Selalu sama"
+        },
+        {
+          "id": "d",
+          "text": "Saldo A"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Mulai tahun kedua, B menghasilkan bunga atas bunga sebelumnya. Untuk tingkat positif dan modal positif, setelah 3 tahun saldo B lebih besar.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "miss-controlled-comparison"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-interest-on-interest"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-compounding-effect"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-annuities-01",
+      "version": 1,
+      "topicId": "g-annuities",
+      "skillId": "g-annuities.payment-components",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Angsuran tetap pinjaman terdiri dari ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hanya pokok"
+        },
+        {
+          "id": "b",
+          "text": "Saldo awal ditambah seluruh bunga masa depan"
+        },
+        {
+          "id": "c",
+          "text": "Bunga periode berjalan dan pelunasan pokok"
+        },
+        {
+          "id": "d",
+          "text": "Hanya bunga"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Dalam anuitas pinjaman, pembayaran berkala membayar bunga periode itu dan mengurangi pokok utang.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-interest-component"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-payment-and-total-debt"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-principal-component"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-annuities-02",
+      "version": 1,
+      "topicId": "g-annuities",
+      "skillId": "g-annuities.remaining-balance",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Saldo pinjaman Rp1.000.000, bunga 1% per bulan, dan pembayaran akhir bulan Rp260.000. Berapa saldo sesudah pembayaran pertama?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rp740.000"
+        },
+        {
+          "id": "b",
+          "text": "Rp750.000"
+        },
+        {
+          "id": "c",
+          "text": "Rp1.010.000"
+        },
+        {
+          "id": "d",
+          "text": "Rp730.000"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Bunga bulan pertama = 10.000. Saldo sesudah bunga dan pembayaran = 1.000.000 + 10.000 − 260.000 = 750.000 rupiah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-period-interest"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-payment"
+        },
+        {
+          "optionId": "d",
+          "misconception": "subtract-interest-instead-of-add"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-annuities-03",
+      "version": 1,
+      "topicId": "g-annuities",
+      "skillId": "g-annuities.payment-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Pinjaman P dilunasi dengan n pembayaran A di akhir periode dan bunga i > 0 per periode. Rumus pembayaran tetap adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "A = P(1 + i)^n"
+        },
+        {
+          "id": "b",
+          "text": "A = P/n"
+        },
+        {
+          "id": "c",
+          "text": "A = Pi"
+        },
+        {
+          "id": "d",
+          "text": "A = Pi / [1 − (1 + i)^(−n)]"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Nilai kini pembayaran memenuhi P = A[1 − (1 + i)^(−n)]/i. Susun ulang untuk mendapatkan A. Pembayaran pertama terjadi pada akhir periode.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-future-value-and-payment"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-interest"
+        },
+        {
+          "optionId": "c",
+          "misconception": "interest-only-payment"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-functions-01",
+      "version": 1,
+      "topicId": "g-functions",
+      "skillId": "g-functions.function-definition",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Relasi mana merupakan fungsi dari himpunan {1, 2} ke bilangan real?",
+      "options": [
+        {
+          "id": "a",
+          "text": "{(1, 3), (2, 3)}"
+        },
+        {
+          "id": "b",
+          "text": "{(1, 3)}"
+        },
+        {
+          "id": "c",
+          "text": "{(2, 3), (2, 4)}"
+        },
+        {
+          "id": "d",
+          "text": "{(1, 3), (1, 4), (2, 5)}"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Setiap anggota domain harus mempunyai tepat satu pasangan keluaran. Keluaran yang sama untuk input berbeda tetap diperbolehkan.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "omit-domain-input"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-input-and-repeat-output"
+        },
+        {
+          "optionId": "d",
+          "misconception": "allow-two-outputs-for-one-input"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-functions-02",
+      "version": 1,
+      "topicId": "g-functions",
+      "skillId": "g-functions.radical-domain",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Domain real f(x) = √(x − 3) adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x ≥ 3"
+        },
+        {
+          "id": "b",
+          "text": "Semua bilangan real"
+        },
+        {
+          "id": "c",
+          "text": "x > 3"
+        },
+        {
+          "id": "d",
+          "text": "x ≤ 3"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Akar real memerlukan x − 3 ≥ 0. Jadi x ≥ 3, termasuk x = 3 karena √0 terdefinisi.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "ignore-root-domain"
+        },
+        {
+          "optionId": "c",
+          "misconception": "exclude-zero-radicand"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-radicand-inequality"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-functions-03",
+      "version": 1,
+      "topicId": "g-functions",
+      "skillId": "g-functions.domain-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Biaya f(n) = 8.000 + 2.000n untuk membeli n tiket. Jika tersedia paling banyak 5 tiket, domain yang sesuai adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Semua bilangan bulat"
+        },
+        {
+          "id": "b",
+          "text": "{8.000, 10.000, 12.000, 14.000, 16.000, 18.000}"
+        },
+        {
+          "id": "c",
+          "text": "{0, 1, 2, 3, 4, 5}"
+        },
+        {
+          "id": "d",
+          "text": "Semua real dari 0 sampai 5"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "n menghitung tiket sehingga berupa bilangan bulat tidak negatif. Batas ketersediaan memberi 0 ≤ n ≤ 5.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "allow-negative-and-unbounded-counts"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-domain-and-range"
+        },
+        {
+          "optionId": "d",
+          "misconception": "allow-fractional-ticket-count"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-composition-01",
+      "version": 1,
+      "topicId": "g-composition",
+      "skillId": "g-composition.composition-value",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = 2x + 1 dan g(x) = x², berapa (f ∘ g)(3)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "49"
+        },
+        {
+          "id": "b",
+          "text": "19"
+        },
+        {
+          "id": "c",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "text": "16"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "(f ∘ g)(3) = f(g(3)) = f(9) = 2 × 9 + 1 = 19.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "reverse-composition-order"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-squaring-input"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-function-values-incorrectly"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-composition-02",
+      "version": 1,
+      "topicId": "g-composition",
+      "skillId": "g-composition.composition-expression",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = x + 2 dan g(x) = 3x, maka (g ∘ f)(x) adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "4x + 2"
+        },
+        {
+          "id": "b",
+          "text": "3x + 6"
+        },
+        {
+          "id": "c",
+          "text": "3x + 2"
+        },
+        {
+          "id": "d",
+          "text": "3x² + 6x"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Masukkan f(x) ke g: g(x + 2) = 3(x + 2) = 3x + 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-functions"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-composition-order"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-functions"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-composition-03",
+      "version": 1,
+      "topicId": "g-composition",
+      "skillId": "g-composition.composition-context",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Harga awal x mendapat diskon 10%, kemudian pajak 5% atas harga setelah diskon. Model harga akhirnya adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "0,9x + 0,05"
+        },
+        {
+          "id": "b",
+          "text": "0,95x"
+        },
+        {
+          "id": "c",
+          "text": "1,05(0,9x)"
+        },
+        {
+          "id": "d",
+          "text": "1,05x − 0,1"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Diskon memberi 0,9x. Pajak kemudian mengalikan hasil tersebut dengan 1,05, sehingga harga akhir = 1,05(0,9x).",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-tax-as-fixed-amount"
+        },
+        {
+          "optionId": "b",
+          "misconception": "add-percentages-without-changing-base"
+        },
+        {
+          "optionId": "d",
+          "misconception": "subtract-decimal-as-currency"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-inverse-functions-01",
+      "version": 1,
+      "topicId": "g-inverse-functions",
+      "skillId": "g-inverse-functions.linear-inverse",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = x + 4, maka f⁻¹(x) = ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x + 4"
+        },
+        {
+          "id": "b",
+          "text": "1/(x + 4)"
+        },
+        {
+          "id": "c",
+          "text": "4 − x"
+        },
+        {
+          "id": "d",
+          "text": "x − 4"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Jika y = x + 4, maka x = y − 4. Tukar nama variabel sehingga f⁻¹(x) = x − 4.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "keep-original-function"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-inverse-and-reciprocal"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-subtraction-order"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-inverse-functions-02",
+      "version": 1,
+      "topicId": "g-inverse-functions",
+      "skillId": "g-inverse-functions.affine-inverse",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = 3x − 6, maka f⁻¹(x) = ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "1/(3x − 6)"
+        },
+        {
+          "id": "b",
+          "text": "(x + 6)/3"
+        },
+        {
+          "id": "c",
+          "text": "(x − 6)/3"
+        },
+        {
+          "id": "d",
+          "text": "3x + 6"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "y = 3x − 6 memberi x = (y + 6)/3. Jadi f⁻¹(x) = (x + 6)/3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-reciprocal"
+        },
+        {
+          "optionId": "c",
+          "misconception": "wrong-inverse-constant-sign"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-inverse-scaling"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-inverse-functions-03",
+      "version": 1,
+      "topicId": "g-inverse-functions",
+      "skillId": "g-inverse-functions.quadratic-inverse-domain",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Agar f(x) = x² memiliki invers f⁻¹(x) = √x, domain f harus dibatasi menjadi ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Semua bilangan real"
+        },
+        {
+          "id": "b",
+          "text": "x ≤ 0"
+        },
+        {
+          "id": "c",
+          "text": "x ≠ 0"
+        },
+        {
+          "id": "d",
+          "text": "x ≥ 0"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Pada x ≥ 0, fungsi x² satu-satu dan inversnya akar nonnegatif. Pada x ≤ 0 inversnya −√x, bukan √x.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-one-to-one-requirement"
+        },
+        {
+          "optionId": "b",
+          "misconception": "choose-negative-root-branch"
+        },
+        {
+          "optionId": "c",
+          "misconception": "remove-zero-only"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-transformations-01",
+      "version": 1,
+      "topicId": "g-transformations",
+      "skillId": "g-transformations.vertical-translation",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Grafik y = f(x) + 3 diperoleh dari y = f(x) dengan ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Geser ke kanan 3 satuan"
+        },
+        {
+          "id": "b",
+          "text": "Geser ke atas 3 satuan"
+        },
+        {
+          "id": "c",
+          "text": "Kalikan semua x dengan 3"
+        },
+        {
+          "id": "d",
+          "text": "Geser ke bawah 3 satuan"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Menambahkan 3 pada keluaran menaikkan setiap ordinat sebesar 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-input-and-output-shift"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-translation-and-scaling"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reverse-vertical-shift"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-transformations-02",
+      "version": 1,
+      "topicId": "g-transformations",
+      "skillId": "g-transformations.horizontal-translation",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Grafik y = f(x − 2) diperoleh dari y = f(x) dengan ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Geser ke bawah 2 satuan"
+        },
+        {
+          "id": "b",
+          "text": "Geser ke kiri 2 satuan"
+        },
+        {
+          "id": "c",
+          "text": "Geser ke kanan 2 satuan"
+        },
+        {
+          "id": "d",
+          "text": "Refleksi terhadap sumbu y"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Untuk mencapai nilai input lama u, diperlukan x − 2 = u atau x = u + 2. Grafik bergeser ke kanan 2 satuan.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-horizontal-and-vertical"
+        },
+        {
+          "optionId": "b",
+          "misconception": "reverse-horizontal-shift"
+        },
+        {
+          "optionId": "d",
+          "misconception": "confuse-shift-and-reflection"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-transformations-03",
+      "version": 1,
+      "topicId": "g-transformations",
+      "skillId": "g-transformations.transformation-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika (1, 3) berada pada y = f(x), titik terkait pada y = 2f(x) − 1 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "(2, 5)"
+        },
+        {
+          "id": "b",
+          "text": "(1, 4)"
+        },
+        {
+          "id": "c",
+          "text": "(1, 5)"
+        },
+        {
+          "id": "d",
+          "text": "(0, 6)"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "x tetap 1. Keluaran baru = 2 × 3 − 1 = 5, sehingga titiknya (1, 5).",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "scale-input-instead-of-output"
+        },
+        {
+          "optionId": "b",
+          "misconception": "apply-operations-in-wrong-order"
+        },
+        {
+          "optionId": "d",
+          "misconception": "apply-output-operations-to-input"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-circles-01",
+      "version": 1,
+      "topicId": "g-circles",
+      "skillId": "g-circles.central-inscribed-angle",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sudut pusat yang menghadap busur kecil AB adalah 100°. Berapa sudut keliling yang menghadap busur kecil AB yang sama?",
+      "options": [
+        {
+          "id": "a",
+          "text": "100°"
+        },
+        {
+          "id": "b",
+          "text": "50°"
+        },
+        {
+          "id": "c",
+          "text": "80°"
+        },
+        {
+          "id": "d",
+          "text": "200°"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Sudut keliling yang menghadap busur sama adalah setengah sudut pusat: 100°/2 = 50°.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "equate-central-and-inscribed-angle"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-supplementary-angle"
+        },
+        {
+          "optionId": "d",
+          "misconception": "double-instead-of-halve"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-circles-02",
+      "version": 1,
+      "topicId": "g-circles",
+      "skillId": "g-circles.arc-length",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Lingkaran berjari-jari 6 cm memiliki sudut pusat 60°. Berapa panjang busur kecilnya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6π cm"
+        },
+        {
+          "id": "b",
+          "text": "2π cm"
+        },
+        {
+          "id": "c",
+          "text": "6 cm"
+        },
+        {
+          "id": "d",
+          "text": "12π cm"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Panjang busur = (60/360) × 2π × 6 = 2π cm.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-angle-fraction"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-radius-and-arc"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-full-circumference"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-circles-03",
+      "version": 1,
+      "topicId": "g-circles",
+      "skillId": "g-circles.tangent-length",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Titik P berjarak 13 cm dari pusat lingkaran berjari-jari 5 cm. Berapa panjang ruas garis singgung dari P ke titik singgung?",
+      "options": [
+        {
+          "id": "a",
+          "text": "18 cm"
+        },
+        {
+          "id": "b",
+          "text": "12 cm"
+        },
+        {
+          "id": "c",
+          "text": "8 cm"
+        },
+        {
+          "id": "d",
+          "text": "√194 cm"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Jari-jari tegak lurus garis singgung. Panjangnya √(13² − 5²) = √144 = 12 cm.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-radius-and-center-distance"
+        },
+        {
+          "optionId": "c",
+          "misconception": "subtract-lengths-without-pythagoras"
+        },
+        {
+          "optionId": "d",
+          "misconception": "add-squares-for-missing-leg"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-bivariate-statistics-01",
+      "version": 1,
+      "topicId": "g-bivariate-statistics",
+      "skillId": "g-bivariate-statistics.regression-prediction",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Model prediksi ŷ = 2x + 5. Berapa prediksi y saat x = 4?",
+      "options": [
+        {
+          "id": "a",
+          "text": "11"
+        },
+        {
+          "id": "b",
+          "text": "8"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "28"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Substitusi x = 4: ŷ = 2 × 4 + 5 = 13.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "add-instead-of-multiply"
+        },
+        {
+          "optionId": "b",
+          "misconception": "omit-intercept"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-input-by-coefficient-plus-intercept"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-bivariate-statistics-02",
+      "version": 1,
+      "topicId": "g-bivariate-statistics",
+      "skillId": "g-bivariate-statistics.categorical-association",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dalam survei, 30 dari 50 pengguna A puas, sedangkan 45 dari 50 pengguna B puas. Pernyataan yang didukung adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Produk B pasti menyebabkan kepuasan"
+        },
+        {
+          "id": "b",
+          "text": "Proporsi puas kedua kelompok sama"
+        },
+        {
+          "id": "c",
+          "text": "Proporsi puas lebih tinggi pada kelompok B"
+        },
+        {
+          "id": "d",
+          "text": "Semua pengguna B puas"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Proporsi puas A = 60%, B = 90%. Ini menunjukkan asosiasi dalam sampel, bukan dengan sendirinya hubungan sebab-akibat.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "infer-causation-from-observational-survey"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-group-proportions"
+        },
+        {
+          "optionId": "d",
+          "misconception": "generalize-to-all-members"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-bivariate-statistics-03",
+      "version": 1,
+      "topicId": "g-bivariate-statistics",
+      "skillId": "g-bivariate-statistics.confounding",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Penjualan es krim dan kejadian tenggelam sama-sama meningkat pada musim panas. Kesimpulan paling hati-hati adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cuaca atau aktivitas musim panas dapat memengaruhi keduanya"
+        },
+        {
+          "id": "b",
+          "text": "Es krim pasti menyebabkan tenggelam"
+        },
+        {
+          "id": "c",
+          "text": "Mencegah penjualan es krim pasti menghilangkan tenggelam"
+        },
+        {
+          "id": "d",
+          "text": "Korelasi membuktikan tidak ada faktor lain"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Faktor ketiga seperti suhu dan lebih banyak aktivitas berenang dapat berkaitan dengan kedua variabel. Korelasi saja tidak membuktikan sebab-akibat.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "infer-causation-from-correlation"
+        },
+        {
+          "optionId": "c",
+          "misconception": "assume-intervention-effect"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-confounders"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-counting-01",
+      "version": 1,
+      "topicId": "g-counting",
+      "skillId": "g-counting.product-rule",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Tersedia 3 pilihan baju dan 2 pilihan celana. Berapa pasangan satu baju dan satu celana?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "6"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Untuk setiap 3 baju ada 2 celana, jadi banyak pasangan = 3 × 2 = 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "count-one-category-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "add-instead-of-multiply"
+        },
+        {
+          "optionId": "d",
+          "misconception": "square-first-category"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-counting-02",
+      "version": 1,
+      "topicId": "g-counting",
+      "skillId": "g-counting.permutation",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dari 5 siswa dipilih ketua dan sekretaris yang berbeda. Berapa susunan jabatan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "120"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "20"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Ketua mempunyai 5 pilihan, sekretaris 4 pilihan tersisa. Total 5 × 4 = 20.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-combination-for-distinct-roles"
+        },
+        {
+          "optionId": "b",
+          "misconception": "arrange-all-students"
+        },
+        {
+          "optionId": "c",
+          "misconception": "allow-same-person-twice"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-counting-03",
+      "version": 1,
+      "topicId": "g-counting",
+      "skillId": "g-counting.combination",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dari 6 siswa dipilih tim beranggotakan 2 orang tanpa jabatan. Berapa tim yang berbeda?",
+      "options": [
+        {
+          "id": "a",
+          "text": "36"
+        },
+        {
+          "id": "b",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "text": "30"
+        },
+        {
+          "id": "d",
+          "text": "12"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Urutan anggota tidak membedakan tim. Banyak tim C(6,2) = (6 × 5)/2 = 15.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "allow-repetition-and-order"
+        },
+        {
+          "optionId": "c",
+          "misconception": "count-team-order-twice"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-count-by-team-size"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-compound-probability-01",
+      "version": 1,
+      "topicId": "g-compound-probability",
+      "skillId": "g-compound-probability.simple-probability",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dadu adil bersisi 1 sampai 6 dilempar sekali. Berapa peluang angka genap?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1/6"
+        },
+        {
+          "id": "b",
+          "text": "1/2"
+        },
+        {
+          "id": "c",
+          "text": "1/3"
+        },
+        {
+          "id": "d",
+          "text": "2/3"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Angka genap adalah 2, 4, 6: ada 3 dari 6 hasil sama mungkin. Peluang = 3/6 = 1/2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "count-single-even-outcome"
+        },
+        {
+          "optionId": "c",
+          "misconception": "miscount-even-outcomes"
+        },
+        {
+          "optionId": "d",
+          "misconception": "include-extra-outcome"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-compound-probability-02",
+      "version": 1,
+      "topicId": "g-compound-probability",
+      "skillId": "g-compound-probability.independent-trials",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dua koin adil dilempar secara independen. Berapa peluang tepat satu sisi gambar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/4"
+        },
+        {
+          "id": "b",
+          "text": "1/2"
+        },
+        {
+          "id": "c",
+          "text": "1/4"
+        },
+        {
+          "id": "d",
+          "text": "1"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Empat hasil sama mungkin adalah GG, GA, AG, AA. Tepat satu gambar terjadi pada GA dan AG, jadi peluangnya 2/4 = 1/2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "include-two-pictures"
+        },
+        {
+          "optionId": "c",
+          "misconception": "count-one-order-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "assume-one-picture-guaranteed"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-compound-probability-03",
+      "version": 1,
+      "topicId": "g-compound-probability",
+      "skillId": "g-compound-probability.expected-frequency",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Sebuah kejadian berpeluang 0,2 diuji dalam 150 percobaan dengan peluang sama. Berapa frekuensi harapannya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "120"
+        },
+        {
+          "id": "b",
+          "text": "30"
+        },
+        {
+          "id": "c",
+          "text": "0,2"
+        },
+        {
+          "id": "d",
+          "text": "750"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Frekuensi harapan = n × p = 150 × 0,2 = 30. Ini nilai harapan, bukan jaminan hasil persis 30.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-complement-event"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-probability-only"
+        },
+        {
+          "optionId": "d",
+          "misconception": "divide-trials-by-probability"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-conditional-probability-01",
+      "version": 1,
+      "topicId": "g-conditional-probability",
+      "skillId": "g-conditional-probability.conditional-count",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Dari 20 anggota klub, 12 perempuan. Dari 12 perempuan itu, 9 hadir. Jika dipilih satu anggota perempuan secara acak, peluang ia hadir adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/4"
+        },
+        {
+          "id": "b",
+          "text": "1/4"
+        },
+        {
+          "id": "c",
+          "text": "9/20"
+        },
+        {
+          "id": "d",
+          "text": "3/5"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Ruang sampel dibatasi pada 12 perempuan. Yang hadir 9, sehingga P(hadir | perempuan) = 9/12 = 3/4.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "use-absent-complement"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-total-population-as-condition"
+        },
+        {
+          "optionId": "d",
+          "misconception": "report-proportion-female"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-conditional-probability-02",
+      "version": 1,
+      "topicId": "g-conditional-probability",
+      "skillId": "g-conditional-probability.independence-test",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "P(A) = 0,4, P(B) = 0,5, dan P(A ∩ B) = 0,2. Apakah A dan B independen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tidak, karena irisan bukan nol"
+        },
+        {
+          "id": "b",
+          "text": "Ya, karena 0,4 + 0,5 < 1"
+        },
+        {
+          "id": "c",
+          "text": "Ya, karena 0,2 = 0,4 × 0,5"
+        },
+        {
+          "id": "d",
+          "text": "Tidak, karena P(A) berbeda dari P(B)"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Independensi mensyaratkan P(A ∩ B) = P(A)P(B). Di sini 0,4 × 0,5 = 0,2, sehingga syarat terpenuhi.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-independent-and-disjoint"
+        },
+        {
+          "optionId": "b",
+          "misconception": "use-sum-instead-of-product-test"
+        },
+        {
+          "optionId": "d",
+          "misconception": "require-equal-event-probabilities"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "g-conditional-probability-03",
+      "version": 1,
+      "topicId": "g-conditional-probability",
+      "skillId": "g-conditional-probability.without-replacement",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Kantong berisi 3 bola merah dan 2 biru. Dua bola diambil tanpa pengembalian. Berapa peluang keduanya merah?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3/10"
+        },
+        {
+          "id": "b",
+          "text": "9/25"
+        },
+        {
+          "id": "c",
+          "text": "1/5"
+        },
+        {
+          "id": "d",
+          "text": "3/5"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Peluang merah pertama = 3/5. Setelah itu tersisa 2 merah dari 4 bola. Peluang keduanya = (3/5)(2/4) = 3/10.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "assume-replacement"
+        },
+        {
+          "optionId": "c",
+          "misconception": "miscount-remaining-red-balls"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-second-draw"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-polynomials-01",
+      "version": 1,
+      "topicId": "a-polynomials",
+      "skillId": "a-polynomials.polynomial-value",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika P(x) = x³ − 2x + 1, berapa P(2)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "13"
+        },
+        {
+          "id": "d",
+          "text": "9"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "P(2) = 2³ − 2 × 2 + 1 = 8 − 4 + 1 = 5.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "treat-cube-as-square"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-linear-term-sign"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-linear-term"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-polynomials-02",
+      "version": 1,
+      "topicId": "a-polynomials",
+      "skillId": "a-polynomials.remainder-theorem",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa sisa pembagian P(x) = x³ + 2x + 4 oleh x − 1?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Teorema sisa memberi sisa P(1) = 1 + 2 + 4 = 7.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-constant-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "substitute-negative-root"
+        },
+        {
+          "optionId": "d",
+          "misconception": "assume-divisor-is-factor"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-polynomials-03",
+      "version": 1,
+      "topicId": "a-polynomials",
+      "skillId": "a-polynomials.factor-theorem",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "P(x) = x³ − 4x. Pernyataan mana benar?",
+      "options": [
+        {
+          "id": "a",
+          "text": "x − 1 adalah faktor karena P(1) = −3"
+        },
+        {
+          "id": "b",
+          "text": "x − 2 adalah faktor karena P(2) = 0"
+        },
+        {
+          "id": "c",
+          "text": "P(x) tidak mempunyai faktor x"
+        },
+        {
+          "id": "d",
+          "text": "x + 2 bukan faktor karena akarnya negatif"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "P(x) = x(x² − 4) = x(x − 2)(x + 2). P(2) = 0 memastikan x − 2 faktor.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-zero-remainder-condition"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-common-variable-factor"
+        },
+        {
+          "optionId": "d",
+          "misconception": "reject-negative-root"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-matrices-01",
+      "version": 1,
+      "topicId": "a-matrices",
+      "skillId": "a-matrices.matrix-entry",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Matriks A = [[1, 2], [3, 4]]. Berapa elemen baris kedua kolom pertama?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "2"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Baris kedua adalah [3, 4]. Elemen kolom pertamanya 3.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "choose-wrong-column"
+        },
+        {
+          "optionId": "c",
+          "misconception": "choose-wrong-row"
+        },
+        {
+          "optionId": "d",
+          "misconception": "swap-row-and-column"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-matrices-02",
+      "version": 1,
+      "topicId": "a-matrices",
+      "skillId": "a-matrices.matrix-product",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika A = [[1, 2], [0, 1]] dan v = [[3], [4]], berapa Av?",
+      "options": [
+        {
+          "id": "a",
+          "text": "[[7], [4]]"
+        },
+        {
+          "id": "b",
+          "text": "[[3], [4]]"
+        },
+        {
+          "id": "c",
+          "text": "[[11], [4]]"
+        },
+        {
+          "id": "d",
+          "text": "[[3], [8]]"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Entri pertama = 1 × 3 + 2 × 4 = 11. Entri kedua = 0 × 3 + 1 × 4 = 4.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-coefficient-in-dot-product"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-off-diagonal-entry"
+        },
+        {
+          "optionId": "d",
+          "misconception": "multiply-selected-entries-only"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-matrices-03",
+      "version": 1,
+      "topicId": "a-matrices",
+      "skillId": "a-matrices.reflection-matrix",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Matriks [[−1, 0], [0, 1]] bekerja pada vektor posisi (x, y). Transformasinya adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Refleksi terhadap sumbu x"
+        },
+        {
+          "id": "b",
+          "text": "Refleksi terhadap sumbu y"
+        },
+        {
+          "id": "c",
+          "text": "Dilatasi faktor 2"
+        },
+        {
+          "id": "d",
+          "text": "Rotasi 180°"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Hasilnya (−x, y), yaitu membalik tanda koordinat horizontal dan mempertahankan vertikal: refleksi terhadap sumbu y.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "swap-reflection-axis"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-reflection-and-scaling"
+        },
+        {
+          "optionId": "d",
+          "misconception": "negate-both-coordinates"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-vectors-01",
+      "version": 1,
+      "topicId": "a-vectors",
+      "skillId": "a-vectors.vector-addition",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika u = (2, −1) dan v = (3, 4), berapa u + v?",
+      "options": [
+        {
+          "id": "a",
+          "text": "(6, −4)"
+        },
+        {
+          "id": "b",
+          "text": "(5, 3)"
+        },
+        {
+          "id": "c",
+          "text": "(5, 5)"
+        },
+        {
+          "id": "d",
+          "text": "(−1, −5)"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Jumlahkan komponen sejenis: (2 + 3, −1 + 4) = (5, 3).",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "multiply-components"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-negative-component"
+        },
+        {
+          "optionId": "d",
+          "misconception": "subtract-instead-of-add"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-vectors-02",
+      "version": 1,
+      "topicId": "a-vectors",
+      "skillId": "a-vectors.vector-magnitude",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa panjang vektor (−3, 4)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "7"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "25"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Panjang = √[(-3)² + 4²] = √25 = 5.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "sum-absolute-components"
+        },
+        {
+          "optionId": "b",
+          "misconception": "sum-signed-components"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-square-root"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-vectors-03",
+      "version": 1,
+      "topicId": "a-vectors",
+      "skillId": "a-vectors.parallel-vectors",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Perpindahan A ke B adalah (2, 3), sedangkan A ke C adalah (6, 9). Kesimpulan yang benar adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Panjang AB sama dengan AC"
+        },
+        {
+          "id": "b",
+          "text": "AB tegak lurus AC"
+        },
+        {
+          "id": "c",
+          "text": "B adalah titik tengah AC"
+        },
+        {
+          "id": "d",
+          "text": "A, B, C segaris karena AC = 3AB"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Vektor AC = 3(2, 3) = 3AB. Vektor searah yang merupakan kelipatan skalar menunjukkan ketiga titik segaris.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-scalar-magnitude"
+        },
+        {
+          "optionId": "b",
+          "misconception": "confuse-parallel-and-perpendicular"
+        },
+        {
+          "optionId": "c",
+          "misconception": "assume-scalar-is-two"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-advanced-trigonometry-01",
+      "version": 1,
+      "topicId": "a-advanced-trigonometry",
+      "skillId": "a-advanced-trigonometry.unit-circle",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa sin 150°?",
+      "options": [
+        {
+          "id": "a",
+          "text": "√3/2"
+        },
+        {
+          "id": "b",
+          "text": "−1/2"
+        },
+        {
+          "id": "c",
+          "text": "−√3/2"
+        },
+        {
+          "id": "d",
+          "text": "1/2"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "150° berada di kuadran II, sinus positif. Sudut acuannya 30°, sehingga sin 150° = sin 30° = 1/2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-sine-and-cosine-reference"
+        },
+        {
+          "optionId": "b",
+          "misconception": "wrong-quadrant-sign"
+        },
+        {
+          "optionId": "c",
+          "misconception": "wrong-function-and-sign"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-advanced-trigonometry-02",
+      "version": 1,
+      "topicId": "a-advanced-trigonometry",
+      "skillId": "a-advanced-trigonometry.period",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa periode y = sin(2x), dengan x dalam radian?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4π"
+        },
+        {
+          "id": "b",
+          "text": "2π"
+        },
+        {
+          "id": "c",
+          "text": "π"
+        },
+        {
+          "id": "d",
+          "text": "1/2"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Periode sin(bx) adalah 2π/|b|. Untuk b = 2, periodenya π.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "multiply-instead-of-divide-period"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-frequency-factor"
+        },
+        {
+          "optionId": "d",
+          "misconception": "report-reciprocal-frequency-only"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-advanced-trigonometry-03",
+      "version": 1,
+      "topicId": "a-advanced-trigonometry",
+      "skillId": "a-advanced-trigonometry.periodic-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Ketinggian kursi bianglala h(t) = 10 + 8 sin(πt/20), dalam meter dan detik. Berapa periode satu putaran?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10 detik"
+        },
+        {
+          "id": "b",
+          "text": "40 detik"
+        },
+        {
+          "id": "c",
+          "text": "20 detik"
+        },
+        {
+          "id": "d",
+          "text": "8 detik"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Koefisien t adalah π/20. Periodenya 2π/(π/20) = 40 detik; 8 adalah amplitudo dan 10 garis tengah.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-midline-as-period"
+        },
+        {
+          "optionId": "c",
+          "misconception": "confuse-half-cycle-and-period"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-amplitude-as-period"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-rational-log-functions-01",
+      "version": 1,
+      "topicId": "a-rational-log-functions",
+      "skillId": "a-rational-log-functions.log-definition",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa log₂ 8?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "16"
+        },
+        {
+          "id": "c",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "log₂ 8 menanyakan pangkat pada 2 yang menghasilkan 8. Karena 2³ = 8, nilainya 3.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "subtract-base-from-argument"
+        },
+        {
+          "optionId": "b",
+          "misconception": "multiply-base-and-argument"
+        },
+        {
+          "optionId": "d",
+          "misconception": "divide-argument-by-base"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-rational-log-functions-02",
+      "version": 1,
+      "topicId": "a-rational-log-functions",
+      "skillId": "a-rational-log-functions.rational-domain",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Domain f(x) = (x + 1)/(x − 2) adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hanya x > 2"
+        },
+        {
+          "id": "b",
+          "text": "Semua real kecuali −1"
+        },
+        {
+          "id": "c",
+          "text": "Semua real"
+        },
+        {
+          "id": "d",
+          "text": "Semua real kecuali 2"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Penyebut tidak boleh nol, sehingga x − 2 ≠ 0 atau x ≠ 2. Nilai selain 2 diperbolehkan.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "exclude-valid-negative-denominators"
+        },
+        {
+          "optionId": "b",
+          "misconception": "exclude-numerator-zero"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-zero-denominator"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-rational-log-functions-03",
+      "version": 1,
+      "topicId": "a-rational-log-functions",
+      "skillId": "a-rational-log-functions.absolute-value-model",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Suhu aman T memiliki jarak paling jauh 3 °C dari 20 °C. Model yang benar adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "T − 20 = 3"
+        },
+        {
+          "id": "b",
+          "text": "|T − 20| ≤ 3"
+        },
+        {
+          "id": "c",
+          "text": "|T − 20| ≥ 3"
+        },
+        {
+          "id": "d",
+          "text": "|T + 20| ≤ 3"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Jarak suhu dari 20 dinyatakan |T − 20|. Paling jauh 3 memberi ≤ 3, setara dengan 17 ≤ T ≤ 23.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "keep-only-upper-bound"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-maximum-deviation"
+        },
+        {
+          "optionId": "d",
+          "misconception": "wrong-reference-temperature"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-conics-01",
+      "version": 1,
+      "topicId": "a-conics",
+      "skillId": "a-conics.circle-equation",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Pusat lingkaran (x − 2)² + (y + 1)² = 9 adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "(−2, 1)"
+        },
+        {
+          "id": "b",
+          "text": "(−1, 2)"
+        },
+        {
+          "id": "c",
+          "text": "(2, 1)"
+        },
+        {
+          "id": "d",
+          "text": "(2, −1)"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Bandingkan dengan (x − h)² + (y − k)² = r². Diperoleh h = 2 dan k = −1.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "reverse-center-signs"
+        },
+        {
+          "optionId": "b",
+          "misconception": "swap-center-coordinates"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-plus-inside-y-term"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-conics-02",
+      "version": 1,
+      "topicId": "a-conics",
+      "skillId": "a-conics.ellipse-axes",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Elips x²/25 + y²/9 = 1 berpusat di origin. Berapa panjang sumbu mayor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "25"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Penyebut terbesar 25 memberi semisumbu mayor a = 5. Panjang sumbu mayor adalah 2a = 10.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-minor-axis"
+        },
+        {
+          "optionId": "b",
+          "misconception": "report-semimajor-axis"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-squared-semiaxis"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-conics-03",
+      "version": 1,
+      "topicId": "a-conics",
+      "skillId": "a-conics.circle-tangent",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Persamaan garis singgung lingkaran x² + y² = 25 di titik (3, 4) adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "3x + 4y = 25"
+        },
+        {
+          "id": "b",
+          "text": "x + y = 7"
+        },
+        {
+          "id": "c",
+          "text": "3x + 4y = 5"
+        },
+        {
+          "id": "d",
+          "text": "4x − 3y = 0"
+        }
+      ],
+      "answer": {
+        "optionId": "a"
+      },
+      "explanation": "Untuk lingkaran berpusat di origin, garis singgung di (x1,y1) adalah x1x + y1y = r². Maka 3x + 4y = 25.",
+      "distractors": [
+        {
+          "optionId": "b",
+          "misconception": "use-point-only-without-tangent-condition"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-radius-instead-of-radius-squared"
+        },
+        {
+          "optionId": "d",
+          "misconception": "use-radius-line-direction"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-binomial-01",
+      "version": 1,
+      "topicId": "a-binomial",
+      "skillId": "a-binomial.binomial-conditions",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Situasi mana sesuai model binomial?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Melempar sampai gambar pertama tanpa batas jumlah lemparan"
+        },
+        {
+          "id": "b",
+          "text": "Mengambil bola tanpa pengembalian dari kantong kecil"
+        },
+        {
+          "id": "c",
+          "text": "Mencatat tinggi badan 10 siswa"
+        },
+        {
+          "id": "d",
+          "text": "Menghitung gambar dari 10 lemparan koin independen dengan peluang gambar tetap"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Binomial menghitung sukses pada jumlah percobaan tetap, dua hasil tiap percobaan, independen, dan peluang sukses tetap.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "ignore-fixed-trial-count"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-changing-trial-probability"
+        },
+        {
+          "optionId": "c",
+          "misconception": "use-continuous-variable-as-count"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-binomial-02",
+      "version": 1,
+      "topicId": "a-binomial",
+      "skillId": "a-binomial.binomial-probability",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika X ~ Binomial(3, 1/2), berapa P(X = 2)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1/2"
+        },
+        {
+          "id": "b",
+          "text": "1/4"
+        },
+        {
+          "id": "c",
+          "text": "1/8"
+        },
+        {
+          "id": "d",
+          "text": "3/8"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "P(X = 2) = C(3,2)(1/2)²(1/2) = 3/8.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-success-probability-only"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-third-trial"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-combination-factor"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-binomial-03",
+      "version": 1,
+      "topicId": "a-binomial",
+      "skillId": "a-binomial.binomial-expectation",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Peluang cacat setiap produk adalah 0,05 secara independen. Dari 200 produk, berapa banyak cacat yang diharapkan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "190"
+        },
+        {
+          "id": "b",
+          "text": "40"
+        },
+        {
+          "id": "c",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "text": "10"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Untuk X binomial, E(X) = np = 200 × 0,05 = 10. Banyak cacat aktual dapat berbeda.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-expected-good-products"
+        },
+        {
+          "optionId": "b",
+          "misconception": "incorrect-percent-conversion"
+        },
+        {
+          "optionId": "c",
+          "misconception": "treat-percent-as-count"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-normal-01",
+      "version": 1,
+      "topicId": "a-normal",
+      "skillId": "a-normal.normal-symmetry",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Distribusi normal memiliki rata-rata μ. Berapa peluang nilai lebih kecil dari μ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0,25"
+        },
+        {
+          "id": "b",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "text": "0,5"
+        },
+        {
+          "id": "d",
+          "text": "1"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Distribusi normal simetris terhadap rata-ratanya dan kontinu, sehingga setengah peluang berada di bawah μ.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-half-with-quarter"
+        },
+        {
+          "optionId": "b",
+          "misconception": "assume-no-values-below-mean"
+        },
+        {
+          "optionId": "d",
+          "misconception": "include-entire-distribution"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-normal-02",
+      "version": 1,
+      "topicId": "a-normal",
+      "skillId": "a-normal.z-score",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Skor x = 80, rata-rata 70, simpangan baku 5. Berapa skor z?",
+      "options": [
+        {
+          "id": "a",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "−2"
+        },
+        {
+          "id": "d",
+          "text": "16"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "z = (x − μ)/σ = (80 − 70)/5 = 2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-standard-deviation-division"
+        },
+        {
+          "optionId": "c",
+          "misconception": "reverse-mean-and-score"
+        },
+        {
+          "optionId": "d",
+          "misconception": "divide-raw-score-by-standard-deviation"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-normal-03",
+      "version": 1,
+      "topicId": "a-normal",
+      "skillId": "a-normal.normal-interval",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Gunakan aturan pendekatan 68–95–99,7. Jika X normal dengan rata-rata 100 dan simpangan baku 10, kira-kira berapa peluang 80 ≤ X ≤ 120?",
+      "options": [
+        {
+          "id": "a",
+          "text": "99,7%"
+        },
+        {
+          "id": "b",
+          "text": "68%"
+        },
+        {
+          "id": "c",
+          "text": "50%"
+        },
+        {
+          "id": "d",
+          "text": "95%"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Batas 80 dan 120 adalah μ − 2σ dan μ + 2σ. Aturan pendekatan memberi sekitar 95% di interval ini.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "use-three-standard-deviation-rule"
+        },
+        {
+          "optionId": "b",
+          "misconception": "use-one-standard-deviation-rule"
+        },
+        {
+          "optionId": "c",
+          "misconception": "ignore-two-sided-interval"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-limits-01",
+      "version": 1,
+      "topicId": "a-limits",
+      "skillId": "a-limits.direct-limit",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa lim saat x → 2 dari (3x + 1)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "Tidak ada"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Fungsi linear kontinu. Substitusi x = 2 memberi 3 × 2 + 1 = 7.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-slope-only"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-constant"
+        },
+        {
+          "optionId": "d",
+          "misconception": "assume-limit-requires-undefined-point"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-limits-02",
+      "version": 1,
+      "topicId": "a-limits",
+      "skillId": "a-limits.removable-limit",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Berapa lim saat x → 2 dari (x² − 4)/(x − 2)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tidak ada karena penyebut nol di x = 2"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Untuk x ≠ 2, pecahan = (x − 2)(x + 2)/(x − 2) = x + 2. Maka limitnya 4 walau nilai fungsi awal di x = 2 tidak terdefinisi.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "confuse-value-and-limit"
+        },
+        {
+          "optionId": "b",
+          "misconception": "omit-one-factor-term"
+        },
+        {
+          "optionId": "c",
+          "misconception": "treat-zero-over-zero-as-zero"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-limits-03",
+      "version": 1,
+      "topicId": "a-limits",
+      "skillId": "a-limits.piecewise-continuity",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "f(x) = x + 1 untuk x < 1 dan f(x) = 2x untuk x ≥ 1. Apakah f kontinu di x = 1?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tidak, karena rumus kiri dan kanan berbeda"
+        },
+        {
+          "id": "b",
+          "text": "Ya, limit kiri, limit kanan, dan f(1) semuanya 2"
+        },
+        {
+          "id": "c",
+          "text": "Tidak, karena limit kiri 1"
+        },
+        {
+          "id": "d",
+          "text": "Ya, cukup karena f(1) terdefinisi"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Limit kiri = 1 + 1 = 2, limit kanan = 2 × 1 = 2, dan f(1) = 2. Ketiga nilai sama sehingga kontinu.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "require-identical-piecewise-formulas"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-constant-in-left-limit"
+        },
+        {
+          "optionId": "d",
+          "misconception": "ignore-limit-continuity-condition"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivatives-01",
+      "version": 1,
+      "topicId": "a-derivatives",
+      "skillId": "a-derivatives.power-rule",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = x³, maka f′(x) = ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "3x³"
+        },
+        {
+          "id": "b",
+          "text": "x²"
+        },
+        {
+          "id": "c",
+          "text": "3x²"
+        },
+        {
+          "id": "d",
+          "text": "x⁴/4"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Aturan pangkat: d(xⁿ)/dx = nx^(n−1). Untuk n = 3, hasilnya 3x².",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "do-not-reduce-exponent"
+        },
+        {
+          "optionId": "b",
+          "misconception": "omit-power-coefficient"
+        },
+        {
+          "optionId": "d",
+          "misconception": "integrate-instead-of-differentiate"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivatives-02",
+      "version": 1,
+      "topicId": "a-derivatives",
+      "skillId": "a-derivatives.chain-rule",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = (2x + 1)³, maka f′(x) = ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "2(2x + 1)²"
+        },
+        {
+          "id": "b",
+          "text": "6(2x + 1)²"
+        },
+        {
+          "id": "c",
+          "text": "6(2x + 1)³"
+        },
+        {
+          "id": "d",
+          "text": "3(2x + 1)²"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Aturan rantai memberi 3(2x + 1)² × 2 = 6(2x + 1)².",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-outer-power-coefficient"
+        },
+        {
+          "optionId": "c",
+          "misconception": "do-not-reduce-outer-exponent"
+        },
+        {
+          "optionId": "d",
+          "misconception": "omit-inner-derivative"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivatives-03",
+      "version": 1,
+      "topicId": "a-derivatives",
+      "skillId": "a-derivatives.trig-exponential-derivative",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Jika f(x) = e^x + sin x, dengan x dalam radian, berapa f′(0)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "text": "−2"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "2"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "f′(x) = e^x + cos x. Pada x = 0, e⁰ + cos 0 = 1 + 1 = 2.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "evaluate-original-function-instead-of-derivative"
+        },
+        {
+          "optionId": "b",
+          "misconception": "negate-both-derivatives"
+        },
+        {
+          "optionId": "c",
+          "misconception": "treat-derivatives-as-zero-at-origin"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivative-applications-01",
+      "version": 1,
+      "topicId": "a-derivative-applications",
+      "skillId": "a-derivative-applications.tangent-slope",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Untuk y = x², berapa gradien garis singgung di x = 3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "9"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Turunan y′ = 2x. Pada x = 3, gradiennya 2 × 3 = 6.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-function-value"
+        },
+        {
+          "optionId": "b",
+          "misconception": "report-second-derivative"
+        },
+        {
+          "optionId": "c",
+          "misconception": "report-input-as-slope"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivative-applications-02",
+      "version": 1,
+      "topicId": "a-derivative-applications",
+      "skillId": "a-derivative-applications.instantaneous-velocity",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Posisi s(t) = t³ − 2t meter. Berapa kecepatan sesaat pada t = 2 detik?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4 m/s"
+        },
+        {
+          "id": "b",
+          "text": "10 m/s"
+        },
+        {
+          "id": "c",
+          "text": "12 m/s"
+        },
+        {
+          "id": "d",
+          "text": "2 m/s"
+        }
+      ],
+      "answer": {
+        "optionId": "b"
+      },
+      "explanation": "Kecepatan v(t) = s′(t) = 3t² − 2. Jadi v(2) = 12 − 2 = 10 m/s.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "report-position-as-velocity"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-linear-term-derivative"
+        },
+        {
+          "optionId": "d",
+          "misconception": "report-average-velocity-from-zero"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-derivative-applications-03",
+      "version": 1,
+      "topicId": "a-derivative-applications",
+      "skillId": "a-derivative-applications.optimization",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Persegi panjang memiliki keliling 20 m. Berapa luas maksimumnya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "50 m²"
+        },
+        {
+          "id": "b",
+          "text": "100 m²"
+        },
+        {
+          "id": "c",
+          "text": "25 m²"
+        },
+        {
+          "id": "d",
+          "text": "20 m²"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Jika satu sisi x, sisi lain 10 − x. Luas A = x(10 − x); A′ = 10 − 2x = 0 memberi x = 5. A″ = −2 < 0, sehingga maksimum 25 m².",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-half-perimeter-constraint"
+        },
+        {
+          "optionId": "b",
+          "misconception": "use-full-perimeter-as-side-sum"
+        },
+        {
+          "optionId": "d",
+          "misconception": "confuse-perimeter-and-area"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-integrals-01",
+      "version": 1,
+      "topicId": "a-integrals",
+      "skillId": "a-integrals.antiderivative",
+      "difficulty": 1,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Integral tak tentu ∫ 2x dx adalah ...",
+      "options": [
+        {
+          "id": "a",
+          "text": "x²"
+        },
+        {
+          "id": "b",
+          "text": "2 + C"
+        },
+        {
+          "id": "c",
+          "text": "2x² + C"
+        },
+        {
+          "id": "d",
+          "text": "x² + C"
+        }
+      ],
+      "answer": {
+        "optionId": "d"
+      },
+      "explanation": "Antiturunan 2x adalah x². Semua antiturunan berbeda sebesar konstanta, sehingga hasil umum x² + C.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-integration-constant"
+        },
+        {
+          "optionId": "b",
+          "misconception": "differentiate-instead-of-integrate"
+        },
+        {
+          "optionId": "c",
+          "misconception": "omit-division-by-new-power"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-integrals-02",
+      "version": 1,
+      "topicId": "a-integrals",
+      "skillId": "a-integrals.definite-integral",
+      "difficulty": 2,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Hitung ∫ dari 0 sampai 2 untuk 3x² dx.",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "12"
+        },
+        {
+          "id": "c",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "text": "6"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Antiturunan 3x² adalah x³. Nilai integral = [x³] dari 0 ke 2 = 8 − 0 = 8.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "omit-cubing-endpoint"
+        },
+        {
+          "optionId": "b",
+          "misconception": "evaluate-integrand-at-upper-bound"
+        },
+        {
+          "optionId": "d",
+          "misconception": "integrate-power-incorrectly"
+        }
+      ],
+      "reviewStatus": "draft"
+    },
+    {
+      "id": "a-integrals-03",
+      "version": 1,
+      "topicId": "a-integrals",
+      "skillId": "a-integrals.signed-area",
+      "difficulty": 3,
+      "difficultyStatus": "provisional",
+      "format": "single-choice",
+      "prompt": "Untuk f(x) = x pada interval [−1, 1], berapa integral tentu dan luas geometris antara grafik dan sumbu x?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Integral 0; luas 0"
+        },
+        {
+          "id": "b",
+          "text": "Integral 1; luas 1"
+        },
+        {
+          "id": "c",
+          "text": "Integral 0; luas 1"
+        },
+        {
+          "id": "d",
+          "text": "Integral −1; luas −1"
+        }
+      ],
+      "answer": {
+        "optionId": "c"
+      },
+      "explanation": "Integral = [x²/2] dari −1 ke 1 = 0. Luas terdiri dari dua segitiga, masing-masing 1/2, sehingga total 1.",
+      "distractors": [
+        {
+          "optionId": "a",
+          "misconception": "equate-signed-integral-and-geometric-area"
+        },
+        {
+          "optionId": "b",
+          "misconception": "ignore-sign-in-definite-integral"
+        },
+        {
+          "optionId": "d",
+          "misconception": "allow-negative-geometric-area"
+        }
+      ],
+      "reviewStatus": "draft"
+    }
+  ]
+}
